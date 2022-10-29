@@ -1,5 +1,8 @@
-# GM PHP Framework Version 2.0
-
+<p align="center">
+    <a href="https://gearmagic.ru/" target="_blank">
+        <img src="https://gearmagic.ru/uploads/images/gm-framework_logo.svg" width="400" alt="GM Framework" />
+    </a>
+</p>
 
 Это основной код фреймворка [GM 2.0](https://github.com/gearmagicru/gm#readme).
 
