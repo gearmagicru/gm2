@@ -26,7 +26,7 @@ GM Framework разработан [веб-студией GearMagic](https://gear
 
 ## Установка
 
-- Минимальная требуемая PHP-версия 8.1.
+- Минимальная требуемая PHP-версия 8.2.
 
 Предпочтительный способ установки GM Framework через [composer](http://getcomposer.org/download/).
 
@@ -39,7 +39,7 @@ composer require gearmagic/gm
 или добавьте
 
 ```json
-"gearmagic/gm": "~2.0.0",
+"gearmagicru/gm": "~2.0.0",
 ```
 
 в требуемый раздел вашего composer.json.
