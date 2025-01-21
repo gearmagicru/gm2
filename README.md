@@ -33,7 +33,7 @@ GM Framework разработан [веб-студией GearMagic](https://gear
 Запустите
 
 ```
-composer require gearmagic/gm
+composer require gearmagicru/gm
 ```
 
 или добавьте
