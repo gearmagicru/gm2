@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rows xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<row><name>Апрелевка (Московская область) </name><index>143362</index></row>
+	<row><name>Адлер (Краснодарский край) </name><index>354340</index></row>
+	<row><name>Александров (Владимирская область) </name><index>601657</index></row>
+	<row><name>Алексин (Тульская область) </name><index>301360</index></row>
+	<row><name>Альметьевск (Республика Татарстан) </name><index>423450</index></row>
+	<row><name>Анапа (Краснодарский край) </name><index>353440</index></row>
+	<row><name>Армавир (Краснодарский край) </name><index>352900</index></row>
+	<row><name>Архангельск (Архангельская область) </name><index>163000</index></row>
+	<row><name>Асбест (Свердловская область) </name><index>624260</index></row>
+	<row><name>Астрахань (Астраханская область) </name><index>414000</index></row>
+	<row><name>Балабаново  (Калужская область) </name><index>249000</index></row>
+	<row><name>Балаково (Саратовская область) </name><index>413840</index></row>
+	<row><name>Балашиха(Московская область) </name><index>143900</index></row>
+	<row><name>Барнаул (Алтайский край) </name><index>656000</index></row>
+	<row><name>Белгород (Белгородская область) </name><index>308000</index></row>
+	<row><name>Бийск (Алтайский край) </name><index>659300</index></row>
+	<row><name>Бронницы(Московская область) </name><index>140170</index></row>
+	<row><name>Братск (Иркутская область) </name><index>665700</index></row>
+	<row><name>Брянск (Брянская область) </name><index>241000</index></row>
+	<row><name>Буденновск (Ставропольский край) </name><index>356800</index></row>
+	<row><name>Бузулук (Оренбургская область) </name><index>461040</index></row>
+	<row><name>Великие Луки (Псковская область) </name><index>182100</index></row>
+	<row><name>Верея (Московская область) </name><index>140153</index></row>
+	<row><name>Великий Новгород (Новгородская область) </name><index>173000</index></row>
+	<row><name>Владикавказ (Респ. Северная Осетия-Алания) </name><index>362000</index></row>
+	<row><name>Владимир (Владимирская область) </name><index>600000</index></row>
+	<row><name>Волгоград (Волгоградская область) </name><index>400000</index></row>
+	<row><name>Волгодонск (Ростовская область) </name><index>347340</index></row>
+	<row><name>Высоковск (Московская область) </name><index>141650</index></row>
+	<row><name>Воскресенск (Московская область) </name><index>140200</index></row>
+	<row><name>Волоколамск(Московская область) </name><index>143600</index></row>
+	<row><name>Видное (Московская область) </name><index>142700</index></row>
+	<row><name>Волжск (Республика Марий Эл) </name><index>425000</index></row>
+	<row><name>Волжский (Волгоградская область)  </name><index>404100</index></row>
+	<row><name>Вологда (Вологодская область) </name><index>160000</index></row>
+	<row><name>Воронеж (Воронежская область) </name><index>394000</index></row>
+	<row><name>Воткинск (Удмуртская Республика) </name><index>427430</index></row>
+	<row><name>Вышний Волочек (Тверская Область) </name><index>171151</index></row>
+	<row><name>Выборг (Ленинградская область) </name><index>188800</index></row>
+	<row><name>Вязьма (Смоленская область) </name><index>215100</index></row>
+	<row><name>Глазов (Удмуртская Республика) </name><index>427620</index></row>
+	<row><name>Голицыно (Московская область) </name><index>143040</index></row>
+	<row><name>Горно-Алтайск (Республика Алтай) </name><index>649000</index></row>
+	<row><name>Грозный (Чеченская республика) </name><index>364000</index></row>
+	<row><name>Гусь Хрустальный (Владимирская область) </name><index>601501</index></row>
+	<row><name>Гороховец (Владимирская область) </name><index>601480</index></row>
+	<row><name>Губкин (Белгородская область) </name><index>309180</index></row>
+	<row><name>Дзержинск (Нижегородская область) </name><index>606000</index></row>
+	<row><name>Дзержинский (Московская область) </name><index>140090</index></row>
+	<row><name>Дмитров (Московская область) </name><index>141800</index></row>
+	<row><name>Долгопрудный (Московская область) </name><index>141707</index></row>
+	<row><name>Дубна (Московская область) </name><index>141980</index></row>
+	<row><name>Домодедово (Московская область) </name><index>142000</index></row>
+	<row><name>Дрезна (Московская область) </name><index>142660</index></row>
+	<row><name>Димитровград (Ульяновская область) </name><index>433500</index></row>
+	<row><name>Дедовск (Московская область) </name><index>143530</index></row>
+	<row><name>Дятьково (Брянская область) </name><index>242600</index></row>
+	<row><name>Ейск (Краснодарский край) </name><index>353680</index></row>
+	<row><name>Екатеринбург (Свердловская область)  </name><index>620109</index></row>
+	<row><name>Егорьевск (Московская область) </name><index>140300</index></row>
+	<row><name>Елабуга (Республика татарстан) </name><index>423600</index></row>
+	<row><name>Елец (Липецкая область) </name><index>399770</index></row>
+	<row><name>Емва (Республика Коми) </name><index>169200</index></row>
+	<row><name>Ессентуки (Ставропольский край) </name><index>357601</index></row>
+	<row><name>Ефремов (Тульская область) </name><index>301840</index></row>
+	<row><name>Железнодорожный (Московская область) </name><index>143980</index></row>
+	<row><name>Жуковский (Московская область) </name><index>140180</index></row>
+	<row><name>Железногорск (Красноярский край) </name><index>662970</index></row>
+	<row><name>Железногорск (Курская область) </name><index>307170</index></row>
+	<row><name>Железноводск (Ставропольский край) </name><index>357400</index></row>
+	<row><name>Жешарт (Республика Коми) </name><index>169044</index></row>
+	<row><name>Жигулевск (Самарская область) </name><index>445350</index></row>
+	<row><name>Жирновск (Волгоградская область) </name><index>403790</index></row>
+	<row><name>Зарайск (Московская область) </name><index>140600</index></row>
+	<row><name>Зеленоград (Московская область) </name><index>124460</index></row>
+	<row><name>Звенигород (Московская область) </name><index>143180</index></row>
+	<row><name>Заволжье (Нижегородская область) </name><index>606520</index></row>
+	<row><name>Заинск (Республика Татарстан) </name><index>423520</index></row>
+	<row><name>Заринск (Алтайский край) </name><index>659100</index></row>
+	<row><name>Зеленодольск (Республика Татарстан) </name><index>422540</index></row>
+	<row><name>Златоуст (Челябинская область) </name><index>456200</index></row>
+	<row><name>Ивантеевка (Московская область) </name><index>141280</index></row>
+	<row><name>Истра (Московская область) </name><index>143500</index></row>
+	<row><name>Иваново (Ивановская область) </name><index>153000</index></row>
+	<row><name>Ижевск (Удмуртская Республика) </name><index>426000</index></row>
+	<row><name>Илек (Оренбургская область) </name><index>461350</index></row>
+	<row><name>Ирбит (Свердловская область) </name><index>623856</index></row>
+	<row><name>Иркутск (Иркутская область) </name><index>644000</index></row>
+	<row><name>Ишим (Тюменская область) </name><index>627750</index></row>
+	<row><name>Кашира (Московская область) </name><index>142900</index></row>
+	<row><name>Климовск (Московская область) </name><index>142180</index></row>
+	<row><name>Клин (Московская область) </name><index>141601</index></row>
+	<row><name>Коломна (Московская область) </name><index>140400</index></row>
+	<row><name>Королев (Московская область) </name><index>141070</index></row>
+	<row><name>Котельники (Московская область) </name><index>140053</index></row>
+	<row><name>Красноармейск (Московская область) </name><index>141292</index></row>
+	<row><name>Красногорск (Московская область) </name><index>143400</index></row>
+	<row><name>Краснозаводск (Московская область) </name><index>141321</index></row>
+	<row><name>Куровское (Московская область) </name><index>142621</index></row>
+	<row><name>Казань (Республика Татарстан) </name><index>420000</index></row>
+	<row><name>Калуга (Калужская область) </name><index>248000</index></row>
+	<row><name>Кемерово (Кемеровская область) </name><index>650000</index></row>
+	<row><name>Кириши (Ленинградская область) </name><index>187110</index></row>
+	<row><name>Киров (Кировская область) </name><index>610000</index></row>
+	<row><name>Кострома (Костромская область) </name><index>156000</index></row>
+	<row><name>Краснодар (Краснодарский край) </name><index>350000</index></row>
+	<row><name>Красноярск (Красноярский край) </name><index>660000</index></row>
+	<row><name>Курган (Курганская область) </name><index>640000</index></row>
+	<row><name>Курск (Курская область) </name><index>305000</index></row>
+	<row><name>Ликино-Дулево(Московская область) </name><index>142670</index></row>
+	<row><name>Лосино-Петровский(Московская область) </name><index>141150</index></row>
+	<row><name>Луховицы (Московская область) </name><index>140500</index></row>
+	<row><name>Лыткарино (Московская область) </name><index>140080</index></row>
+	<row><name>Люберцы (Московская область) </name><index>140000</index></row>
+	<row><name>Лобня (Московская область) </name><index>141730</index></row>
+	<row><name>Лабинск (Краснодарский край) </name><index>352500</index></row>
+	<row><name>Лебедянь (Липецкая область) </name><index>399610</index></row>
+	<row><name>Ливны (Орловская область)  </name><index>303850</index></row>
+	<row><name>Липецк (Липецкая область)  </name><index>398000</index></row>
+	<row><name>Лиски (Воронежская область) </name><index>+397900</index></row>
+	<row><name>Лысьва (Пермская область) </name><index>618900</index></row>
+	<row><name>Можайск (Московская область) </name><index>143200</index></row>
+	<row><name>Московский (Московская область) </name><index>142784</index></row>
+	<row><name>Мытищи (Московская область) </name><index>141000</index></row>
+	<row><name>Магнитогорск (Челябинская область) </name><index>455000</index></row>
+	<row><name>Майкоп (Республика Адыгея) </name><index>385000</index></row>
+	<row><name>Махачкала (Республтка Дагестан) </name><index>367000</index></row>
+	<row><name>Минеральные Воды (Ставропольский край) </name><index>357200</index></row>
+	<row><name>Мураши (Кировская область) </name><index>613710</index></row>
+	<row><name>Мурманск (Мурманская область)  </name><index>183038</index></row>
+	<row><name>Муром (Владимирская область) </name><index>602200</index></row>
+	<row><name>Наро-Фоминск (Московская область) </name><index>143301</index></row>
+	<row><name>Ногинск (Московская область) </name><index>142400</index></row>
+	<row><name>Набережные Челны (Республика Татарстан) </name><index>423800</index></row>
+	<row><name>Нальчик (Кабардино-Балкарская республика) </name><index>360000</index></row>
+	<row><name>Нефтекамск (Республика Башкортостан) </name><index>452680</index></row>
+	<row><name>Нефтеюганск (Ханты-Мансийский авт. округ) </name><index>628300</index></row>
+	<row><name>Невинномысск (Ставропольский край) </name><index>357100</index></row>
+	<row><name>Нижний Новгород (Нижегородская область) </name><index>603000</index></row>
+	<row><name>Нижневартовск (Ханты-Мансийский авт. округ) </name><index>628600</index></row>
+	<row><name>Нижнекамск (республтка Татарстан) </name><index>423570</index></row>
+	<row><name>Нижний Тагил (Свердловская область) </name><index>622000</index></row>
+	<row><name>Новороссийкс (Краснодарский край) </name><index>353900</index></row>
+	<row><name>Новосибирск (Новосибирская область) </name><index>630000</index></row>
+	<row><name>Новый Уренгой (Ямало-Ненецкий авт. Округ) </name><index>629300</index></row>
+	<row><name>Новый Оскол (Белгородская область) </name><index>309640</index></row>
+	<row><name>Новокузнецк (Кемеровская область) </name><index>654000</index></row>
+	<row><name>Новокуйбышевск (Самарская область) </name><index>446200</index></row>
+	<row><name>Новочеркасск (Ростовская область)  </name><index>346400</index></row>
+	<row><name>Новочебоксарск (Чувашская республика) </name><index>4299950</index></row>
+	<row><name>Новотроицк (Оренбургская область)  </name><index>462351</index></row>
+	<row><name>Новошахтинск (Ростовская область ) </name><index>346900</index></row>
+	<row><name>Ноябрьск (Ямало-Ненецкий авт. округ) </name><index>629800</index></row>
+	<row><name>Нягань (Ханты-Мансийский авт. округ) </name><index>628181</index></row>
+	<row><name>Орехово-Зуево (Московская область) </name><index>142600</index></row>
+	<row><name>Одинцово (Московская область) </name><index>143000</index></row>
+	<row><name>Ожерелье(Московская область) </name><index>142921</index></row>
+	<row><name>Озеры (Московская область) </name><index>140560</index></row>
+	<row><name>Омск (Омская область) </name><index>644000</index></row>
+	<row><name>Орел (Орловская область) </name><index>302000</index></row>
+	<row><name>Оренбург (Оренбургская область) </name><index>460000</index></row>
+	<row><name>Орск (Оренбургская область) </name><index>462400</index></row>
+	<row><name>Обнинск (Калужская область)  </name><index>249030</index></row>
+	<row><name>Октябрьский (Республика  Башкортостан) </name><index>452600</index></row>
+	<row><name>Озерск (Закрытый) </name><index>456780</index></row>
+	<row><name>Павловский Посад (Московская область) </name><index>142500</index></row>
+	<row><name>Павловская Слобода (Московская область) </name><index>143581</index></row>
+	<row><name>Пересвет (Московская область) </name><index>141320</index></row>
+	<row><name>Подольск (Московская область) </name><index>142100</index></row>
+	<row><name>Протвино (Московская область) </name><index>142280</index></row>
+	<row><name>Пушкино (Московская область) </name><index>141200</index></row>
+	<row><name>Пущино (Московская область) </name><index>142290</index></row>
+	<row><name>Пенза (Пензенская область) </name><index>440000</index></row>
+	<row><name>Первоуральск (Свердловская область) </name><index>623100</index></row>
+	<row><name>Пермь (Пермская область) </name><index>614000</index></row>
+	<row><name>Петрозаводск (Республика Карелия) </name><index>185000</index></row>
+	<row><name>Петушки (Владимирская область) </name><index>601144</index></row>
+	<row><name>Приморск (Ленинградская область) </name><index>188910</index></row>
+	<row><name>Прокопьевск (Кемеровская область) </name><index>653000</index></row>
+	<row><name>Псков (Псковская область) </name><index>180000</index></row>
+	<row><name>Пурпе (Ямало Ненецкий авт. округ) </name><index>629840</index></row>
+	<row><name>Пятигорск (Ставропольский край) </name><index>357500</index></row>
+	<row><name>Рошаль (Московская область) </name><index>140730</index></row>
+	<row><name>Раменское (Московская область) </name><index>140100</index></row>
+	<row><name>Реутов (Московская область) </name><index>143960</index></row>
+	<row><name>Руза(Московская область) </name><index>143100</index></row>
+	<row><name>Ржев (Тверская область) </name><index>172380</index></row>
+	<row><name>Рославль (Смоленская область) </name><index>216500</index></row>
+	<row><name>Россошь (Воронежская область) </name><index>396650</index></row>
+	<row><name>Ростов-на-Дону (Ростовская область) </name><index>344000</index></row>
+	<row><name>Рубцовск (Алтайский край) </name><index>658200</index></row>
+	<row><name>Рыбинск (Ярославская область) </name><index>152900</index></row>
+	<row><name>Рязань (Рязанская область) </name><index>3390000</index></row>
+	<row><name>Сергиев Посад (Московская область) </name><index>141300</index></row>
+	<row><name>Серпухов (Московская область) </name><index>142200</index></row>
+	<row><name>Солнечногорск (Московская область) </name><index>141501</index></row>
+	<row><name>Старая Купавна (Московская область) </name><index>142450</index></row>
+	<row><name>Ступино (Московская область) </name><index>142800</index></row>
+	<row><name>Салават (республика Башкортостан) </name><index>453250</index></row>
+	<row><name>Самара (Самарская область) </name><index>443000</index></row>
+	<row><name>Санкт-Петербург </name><index>190000</index></row>
+	<row><name>Саранск (Республика Мордовия) </name><index>430000</index></row>
+	<row><name>Сарапул (Удмуртская Республика) </name><index>427960</index></row>
+	<row><name>Саратов (Саратовская область) </name><index>410000</index></row>
+	<row><name>Серов (Свердловская область) </name><index>624000</index></row>
+	<row><name>Серпухов (Московская область) </name><index>142200</index></row>
+	<row><name>Смоленск (Смоленская область) </name><index>214000</index></row>
+	<row><name>Снежинск (Челябинская область) </name><index>456770</index></row>
+	<row><name>Сочи (Краснодарский край) </name><index>354000</index></row>
+	<row><name>Ставрополь (Ставропольский край) </name><index>355000</index></row>
+	<row><name>Старый Оскол (Белгородская область) </name><index>309500</index></row>
+	<row><name>Стерлитамак (Республика Башкортостан) </name><index>453100</index></row>
+	<row><name>Сургут (Ханты-Мансийский авт.округ) </name><index>628400</index></row>
+	<row><name>Суздаль (Владимирская область) </name><index>601293</index></row>
+	<row><name>Сызрань (Самарская область) </name><index>446000</index></row>
+	<row><name>Сыктывкар (Республика Коми) </name><index>167000</index></row>
+	<row><name>Талдом (Московская область) </name><index>141900</index></row>
+	<row><name>Троицк (Московская область) </name><index>457100</index></row>
+	<row><name>Таганрог (Ростовская область) </name><index>347900</index></row>
+	<row><name>Тамбов (Тамбовская область) </name><index>392000</index></row>
+	<row><name>Тверь (Тверская область) </name><index>170000</index></row>
+	<row><name>Тимашевск (Краснодарский край) </name><index>3527000</index></row>
+	<row><name>Тобольск (Тюменская область) </name><index>626150</index></row>
+	<row><name>Тольятти (Самарская область) </name><index>445000</index></row>
+	<row><name>Томск (Томская область) </name><index>634000</index></row>
+	<row><name>Троицк (Челябинская область) </name><index>457100</index></row>
+	<row><name>Тула (Тульская область) </name><index>300000</index></row>
+	<row><name>Туапсе (Краснодарский край) </name><index>352800</index></row>
+	<row><name>Тюмень (Тюменская область) </name><index>625000</index></row>
+	<row><name>Улан-Удэ (Республика Бурятия) </name><index>670000</index></row>
+	<row><name>Ульяновск (Ульяновская область) </name><index>432000</index></row>
+	<row><name>Уренгой (Ямало-Ненецкий авт. округ) </name><index>629860</index></row>
+	<row><name>Усть-Кут (Иркутская область) </name><index>666780</index></row>
+	<row><name>Уфа (Республика Башкортостан) </name><index>450000</index></row>
+	<row><name>Ухта (Республика Коми) </name><index>169300</index></row>
+	<row><name>Фрязино (Московская область) </name><index>141190</index></row>
+	<row><name>Фролово (Волгоградская область) </name><index>403530</index></row>
+	<row><name>Химки (Московская область) </name><index>141400</index></row>
+	<row><name>Хотьково (Московская оласть) </name><index>141371</index></row>
+	<row><name>Хабаровск (Хабаровский край) </name><index>680000</index></row>
+	<row><name>Ханты-Мансийск (Ханты-Мансийский авт. округ) </name><index>628000</index></row>
+	<row><name>Черноголовка (Московская оласть) </name><index>142432</index></row>
+	<row><name>Чехов (Московская оласть) </name><index>142300</index></row>
+	<row><name>Чагода (Вологодская область) </name><index>162401</index></row>
+	<row><name>Чебоксары (Чувашская Республика) </name><index>428000</index></row>
+	<row><name>Челябинск (Челябинская область) </name><index>454000</index></row>
+	<row><name>Череповец (Вологодская область) </name><index>162600</index></row>
+	<row><name>Черкесск (Карачаево-Черкесская Республика) </name><index>369000</index></row>
+	<row><name>Чита (Читинская область) </name><index>672000</index></row>
+	<row><name>Шатура(Московская область) </name><index>140700</index></row>
+	<row><name>Шахты (Ростовская область) </name><index>346500</index></row>
+	<row><name>Щелково (Московская область) </name><index>141101</index></row>
+	<row><name>Щербинка (Московская область) </name><index>142171</index></row>
+	<row><name>Электросталь (Московская область) </name><index>144000</index></row>
+	<row><name>Электрогорск (Московская область) </name><index>142530</index></row>
+	<row><name>Электроугли (Московская область) </name><index>142455</index></row>
+	<row><name>Энгельс (Саратовская область) </name><index>413100</index></row>
+	<row><name>Элиста (Республика Калмыкия) </name><index>358000</index></row>
+	<row><name>Юбилейный (Московская область)  </name><index>141090</index></row>
+	<row><name>Юрга (Кемеровская область)  </name><index>652050</index></row>
+	<row><name>Южноуральск (Челябинская область) </name><index>457040</index></row>
+	<row><name>Яхрома (Московская область) </name><index>141840</index></row>
+	<row><name>Ярославль (Ярославская область) </name><index>150000</index></row>
+	<row><name>Якутск (Республика Саха(Якутия)) </name><index>677000</index></row>
+</rows>
