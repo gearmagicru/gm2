@@ -26,7 +26,7 @@ GM Framework разработан [веб-студией GearMagic](https://gear
 
 ## Установка
 
-- Минимальная требуемая PHP-версия 7.2.
+- Минимальная требуемая PHP-версия 8.1.
 
 Предпочтительный способ установки GM Framework через [composer](http://getcomposer.org/download/).
 
