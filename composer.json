@@ -20,7 +20,10 @@
         "php": ">=8.2",
         "ext-mbstring": "*",
         "ext-ctype": "*",
-        "lib-pcre": "*"
+        "lib-pcre": "*",
+        "symfony/cache": "*",
+        "symfony/finder": "*",
+        "symfony/http-foundation": "*"
     },
     "autoload": {
         "psr-4": {"Gm\\": "framework/"},
