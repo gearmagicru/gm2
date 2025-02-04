@@ -22,7 +22,11 @@
         "lib-pcre": "*",
         "symfony/cache": "*",
         "symfony/finder": "*",
-        "symfony/http-foundation": "*"
+        "symfony/http-foundation": "*",
+        "jbroadway/urlify": "*",
+        "maiorano84/shortcodes": "*",
+        "phpmailer/phpmailer": "*",
+        "PHPThumb/PHPThumb": "*"
     },
     "autoload": {
         "psr-4": {"Gm\\": "framework/"},
