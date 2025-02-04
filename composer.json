@@ -26,7 +26,10 @@
         "jbroadway/urlify": "*",
         "maiorano84/shortcodes": "*",
         "phpmailer/phpmailer": "*",
-        "PHPThumb/PHPThumb": "*"
+        "PHPThumb/PHPThumb": "*",
+        "league/flysystem": "3.x",
+        "league/flysystem-memory": "^3.0",
+        "league/flysystem-ziparchive": "^3.0"
     },
     "autoload": {
         "psr-4": {"Gm\\": "framework/"},
