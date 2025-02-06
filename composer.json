@@ -20,7 +20,7 @@
         "ext-mbstring": "*",
         "ext-ctype": "*",
         "lib-pcre": "*",
-        "gearmagicru/symfony-cache": "^1.0",
+        "gearmagicru/symfony-cache": "*",
         "symfony/finder": "*",
         "symfony/http-foundation": "*",
         "jbroadway/urlify": "*",
