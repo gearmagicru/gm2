@@ -53,7 +53,7 @@ class Finder extends SymfonyFinder
      * 
      * @return bool
      */
-    public function isSearched(): bool
+    static public function isSearched(): bool
     {
         return static::$searched;
     }
