@@ -26,7 +26,7 @@
         "jbroadway/urlify": "*",
         "maiorano84/shortcodes": "*",
         "phpmailer/phpmailer": "*",
-        "PHPThumb/PHPThumb": "*",
+        "phpthumb/phpthumb": "*",
         "league/flysystem": "3.x",
         "league/flysystem-memory": "^3.0",
         "league/flysystem-ziparchive": "^3.0"
