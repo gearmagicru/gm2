@@ -26,14 +26,14 @@ class Finder extends SymfonyFinder
      * 
      * @var bool
      */
-    public bool $searched = false;
+    static protected bool $searched = false;
 
     /**
      * {@inheritdoc}
      */
-    public function in($dirs)
+    public function in(array|string $dirs): static
     {
-        $this->searched = true;
+        static::$searched = true;
 
         return parent::in($dirs);
     }
@@ -41,10 +41,20 @@ class Finder extends SymfonyFinder
     /**
      * {@inheritdoc}
      */
-    public function append(iterable $iterator)
+    public function append(iterable $iterator): static
     {
-        $this->searched = true;
+        static::$searched = true;
 
         return parent::in($iterator);
+    }
+
+    /**
+     * Определяет, был ли зайдействован поиск.
+     * 
+     * @return bool
+     */
+    public function isSearched(): bool
+    {
+        return static::$searched;
     }
 }
