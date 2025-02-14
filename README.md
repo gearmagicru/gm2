@@ -1,8 +1,3 @@
-[![Author](https://img.shields.io/badge/author-anton.tivonenko@gmail.com-blue.svg)](mailto:anton.tivonenko@gmail)
-[![Source Code](https://img.shields.io/badge/source-gearmagicru/gm2-blue.svg)](https://github.com/gearmagicru/gm2)
-[![Software License](https://img.shields.io/badge/license-BSD%203%20Clause-brightgreen.svg)](https://github.com/gearmagicru/gm2/blob/master/LICENSE)
-![php 8.2+](https://img.shields.io/badge/php-min%208.2-red.svg)
-
 <p align="center">
     <a href="https://gearmagic.ru/" target="_blank">
         <img src="https://gearmagic.ru/uploads/images/gm-framework_logo.svg" width="400" alt="GM Framework" />
@@ -14,6 +9,12 @@
 Этот репозиторий является частью git только для чтения <https://github.com/gearmagicru/gm>.
 
 Для получения информации о лицензии см. [LICENSE](LICENSE).
+
+[![Latest Stable Version](https://img.shields.io/packagist/v/gearmagicru/gm2.svg)](https://packagist.org/packages/gearmagicru/gm2)
+[![Total Downloads](https://img.shields.io/packagist/dt/gearmagicru/gm2.svg)](https://packagist.org/packages/gearmagicru/gm2)
+[![Source Code](https://img.shields.io/badge/source-gearmagicru/gm2-blue.svg)](https://github.com/gearmagicru/gm2)
+[![Software License](https://img.shields.io/badge/license-BSD%203%20Clause-brightgreen.svg)](https://github.com/gearmagicru/gm2/blob/master/LICENSE)
+![php 8.2+](https://img.shields.io/badge/php-min%208.2-red.svg)
 
 ## О GM (GearMagic)
 
