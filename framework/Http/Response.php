@@ -422,13 +422,15 @@ class Response extends AbstractMessage
      */
     public function setFormat(string $format): static
     {
-        // если был устанолвен ранее форматтер, то удаляем события связанные с ним, 
-        // т.к. события вызываются при отправки ответа
+        /*
+        // если был установлен ранее форматтер, то удаляем события связанные с ним, 
+        // т.к. эти же события вызываются при отправке ответа
         if ($this->formatter !== null) {
             $this
                 ->off(self::EVENT_BEFORE_SEND)
                 ->off(self::EVENT_SET_EXCEPTION);
         }
+        */
         $this->format    = $format;
         $this->formatter = $this->getFormatter();
         return $this;
