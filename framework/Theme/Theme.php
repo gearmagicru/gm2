@@ -471,7 +471,7 @@ class Theme extends Service
     /**
      * Возвращает абсолютный путь указанной темы.
      * 
-     * @param string $themeName Имя темы.
+     * @param null|string $themeName Имя темы. Если значение `null`, то текущая тема (по умолчанию `null`).
      * 
      * @return string
      */
@@ -488,9 +488,40 @@ class Theme extends Service
     }
 
     /**
+     * Проверяет, имеет ли указанная тема демонстрационные данные.
+     * 
+     * @param null|string $themeName Имя темы. Если значение `null`, то текущая тема (по умолчанию `null`).
+     * 
+     * @return bool
+     */
+    public function hasPreview(string $themeName = null): bool
+    {
+        return $this->getPreviewFilename($themeName) !== null;
+    }
+
+    /**
+     * Возвращает абсолютный путь указанной темы к демонстрационным данным.
+     * 
+     * @param null|string $themeName Имя темы. Если значение `null`, то текущая тема (по умолчанию `null`).
+     * 
+     * @return null|string
+     */
+    public function getPreviewFilename(string $themeName = null): ?string
+    {
+        if ($themeName === null) {
+            return $this->path;
+        }
+        $params = $this->get($themeName);
+        if (empty($params)) {
+            return null;
+        }
+        return $this->themesPath . $params['localPath'] . DS . 'preview' . DS . 'theme.xml';
+    }
+
+    /**
      * Возвращает абсолютный путь к шаблонам указанной темы.
      * 
-     * @param string $themeName Имя темы.
+     * @param null|string $themeName Имя темы. Если значение `null`, то текущая тема (по умолчанию `null`).
      * 
      * @return string|null
      */
@@ -532,7 +563,7 @@ class Theme extends Service
     /**
      * Возвращает пакет информации по указанной теме.
      * 
-     * @param string $themeName Имя темы. Если значение `null`, имя темы по умолчанию.
+     * @param string $themeName Имя темы. Если значение `null`, имя темы по умолчанию (по умолчанию `null`).
      * 
      * @return ThemePackage
      */
@@ -635,7 +666,7 @@ class Theme extends Service
      *           (\Gm\Theme\Theme) "theme" экземпляр класса темы
      *       ]
      */
-    public function defineThemeFromStr(string $name, string $separator = '::', bool $create = false)
+    public function defineThemeFromStr(string $name, string $separator = '::', bool $create = false): ?array
     {
         if (empty($name)) {
             return null;
