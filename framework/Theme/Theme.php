@@ -729,6 +729,8 @@ class Theme extends Service
                 if (file_exists($path . DS . 'screenshot.png')) {
                     $info['screenshot'] = $this->themesUrl . '/' . $localPath . '/screenshot.png';
                 }
+                // если есть демоданные 
+                $info['preview'] = file_exists($path . DS . 'preview' . DS . 'package.xml');
 
                 $info['side'] = $this->side;
                 $info['localPath'] = '/' . $localPath;
