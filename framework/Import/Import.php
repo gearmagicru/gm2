@@ -300,7 +300,6 @@ class Import extends BaseObject
         if ($parser->hasErrors()) {
             throw new Exception\ParseFileException($parser->getError());
         }
-
         $this->parser = $parser;
 
         if (!$this->beforeImport($filename, $data)) return;
@@ -338,7 +337,7 @@ class Import extends BaseObject
         /** @var array|false $package Информация о пакета */
         $package = $parser->parseFile($filename, true);
         if ($parser->hasErrors()) {
-            throw new Exception\ParseFileException($this->parser->getError());
+            throw new Exception\ParseFileException($parser->getError());
         }
         $this->parser = $parser;
 
