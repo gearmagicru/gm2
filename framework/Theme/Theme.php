@@ -496,7 +496,9 @@ class Theme extends Service
      */
     public function hasPreview(string $themeName = null): bool
     {
-        return $this->getPreviewFilename($themeName) !== null;
+        /** @var null|string $file */
+        $file = $this->getPreviewFilename($themeName);
+        return $file ? file_exists($file) : false;
     }
 
     /**
