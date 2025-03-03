@@ -515,7 +515,7 @@ class Theme extends Service
         if (empty($params)) {
             return null;
         }
-        return $this->themesPath . $params['localPath'] . DS . 'preview' . DS . 'theme.xml';
+        return $this->themesPath . $params['localPath'] . DS . 'preview' . DS . 'package.xml';
     }
 
     /**
