@@ -104,7 +104,8 @@ class DomParser extends AbstractParser
             $result['components'][] = [
                 'id'   => (string) $children->id,
                 'type' => (string) $children->type,
-                'file' => (string) $children->file
+                'file' => (string) $children->file,
+                'cls'  => (string) $children->cls
             ];
         }
         return $result;

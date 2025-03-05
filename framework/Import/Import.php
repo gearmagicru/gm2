@@ -344,7 +344,9 @@ class Import extends BaseObject
         /** @var string $path Абсолютный путь к файлу пакета */
         $path = dirname($filename);
         foreach ($package['components'] as $component) {
-            $model = $this->createComponentImport($component['type'], $component['id']);
+            $model = $this->createComponentImport(
+                $component['type'], $component['id'], $component['id'] ?: 'Import'
+            );
             if ($model)
                 $model->run($path . DS . $component['file']);
         }
@@ -357,16 +359,20 @@ class Import extends BaseObject
      * 
      * @var string $type Тип компонента: 'module', 'extension'.
      * @var string $componentId Идентификатор установленного компонента.
+     * @var string $importCls Класс импорта данных.
      * 
      * @return mixed Возвращает значение `null` если объект компонента не создан.
      */
-    protected function createComponentImport(string $type, string $componentId): mixed
-    {
+    protected function createComponentImport(
+        string $type, 
+        string $componentId, 
+        string $importCls = 'Import'
+    ): mixed {
         if ($type === 'module')
-            return Gm::getMModel('Import', $componentId);
+            return Gm::getMModel($importCls, $componentId);
         else
         if ($type === 'extension')
-            return Gm::getEModel('Import', $componentId);
+            return Gm::getEModel($importCls, $componentId);
         return null;
     }
 
@@ -406,6 +412,9 @@ class Import extends BaseObject
                         $value = $row[$alias];
                         if (isset($params['type'])) {
                             settype($value, $params['type']);
+                        }
+                        if (isset($params['length']) && is_string($value)) {
+                            $value = mb_substr($value, 0, $params['length']);
                         }
                         $columns[$params['field']] = $value;
                     }
