@@ -167,7 +167,7 @@ class Import extends BaseObject
     /**
      * Определяет тип парсера по указанному расширению файла.
      * 
-     * @param string $extension Расширение файла.
+     * @param string $extension Расширение файла, например: 'xml', 'json'...
      * 
      * @return string|null Возвращает тип парсера. Если значение `null`, то его тип 
      *     не определен.
@@ -413,8 +413,13 @@ class Import extends BaseObject
                         if (isset($params['type'])) {
                             settype($value, $params['type']);
                         }
-                        if (isset($params['length']) && is_string($value)) {
-                            $value = mb_substr($value, 0, $params['length']);
+                        if (is_string($value)) {
+                            if (isset($params['trim'])) {
+                                $value = mb_trim($value, is_bool($params['trim']) ? null : $params['trim']);
+                            }
+                            if (isset($params['length'])) {
+                                $value = mb_substr($value, 0, $params['length']);
+                            }
                         }
                         $columns[$params['field']] = $value;
                     }
