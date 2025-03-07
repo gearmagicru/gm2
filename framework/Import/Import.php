@@ -345,7 +345,7 @@ class Import extends BaseObject
         $path = dirname($filename);
         foreach ($package['components'] as $component) {
             $model = $this->createComponentImport(
-                $component['type'], $component['id'], $component['id'] ?: 'Import'
+                $component['type'], $component['id'], $component['cls'] ?: 'Import'
             );
             if ($model)
                 $model->run($path . DS . $component['file']);
