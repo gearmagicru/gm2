@@ -249,6 +249,10 @@ class XmlParser extends AbstractParser
             [
                 'path' => 'package/components/component',
                 'key'  => 'components'
+            ],
+            [
+                'path' => 'package/files/file',
+                'key'  => 'files'
             ]
         ]);
 
@@ -263,6 +267,7 @@ class XmlParser extends AbstractParser
             'version'     => $data['package']['version'] ?? '',
             'created'     => $data['package']['created'] ?? '',
             'components'  => $data['components'] ?? [],
+            'files'       => $data['files'] ?? []
         ];
     }
 }
