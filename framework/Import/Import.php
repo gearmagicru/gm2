@@ -14,6 +14,7 @@ use Gm\Stdlib\BaseObject;
 use Gm\Db\ActiveRecord;
 use Gm\Db\Adapter\Exception\CommandException;
 use Gm\Import\Parser\AbstractParser;
+use Gm\Filesystem\Filesystem as Fs;
 
 /**
  * Класс импорта данных компонентов (модулей, расширений модулей).
@@ -110,6 +111,27 @@ class Import extends BaseObject
      * @var ActiveRecord|null
      */
     protected ?ActiveRecord $model = null;
+
+    /**
+     * Абсолютный (базовый) путь для копирования файлов.
+     *
+     * @var string
+     */
+    public string $filesPath = '@published/uploads';
+
+    /**
+     * Права доступа к созданной для копирования файлов директории.
+     *
+     * @var string
+     */
+    public string|int $filesPathPerms = '0755';
+
+    /**
+     * Допустимые расширения файлов пакета импорта для копирования.
+     *
+     * @var string
+     */
+    public string $allowedExtensions = 'jpg,jpeg,gif,tiff,png,svg,doc,docx,pdf,xls,xlsx,xml,json';
 
     /**
      * Возвращает маску атрибутов (свойств, тегов) импортирумего файла.
@@ -343,6 +365,49 @@ class Import extends BaseObject
 
         /** @var string $path Абсолютный путь к файлу пакета */
         $path = dirname($filename);
+
+        /** @var string|false $filesPath Путь к файлам копирования */
+        $filesPath = Gm::getAlias($this->filesPath);
+        if (empty($filesPath) || !file_exists($filesPath)) {
+            throw new Exception\FilesPathNotDefinedException(
+                'Base files path "' . $filesPath . '" not extists.'
+            );
+        }
+        $filesPath = rtrim($filesPath, '\\/');
+
+        Fs::$throwException = true;
+        $allowedExtensions = explode(',', $this->allowedExtensions);
+        $files = $package['files'];
+        if ($files) {
+            foreach ($package['files'] as $file) {
+                /** @var string $copyFile Копируемый файл */
+                $copyFile = $path . $file['name'];
+                if (!file_exists($copyFile)) {
+                    throw new Exception\FileNotFoundException(
+                        'File "' . $copyFile . '" missing from import package.'
+                    );
+                }
+                /** @var string $filePath Локальный путь копируемого файла в пакете */
+                $filePath = trim($file['path'], ' \\/');
+                /** @var string $filename Имя копирумего файла */
+                $filename = pathinfo($file['name'], PATHINFO_BASENAME);
+                /** @var string $extension Расширение копирумего файла */
+                $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                // если необходимо проверить допустимое расширение файла
+                if ($allowedExtensions && !in_array($extension, $allowedExtensions)) {
+                    throw new Exception\ExtensionException(
+                        'The file "' . $file['name'] . '" contains an invalid file extension..'
+                    );
+                }
+                /** @var string $copyTo Путь куда копировать файл */
+                $copyTo = $filesPath . DS . ($filePath ? $filePath . DS : '');
+                if (!file_exists($copyTo)) {
+                    Fs::makeDirectory($copyTo, $this->filesPathPerms, true);
+                }
+                Fs::copy($copyFile, $copyTo . $filename);
+            }
+        }
+
         foreach ($package['components'] as $component) {
             $model = $this->createComponentImport(
                 $component['type'], $component['id'], $component['cls'] ?: 'Import'
