@@ -97,7 +97,8 @@ class DomParser extends AbstractParser
             'language'    => (string) $xml->language,
             'version'     => (string) $xml->version,
             'created'     => (string) $xml->created,
-            'components'  => []
+            'components'  => [],
+            'files'       => []
         ];
         foreach ($xml->xpath('/package/components/component') as $component) {
             $children = $component->children();
@@ -106,6 +107,13 @@ class DomParser extends AbstractParser
                 'type' => (string) $children->type,
                 'file' => (string) $children->file,
                 'cls'  => (string) $children->cls
+            ];
+        }
+        foreach ($xml->xpath('/package/files/file') as $component) {
+            $children = $component->children();
+            $result['files'][] = [
+                'name' => (string) $children->name,
+                'path' => (string) $children->path
             ];
         }
         return $result;
