@@ -741,4 +741,22 @@ class Theme extends Service
         }
         return $themes;
     }
+
+    /**
+     * Добавляет или делает указанную тему доступной для выбора.
+     * 
+     * @see Theme::$available
+     * 
+     * @param string $theme Имя темы
+     * @param array<string, array> $params Параметры темы.
+     * 
+     * @return void
+     */
+    public function addAvailable(string $theme, array $params): void
+    {
+        $this->available[$theme] = [
+            'name'      => $theme,
+            'localPath' => $params['localPath'] ?? ''
+        ];
+    }
 }
