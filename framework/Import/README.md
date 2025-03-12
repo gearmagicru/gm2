@@ -36,6 +36,11 @@ class Import extends \Gm\Import\Import
     <version>1.0</version>
     <!-- дата и время создания файла в формате "d-m-Y H:i:s" в UTC -->
     <created>2025-01-01 11:11:11</created>
+    <properties>
+        <property1>Значение 1</property1>
+        <property2>Значение 2</property2>
+        <!-- ... -->
+    </properties>
     <components>
         <!-- описанием компонента с указанием файла -->
         <component>
@@ -48,6 +53,13 @@ class Import extends \Gm\Import\Import
         </component>
         <!-- ... -->
     </components>
+    <files>
+        <file>
+            <name>/src/dir/file.txt</name>
+            <path>/copy/to/dir/</path>
+        </file>
+        <!-- ... -->
+    </files>
 </package>
 ```
 
