@@ -63,6 +63,7 @@ class JsonParser extends AbstractParser
             'language'    => $json['language'] ?? '',
             'version'     => $json['version'] ?? '',
             'created'     => $json['created'] ?? '',
+            'properties'  => $json['properties'] ?? [],
             'components'  => $json['components'] ?? [],
             'files'       => $json['files'] ?? []
         ];
