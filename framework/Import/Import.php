@@ -362,6 +362,7 @@ class Import extends BaseObject
             throw new Exception\ParseFileException($parser->getError());
         }
         $this->parser = $parser;
+        $this->package = $package;
 
         /** @var string $path Абсолютный путь к файлу пакета */
         $path = dirname($filename);
