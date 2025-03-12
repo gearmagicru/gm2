@@ -98,8 +98,14 @@ class DomParser extends AbstractParser
             'version'     => (string) $xml->version,
             'created'     => (string) $xml->created,
             'components'  => [],
+            'properties'  => [],
             'files'       => []
         ];
+        $properties = $xml->xpath('/package/properties');
+        if ($properties && isset($properties[0])) {
+            // SimpleXMLElement -> array
+            $result['properties'] = (array) $properties[0];
+        }
         foreach ($xml->xpath('/package/components/component') as $component) {
             $children = $component->children();
             $result['components'][] = [
