@@ -247,6 +247,10 @@ class XmlParser extends AbstractParser
                 'toProperties' => true
             ],
             [
+                'path' => 'package/properties',
+                'key'  => 'properties'
+            ],
+            [
                 'path' => 'package/components/component',
                 'key'  => 'components'
             ],
@@ -266,6 +270,7 @@ class XmlParser extends AbstractParser
             'language'    => $data['package']['language'] ?? '',
             'version'     => $data['package']['version'] ?? '',
             'created'     => $data['package']['created'] ?? '',
+            'properties'  => $data['properties'][0] ?: [],
             'components'  => $data['components'] ?? [],
             'files'       => $data['files'] ?? []
         ];
