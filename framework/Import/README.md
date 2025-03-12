@@ -37,6 +37,7 @@ class Import extends \Gm\Import\Import
     <!-- дата и время создания файла в формате "d-m-Y H:i:s" в UTC -->
     <created>2025-01-01 11:11:11</created>
     <properties>
+        <!-- дополнительные свойства пакета данных, которые могут применяться в будущем -->
         <property1>Значение 1</property1>
         <property2>Значение 2</property2>
         <!-- ... -->
@@ -54,8 +55,11 @@ class Import extends \Gm\Import\Import
         <!-- ... -->
     </components>
     <files>
+        <!-- копирование файлов в указанную директорию -->
         <file>
+            <!-- имя файла с локальным путём относительно файла пакета данных -->
             <name>/src/dir/file.txt</name>
+            <!-- локальный путь относительно приложения -->
             <path>/copy/to/dir/</path>
         </file>
         <!-- ... -->
