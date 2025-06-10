@@ -877,12 +877,12 @@ class Application extends BaseObject
         $this->initDateTime();
         // маршрутизатор запросов
         $this->router = $this->getRouter();
-        // инициализация темы
-        $this->initTheme();
         // инициализация событий в приложении
         $this->initEvents();
         // инициализация служб
         $this->initServices();
+        // инициализация темы
+        $this->initTheme();
         // инициализация защиты
         $this->initDefense();
         // Если включена отладка ошибок, создаем логгер для активации его 
@@ -959,6 +959,8 @@ class Application extends BaseObject
      */
     protected function initTheme(): void
     {
+        if (isset($this->theme)) return;
+
         $this->theme = IS_BACKEND ? $this->backendTheme : $this->frontendTheme;
         // устанавливаем тему по умолчанию
         $this->theme->set();
