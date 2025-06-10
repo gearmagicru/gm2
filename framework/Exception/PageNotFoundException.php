@@ -23,7 +23,7 @@ class PageNotFoundException extends NotFoundException
     /**
      * {@inheritdoc}
      */
-    public string $viewFile = '//pages/404';
+    public string $viewFile = '//errors/404';
 
     /**
      * Конструктор класса.
