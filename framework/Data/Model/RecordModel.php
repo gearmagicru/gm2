@@ -58,7 +58,7 @@ class RecordModel extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function updateRecord(array $columns, Where|Closure|string|array $where = null): false|int
+    public function updateRecord(array $columns, Where|Closure|string|array|null $where = null): false|int
     {
         $where = $where ?: [];
         if ($this->dataManager && $this->dataManager->useAudit) {
@@ -220,6 +220,21 @@ class RecordModel extends ActiveRecord
     }
 
     /**
+     * Возвращает поля, значения которых необходимо проверить на уникальность.
+     * 
+     * Варианты записи полей:
+     * 1) `['fields' => ['field1', 'field2', ...], 'operator' => 'OR']`.
+     * 2) `['field1', 'field2', ...]`.
+     * 
+     * @return array
+     * 
+     */
+    public function uniqueFields(): array
+    {
+        return $this->dataManager->uniqueFields ?? [];
+    }
+
+    /**
      * Возвращает идентификатор записи, полученный из запроса одним
      * из методов: GET, POST,...
      *
@@ -227,6 +242,7 @@ class RecordModel extends ActiveRecord
      */
     public function getIdentifier(): mixed
     {
+        return null;
     }
 
     /**
@@ -290,8 +306,9 @@ class RecordModel extends ActiveRecord
      */
     public function beforeSave(bool $isInsert): bool
     {
-        if ($this->dataManager && $this->dataManager->uniqueFields) {
-            $uniqueFields = $this->dataManager->uniqueFields;
+        /** @var array $uniqueFields */
+        $uniqueFields = $this->uniqueFields();
+        if ($uniqueFields) {
             // если имеет объявление в виде: ['fields' => ['field1', 'field2', ...], 'operator' => 'OR']
             if (isset($uniqueFields['fields'])) {
                 $isUniqueness = $this->checkUniqueness($uniqueFields['fields'], $uniqueFields['operator'] ?? 'OR');
@@ -313,7 +330,7 @@ class RecordModel extends ActiveRecord
      */
     public function afterSave(
         bool $isInsert, 
-        array $columns = null, 
+        ?array $columns = null, 
         false|int|string|null $result = null
     ): void
     {
