@@ -23,7 +23,7 @@ class ForbiddenHttpException extends HttpException
     /**
      * {@inheritdoc}
      */
-    public string $viewFile = '//pages/403';
+    public string $viewFile = '//errors/403';
 
     /**
      * Конструктор класса.
