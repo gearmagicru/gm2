@@ -134,4 +134,48 @@ class Sites extends Collection
         }
         return $id ? (max($id) + 1) : 1;
     }
+
+    /**
+     * Возвращает метаданные сайта (для установленных языков).
+     * 
+     * @param string $id Уникальный идентификатор сайта.
+     *
+     * @return array|null Возвращает значение `null`, если метаданные сайта отсутствуют.
+     */
+    public function getMeta(string $id): ?array
+    {
+        /** @var array|null $site */
+        $site = $this->get($id);
+        return $site['meta'] ?? null;
+    }
+
+    /**
+     * Возвращает метаданные сайта для указанного языка.
+     * 
+     * @param string $id Уникальный идентификатор сайта.
+     * @param null|string $languageTag Тег языка, например: "ru-RU", "en-GB"... 
+     *     Если значение `null`, то результатом будут значения указанные по умолчанию.
+     *
+     * @return array|null Возвращает значение `null`, если метаданные сайта отсутствуют.
+     */
+    public function getMetaByLanguage(string $id, ?string $languageTag = null): ?array
+    {
+        /** @var array|null $site */
+        $site = $this->get($id);
+        if ($site === null) return null;
+
+        $default = [
+            'titlePattern' => $site['titlePattern'],
+            'title'        => $site['title'],
+            'author'       => $site['author'],
+            'keywords'     => $site['keywords'],
+            'description'  => $site['description'],
+            'image'        => $site['image'],
+            'robots'       => $site['robots']
+        ];
+        if ($languageTag === null)
+            return $default;
+        else
+            return $site['meta'][$languageTag] ?? $default;
+    }
 }
