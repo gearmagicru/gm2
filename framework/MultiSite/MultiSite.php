@@ -52,8 +52,10 @@ class MultiSite extends Service
     public Sites|array $items = [];
 
     /**
-     * [Description for $site]
-     *
+     * Атрибуты текущего сайта.
+     * 
+     * @see MultiSite::initSite()
+     * 
      * @var array|null
      */
     public ?array $site = [];
@@ -89,9 +91,9 @@ class MultiSite extends Service
     }
 
     /**
-     * [Description for initSite]
+     * Инициализация текущего сайта.
      *
-     * @return array|null
+     * @return array|null Если сайт определён, то возвратит атрибуты сайта, иначе `null`.
      */
     protected function initSite(): ?array
     {
@@ -100,12 +102,12 @@ class MultiSite extends Service
     }
 
     /**
-     * [Description for initSiteTheme]
+     * Инициализация темы указанного сайта.
      *
-     * @param \Gm\Mvc\Application $app
-     * @param array $site
+     * @param \Gm\Mvc\Application $app Веб-приложение.
+     * @param array $site Атрибуты сайта.
      * 
-     * @return \Gm\Theme\Theme
+     * @return \Gm\Theme\Theme Возвращает текущую тему.
      */
     protected function initSiteTheme(\Gm\Mvc\Application $app, array $site): \Gm\Theme\Theme
     {
@@ -132,7 +134,7 @@ class MultiSite extends Service
         if ($site) {
             $this->initSiteTheme($app, $site);
             // если сайт не активен
-            if (!$site['active']) {
+            if (!$site['active'] && IS_FRONTEND) {
                 throw new Exception\PageUnavailableException();
             }
         }
@@ -207,6 +209,32 @@ class MultiSite extends Service
     public function getSite(string $id): ?array
     {
         return $this->items->get($id);
+    }
+
+    /**
+     * Возвращает метаданные сайта (для установленных языков).
+     * 
+     * @param string $id Уникальный идентификатор сайта.
+     *
+     * @return array|null Возвращает значение `null`, если метаданные сайта отсутствуют.
+     */
+    public function getSiteMeta(string $id): ?array
+    {
+        return $this->items->getMeta($id);
+    }
+
+    /**
+     * Возвращает метаданные для указанного языка.
+     * 
+     * @param string $id Уникальный идентификатор сайта.
+     * @param null|string $languageTag Тег языка, например: "ru-RU", "en-GB"... 
+     *     Если значение `null`, то результатом будут значения указанные по умолчанию.
+     *
+     * @return array|null Возвращает значение `null`, если метаданные сайта отсутствуют.
+     */
+    public function getSiteMetaByLanguage(string $id, ?string $languageTag = null): ?array
+    {
+        return $this->items->getMetaByLanguage($id, $languageTag);
     }
 
     /**
