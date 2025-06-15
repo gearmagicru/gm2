@@ -136,20 +136,6 @@ class Sites extends Collection
     }
 
     /**
-     * Возвращает метаданные сайта (для установленных языков).
-     * 
-     * @param string $id Уникальный идентификатор сайта.
-     *
-     * @return array|null Возвращает значение `null`, если метаданные сайта отсутствуют.
-     */
-    public function getMeta(string $id): ?array
-    {
-        /** @var array|null $site */
-        $site = $this->get($id);
-        return $site['meta'] ?? null;
-    }
-
-    /**
      * Возвращает метаданные сайта для указанного языка.
      * 
      * @param string $id Уникальный идентификатор сайта.
@@ -158,7 +144,7 @@ class Sites extends Collection
      *
      * @return array|null Возвращает значение `null`, если метаданные сайта отсутствуют.
      */
-    public function getMetaByLanguage(string $id, ?string $languageTag = null): ?array
+    public function getDefaultMeta(string $id, ?string $languageTag = null): ?array
     {
         /** @var array|null $site */
         $site = $this->get($id);
