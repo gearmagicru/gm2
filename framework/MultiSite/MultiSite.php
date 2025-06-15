@@ -98,26 +98,32 @@ class MultiSite extends Service
     protected function initSite(): ?array
     {
         /** @var array|null $site */
-        return $this->site = $this->getByDomain($_SERVER['SERVER_NAME']);
+        return $this->site = $this->getByDomain();
     }
 
     /**
      * Инициализация темы указанного сайта.
      *
      * @param \Gm\Mvc\Application $app Веб-приложение.
-     * @param array $site Атрибуты сайта.
+     * @param array|null $site Атрибуты сайта.
      * 
      * @return \Gm\Theme\Theme Возвращает текущую тему.
      */
-    protected function initSiteTheme(\Gm\Mvc\Application $app, array $site): \Gm\Theme\Theme
+    protected function initSiteTheme(\Gm\Mvc\Application $app, ?array $site): \Gm\Theme\Theme
     {
-        if (IS_BACKEND) {
-            $app->backendTheme->default = $site['backendTheme'];
-            $app->theme = $app->backendTheme;
-        } else
-        if (IS_FRONTEND) {
-            $app->frontendTheme->default = $site['frontendTheme'];
-            $app->theme = $app->frontendTheme;
+        if ($site) {
+            if (IS_BACKEND) {
+                $app->backendTheme->default = $site['backendTheme'];
+                $app->theme = $app->backendTheme;
+            } else
+            if (IS_FRONTEND) {
+                $app->frontendTheme->default = $site['frontendTheme'];
+                $app->theme = $app->frontendTheme;
+            }
+        } else {
+            // т.к. инициализация тема еще не выполнена, а исключение делать надо
+            // (исключение содержит установленную тему), то делаем её здесь
+            $app->theme = IS_BACKEND ? $app->backendTheme : $app->frontendTheme;
         }
         // устанавливаем тему по умолчанию
         $app->theme->set();
@@ -131,13 +137,14 @@ class MultiSite extends Service
     {
         /** @var array|null $site */
         $site = $this->initSite();
+        $this->initSiteTheme($app, $site);
         if ($site) {
-            $this->initSiteTheme($app, $site);
             // если сайт не активен
             if (!$site['active'] && IS_FRONTEND) {
                 throw new Exception\PageUnavailableException();
             }
-        }
+        } else
+            throw new Exception\PageUnavailableException();
     }
 
     /**
@@ -212,18 +219,6 @@ class MultiSite extends Service
     }
 
     /**
-     * Возвращает метаданные сайта (для установленных языков).
-     * 
-     * @param string $id Уникальный идентификатор сайта.
-     *
-     * @return array|null Возвращает значение `null`, если метаданные сайта отсутствуют.
-     */
-    public function getSiteMeta(string $id): ?array
-    {
-        return $this->items->getMeta($id);
-    }
-
-    /**
      * Возвращает метаданные для указанного языка.
      * 
      * @param string $id Уникальный идентификатор сайта.
@@ -232,21 +227,26 @@ class MultiSite extends Service
      *
      * @return array|null Возвращает значение `null`, если метаданные сайта отсутствуют.
      */
-    public function getSiteMetaByLanguage(string $id, ?string $languageTag = null): ?array
+    public function getDefaultSiteMeta(string $id, ?string $languageTag = null): ?array
     {
-        return $this->items->getMetaByLanguage($id, $languageTag);
+        return $this->items->getDefaultMeta($id, $languageTag);
     }
 
     /**
      * Возвращает атрибуты сайта по указанному домену.
      *
-     * @param string $domain Имя домена.
+     * @param string|null $domain Имя домена. Если значение `null`, то применяется 
+     *     текущее имя домена (по умолчанию `null`).
      * 
      * @return array|null Возвращает значение `null`, если атрибуты сайта не найдены.
      * 
      */
-    public function getByDomain(string $domain): ?array
+    public function getByDomain(?string $domain = null): ?array
     {
+        if ($domain === null) {
+            $domain = $_SERVER['SERVER_NAME'];
+        }
+
         /** @var string|null $siteId */
         $siteId = $this->domains->get($domain);
         return $siteId ? $this->items->get($siteId) : null;
