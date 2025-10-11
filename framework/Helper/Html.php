@@ -3,7 +3,7 @@
  * Этот файл является частью пакета GM Framework.
  * 
  * @link https://gearmagic.ru/framework/
- * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @copyright Copyright (c) 2015-2025 Веб-студия GearMagic
  * @license https://gearmagic.ru/license/
  */
 
@@ -13,15 +13,15 @@ use Gm;
 use Gm\Helper\Url;
 
 /**
- * Вспомогательный класс Html, предоставляет набор статических 
- * методов для генерации часто используемых тегов HTML.
+ * Вспомогательный класс Html, предоставляет набор статических методов для генерации 
+ * часто используемых тегов HTML.
  * 
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @author Anton Tivonenko <anton.tivonenko@gmail.com>
  * @package Gm\Helper
  * @since 2.0
  */
-class Html
+class Html extends Helper
 {
     /**
      * Список пустых элементов.
@@ -63,10 +63,11 @@ class Html
     ];
 
     /**
-     * Cписок атрибутов тегов, которые следует обрабатывать особо, если их значения имеют тип array.
+     * Cписок атрибутов тегов, которые следует обрабатывать особо, если их значения 
+     * имеют тип array.
      * 
-     * В частности, если значение атрибута `data` = ['name' => 'abc', 'age' => 7] `, два атрибута
-     * будет сгенерирован вместо одного: `data-name = "abc" data-age ="7"`.
+     * В частности, если значение атрибута `data` = ['name' => 'abc', 'age' => 7] `, 
+     * два атрибута будет сгенерирован вместо одного: `data-name = "abc" data-age ="7"`.
      * 
      * @var array<int, string>
      */
@@ -80,8 +81,8 @@ class Html
      * @see Gm::charset()
      * 
      * @param string $content Кодируемый контент.
-     * @param bool $doubleEncode Если `true`, то PHP не будет преобразовывать существующие HTML-сущности. 
-     *    По умолчанию преобразуется все без ограничений.
+     * @param bool $doubleEncode Если `true`, то PHP не будет преобразовывать существующие 
+     *    HTML-сущности. По умолчанию преобразуется все без ограничений (по умолчанию `true`).
      * 
      * @return string Закодированный контент.
      */
@@ -113,15 +114,16 @@ class Html
      * @see Html::beginTag()
      * @see Html::endTag()
      * 
-     * @param string|false|null $name Имя тега. Если $name имеет значение `null` или `false`,
-     *    соответствующий контент будет отображаться без тега.
-     * @param array|string $content Содержимое, которое должно быть заключено между начальным 
-     *    и конечным тегами. Он не будет закодирован в HTML. Если это исходит от конечных 
-     *    пользователей, следует подумать о {@see Html::encode()}, чтобы предотвратить XSS атаки.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string|false|null $name Имя тега. Если $name имеет значение `null` 
+     *    или `false`, соответствующий контент будет отображаться без тега.
+     * @param array|string $content Содержимое, которое должно быть заключено между 
+     *    начальным и конечным тегами. Он не будет закодирован в HTML. Если это исходит 
+     *    от конечных пользователей, следует подумать о {@see Html::encode()}, чтобы 
+     *    предотвратить XSS атаки.
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в 
+     *    виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться.
      *
      * Например, при использовании: 
      * ```php
@@ -134,7 +136,11 @@ class Html
      *
      * @return string Сгенерированный HTML-тег.
      */
-    public static function tag(string|false|null $name, array|string $content = '', array $attributes = []): string
+    public static function tag(
+        string|false|null $name, 
+        array|string $content = '', 
+        array $attributes = []
+    ): string
     {
         if ($name === null || $name === false) {
             return $content;
@@ -143,8 +149,8 @@ class Html
         if (is_array($content)) {
             $content = implode('', $content);
         }
-        $html = "<$name" . self::renderTagAttributes($attributes) . '>';
-        return isset(self::$voidElements[strtolower($name)]) ? $html : "$html$content</$name>";
+        $html = "<$name" . static::renderTagAttributes($attributes) . '>';
+        return isset(static::$voidElements[strtolower($name)]) ? $html : "$html$content</$name>";
     }
 
     /**
@@ -189,7 +195,7 @@ class Html
      * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
      *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
      *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     *    не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный начальный тег.
      */
@@ -198,7 +204,7 @@ class Html
         if ($name === null || $name === false) {
             return '';
         }
-        return "<$name" . self::renderTagAttributes($attributes) . '>';
+        return "<$name" . static::renderTagAttributes($attributes) . '>';
     }
 
     /**
@@ -224,38 +230,39 @@ class Html
      * Создаёт тег стиля.
      * 
      * @param string $content Cодержание стиля.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Cгенерированный тег стиля
      */
     public static function style(string $content, array $attributes = []): string
     {
-        return self::tag('style', $content, $attributes);
+        return static::tag('style', $content, $attributes);
     }
 
     /**
      * Создаёт тег скрипта.
      * 
      * @param string $content Cодержание сценария.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Cгенерированный тег скрипта.
      */
     public static function script(string $content, array $attributes = []): string
     {
-        return self::tag('script', $content, $attributes);
+        return static::tag('script', $content, $attributes);
     }
 
     /**
      * Сортирует атрибуты тега HTML.
      * 
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *     в виде пар "имя => значение".
      * 
      * @return array Отсортированные атрибуты тега.
      */
@@ -266,7 +273,7 @@ class Html
         }
 
         $sorted = [];
-        foreach (self::$attributeOrder as $name) {
+        foreach (static::$attributeOrder as $name) {
             if (isset($attributes[$name])) {
                 $sorted[$name] = $attributes[$name];
             }
@@ -302,8 +309,8 @@ class Html
      * data-params='{"value":1,"name":"gear"}' data-status="ok"
      * ```
      *
-     * @param array<string, string> $attributes Атрибуты для рендеринга. Значения атрибутов будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}.
+     * @param array<string, string> $attributes Атрибуты для рендеринга. Значения атрибутов 
+     *    будут закодированы в HTML с использованием {@see Html::encode()}.
      * @return string Результат рендеринга. Если атрибуты не пустые, они будут преобразованы в 
      *    строку с начальным пробелом (чтобы его можно было напрямую добавить к имени тега в теге. 
      *    Если атрибут отсутствует, будет возвращена пустая строка.
@@ -318,29 +325,29 @@ class Html
                     $html .= " $name";
                 }
             } elseif (is_array($value)) {
-                if (in_array($name, self::$dataAttributes)) {
+                if (in_array($name, static::$dataAttributes)) {
                     foreach ($value as $n => $v) {
                         if (is_array($v)) {
                             $html .= " $name-$n='" . Json::htmlEncode($v) . "'";
                         } else {
-                            $html .= " $name-$n=\"" . self::encode($v) . '"';
+                            $html .= " $name-$n=\"" . static::encode($v) . '"';
                         }
                     }
                 } elseif ($name === 'class') {
                     if (empty($value)) {
                         continue;
                     }
-                    $html .= " $name=\"" . self::encode(implode(' ', $value)) . '"';
+                    $html .= " $name=\"" . static::encode(implode(' ', $value)) . '"';
                 } elseif ($name === 'style') {
                     if (empty($value)) {
                         continue;
                     }
-                    $html .= " $name=\"" . self::encode(self::cssStyleFromArray($value)) . '"';
+                    $html .= " $name=\"" . static::encode(static::cssStyleFromArray($value)) . '"';
                 } else {
                     $html .= " $name='" . Json::htmlEncode($value) . "'";
                 }
             } elseif ($value !== null) {
-                $html .= " $name=\"" . self::encode($value) . '"';
+                $html .= " $name=\"" . static::encode($value) . '"';
             }
         }
         return $html;
@@ -357,8 +364,8 @@ class Html
      * ?>
      * ```
      *
-     * @param array<string, string> $style Массив стилей CSS. Ключи массива - это имена свойств CSS, 
-     *    а значения массива - соответствующие значения свойств CSS.
+     * @param array<string, string> $style Массив стилей CSS. Ключи массива - это имена 
+     *    свойств CSS, а значения массива - соответствующие значения свойств CSS.
      * @return string Строка стиля CSS. Если стиль CSS пуст, будет возвращено значение `null`.
      */
     public static function cssStyleFromArray(array $style): string
@@ -406,66 +413,84 @@ class Html
      * 
      * @see Url::to()
      * 
-     * @param string $text Тело ссылки. Оно не будет закодировано в HTML. Поэтому вы можете передать HTML-код, 
-     *    например тег изображения. Если это делает сам пользователь, следует использовать {@see Html::encode()}
-     *    чтобы предотвратить XSS атаки.
-     * @param string|array|null URL-адрес тега гиперссылки. Этот параметр будет обработан {@see Url::to()} 
-     *    и будет использоваться для атрибута "href" тега. Если этот параметр равен `null` или `#`, атрибут "href" не будет сгенерирован.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $text Тело ссылки. Оно не будет закодировано в HTML. Поэтому 
+     *    вы можете передать HTML-код, например тег изображения. Если это делает 
+     *    сам пользователь, следует использовать {@see Html::encode()} чтобы 
+     *    предотвратить XSS атаки.
+     * @param string|array|null URL-адрес тега гиперссылки. Этот параметр будет 
+     *    обработан {@see Url::to()} и будет использоваться для атрибута "href" тега. 
+     *    Если этот параметр равен `null` или `#`, атрибут "href" не будет сгенерирован
+     *    (по умолчанию `null`).
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в 
+     *    виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}
+     *    (по умолчанию `[]`). 
      * 
      * @return string Созданная гиперссылка.
      */
-    public static function a(string $text, string|array|null $url = null, array $attributes = []): string
+    public static function a(
+        string $text, 
+        string|array|null $url = null, 
+        array $attributes = []
+    ): string
     {
         if ($url !== null) {
             // если главная страница, нет смысла получать URL
-            if ($url === Gm::$app->baseUrl)
+            if ($url === static::$app->baseUrl)
                 $attributes['href'] = $url;
             else
                 $attributes['href'] = $url !== '#' ? Url::to($url) : '#';
         }
-        return self::tag('a', $text, $attributes);
+        return static::tag('a', $text, $attributes);
     }
 
     /**
      * Создаёт гиперссылку mailto.
      * 
-     * @param string $text Тело ссылки. Оно не будет закодировано в HTML. Поэтому вы можете передать HTML-код, 
-     *    например тег изображения. Если это делает сам пользователь, следует использовать {@see Html::encode()}
-     *    чтобы предотвратить XSS атаки.
-     * @param string|null $email Адрес электронной почты. Если это значение `null`, первый параметр (тело ссылки) будет 
-     *    рассматриваться как адрес электронной почты и использоваться.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $text Тело ссылки. Оно не будет закодировано в HTML. Поэтому вы 
+     *    можете передать HTML-код, например тег изображения. Если это делает сам 
+     *    пользователь, следует использовать {@see Html::encode()} чтобы предотвратить 
+     *    XSS атаки.
+     * @param string|null $email Адрес электронной почты. Если это значение `null`, 
+     *    первый параметр (тело ссылки) будет рассматриваться как адрес электронной 
+     *    почты и использоваться (по умолчанию `null`).
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированная ссылка mailto.
      */
-    public static function mailto(string $text, ?string $email = null, array $attributes = []): string
+    public static function mailto(
+        string $text, 
+        ?string $email = null, 
+        array $attributes = []
+    ): string
     {
         $attributes['href'] = 'mailto:' . ($email === null ? $text : $email);
-        return self::tag('a', $text, $attributes);
+        return static::tag('a', $text, $attributes);
     }
 
     /**
      * Создаёт тег изображения.
      * 
      * @param array|string $src URL изображения. Этот параметр будет обработан через {@see Url::to()}.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
-     *    В качестве атрибута можно передать параметр `srcset` в виде массива, ключи которого являются дескрипторами, 
-     *    а значения - URL-адресами. Все URL-адреса будут обработаны {@see Url::to()}.
-     * @param bool $defineUrl Если true, URL не будет обработа через {@see Url::to()}.
-
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться.
+     *    В качестве атрибута можно передать параметр `srcset` в виде массива, ключи которого 
+     *    являются дескрипторами, а значения - URL-адресами. Все URL-адреса будут обработаны 
+     *    {@see Url::to()} (по умолчанию `[]`).
+     * @param bool $defineUrl Если true, URL не будет обработа через {@see Url::to()} 
+     *    (по умолчанию `true`).
      * @return string Сгенерированный тег изображения.
      */
-    public static function img(array|string $src, array $attributes = [], bool $defineUrl = true): string
+    public static function img(
+        array|string $src, 
+        array $attributes = [], 
+        bool $defineUrl = true
+    ): string
     {
         $attributes['src'] = $defineUrl ? Url::to($src) : $src;
         if (isset($attributes['srcset']) && is_array($attributes['srcset'])) {
@@ -478,7 +503,7 @@ class Html
         if (!isset($attributes['alt'])) {
             $attributes['alt'] = '';
         }
-        return self::tag('img', '', $attributes);
+        return static::tag('img', '', $attributes);
     }
 
     /**
@@ -486,12 +511,13 @@ class Html
      * 
      * Контент имеет вид: `data:{type};{content}`
      * 
-     * @param string $type Тип изображения (например: "image/gif").
-     * @param string $data Контент изображения. Если `null`, будет контент "пустого" изображения в base64.
+     * @param string $type Тип изображения (по умолчанию 'image/gif').
+     * @param string|null $data Контент изображения. Если `null`, будет контент "пустого" 
+     *     изображения в base64 (по умолчанию `null`).
 
      * @return string Контент изображения.
      */
-    public static function imgDataSrc(string $type = 'image/gif', string $data = null): string
+    public static function imgDataSrc(string $type = 'image/gif', ?string $data = null): string
     {
         if ($data === null) {
             $data = 'base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
@@ -520,15 +546,15 @@ class Html
     /**
      * Создаёт тег метки.
      * 
-     * @param string $content Текст метки. Он не будет закодирован в HTML. Поэтому вы можете передать HTML-код, 
-     *    например тег изображения. Если это делает сам пользователь, следует использовать {@see Html::encode()}
-     *    чтобы предотвратить XSS атаки.
-     *    Если это значение `null`, атрибут "for" не будет сгенерирован.
-     * @param string|null $for
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $content Текст метки. Он не будет закодирован в HTML. Поэтому вы 
+     *    можете передать HTML-код, например тег изображения. Если это делает сам 
+     *    пользователь, следует использовать {@see Html::encode()} чтобы предотвратить 
+     *    XSS атаки. Если это значение `null`, атрибут "for" не будет сгенерирован.
+     * @param string|null $for (по умолчанию `null`)
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег метки.
      */
@@ -541,13 +567,14 @@ class Html
     /**
      * Создаёт тег шаблона "tpl".
      * 
-     * @param string|array $content Текст шаблона. Он не будет закодирован в HTML. Поэтому вы можете передать HTML-код, 
-     *    например тег изображения. Если это делает сам пользователь, следует использовать {@see Html::encode()}
-     *    чтобы предотвратить XSS атаки.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string|array $content Текст шаблона. Он не будет закодирован в HTML. 
+     *    Поэтому вы можете передать HTML-код, например тег изображения. Если это 
+     *    делает сам пользователь, следует использовать {@see Html::encode()} чтобы 
+     *    предотвратить XSS атаки.
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег шаблона "tpl".
      */
@@ -633,7 +660,8 @@ class Html
      * 
      * @param string $if Выражение.
      * @param string $then Фрагмент для выражения, принимающего значение `true`.
-     * @param string $else Фрагмент для выражения, принимающего значение `false`.
+     * @param string $else Фрагмент для выражения, принимающего значение `false` 
+     *     (по умолчанию '').
      * 
      * @return string Сгенерированный тег шаблона "tpl" с выражением.
      */
@@ -645,10 +673,10 @@ class Html
     /**
      * Cоздаёт тег плавающего фрейма.
      * 
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег шаблона "tpl" с выражением.
      */
@@ -660,13 +688,14 @@ class Html
     /**
      * Создаёт тег кнопки.
      * 
-     * @param string $content Содержимое, заключенное в тег кнопки. Оно не будет закодировано в HTML. 
-     *    Поэтому вы можете передать HTML-код, например тег изображения. Если это делает сам пользователь, 
-     *    следует использовать {@see Html::encode()}, чтобы предотвратить XSS атаки.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $content Содержимое, заключенное в тег кнопки. Оно не будет 
+     *    закодировано в HTML. Поэтому вы можете передать HTML-код, например тег 
+     *    изображения. Если это делает сам пользователь, следует использовать {@see Html::encode()}, 
+     *    чтобы предотвратить XSS атаки (по умолчанию 'button').
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег кнопки.
      */
@@ -675,40 +704,48 @@ class Html
         if (!isset($attributes['type'])) {
             $attributes['type'] = 'button';
         }
-        return self::tag('button', $content, $attributes);
+        return static::tag('button', $content, $attributes);
     }
 
     /**
      * Создаёт тег элемента ввода заданного типа.
      * 
      * @param string $type Атрибут типа.
-     * @param string $name Атрибут имени. Если `null`, атрибут имени не будет сгенерирован.
-     * @param string $value Атрибут значения. Если `null`, атрибут значения не будет сгенерирован.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $name Атрибут имени. Если `null`, атрибут имени не будет сгенерирован
+     *   (по умолчанию `null`).
+     * @param string $value Атрибут значения. Если `null`, атрибут значения не будет 
+     *   сгенерирован (по умолчанию `null`).
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег элемента ввода заданного типа.
      */
-    public static function input(string $type, ?string $name = null, ?string $value = null, array $attributes = []): string
+    public static function input(
+        string $type, 
+        ?string $name = null, 
+        ?string $value = null, 
+        array $attributes = []
+    ): string
     {
         if (!isset($attributes['type'])) {
             $attributes['type'] = $type;
         }
         $attributes['name'] = $name;
         $attributes['value'] = $value === null ? null : (string) $value;
-        return self::tag('input', '', $attributes);
+        return static::tag('input', '', $attributes);
     }
 
     /**
      * Создаёт кнопку ввода.
      * 
-     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет сгенерирован.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $label Атрибут значения. Если `null`, атрибут значения не 
+     *    будет сгенерирован (по умолчанию 'button').
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег кнопки ввода.
      */
@@ -716,17 +753,18 @@ class Html
     {
         $attributes['type'] = 'button';
         $attributes['value'] = $label;
-        return self::tag('input', '', $attributes);
+        return static::tag('input', '', $attributes);
     }
 
     /**
      * Создаёт кнопку отправки данных.
      *
-     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет сгенерирован.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет 
+     *    сгенерирован (по умолчанию 'Submit').
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег кнопки отправки данных.
      */
@@ -734,17 +772,18 @@ class Html
     {
         $attributes['type'] = 'submit';
         $attributes['value'] = $label;
-        return self::tag('input', '', $attributes);
+        return static::tag('input', '', $attributes);
     }
 
     /**
      * Создаёт кнопку сброса данных.
      * 
-     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет сгенерирован.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет 
+     *   сгенерирован (по умолчанию 'Reset').
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег кнопки сброса данных.
      */
@@ -752,52 +791,54 @@ class Html
     {
         $attributes['type'] = 'reset';
         $attributes['value'] = $label;
-        return self::tag('input', '', $attributes);
+        return static::tag('input', '', $attributes);
     }
 
     /**
      * Создаёт поле ввода текста.
      * 
      * @param string $name Атрибут имени.
-     * @param string $value Значение.
-     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет сгенерирован.
-     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     * @param string $value Значение (по умолчанию `null`).
+     * @param array<string, string> $attributes Атрибуты тега HTML (параметры HTML) 
+     *    в виде пар "имя => значение". Они будут отображаться как атрибуты результирующего 
+     *    тега. Значения будут закодированы в HTML с использованием {@see Html::encode()}. 
+     *    Если значение `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег ввода текста.
      */
     public static function textInput(string $name, ?string $value = null, array $attributes = []): string
     {
-        return self::input('text', $name, $value, $attributes);
+        return static::input('text', $name, $value, $attributes);
     }
 
    /**
      * Создаёт скрытое поле ввода.
      * 
+     * @see Html::input()
+     * 
      * @param string $name Атрибут имени.
-     * @param string $value Значение.
-     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет сгенерирован.
+     * @param string $value Значение (по умолчанию `null`).
      * @param array<string, string> $options Параметры тега в виде пар "имя => значение".
      *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий 
+     *    атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный скрытый тег ввода.
      */
     public static function hiddenInput(string $name, ?string $value = null, array $options = []): string
     {
-        return self::input('hidden', $name, $value, $options);
+        return static::input('hidden', $name, $value, $options);
     }
 
    /**
      * Создаёт скрытое поле ввода для проверки CSRF токена.
      * 
+     * @see Html::input()
+     * 
      * @param array<string, string> $options Параметры тега в виде пар "имя => значение".
      *    Они будут отображаться как атрибуты результирующего тега. Значения будут 
      *    закодированы в HTML с использованием {@see Html::encode()}. Если значение 
-     *    `null`, соответствующий атрибут не будет отображаться.
+     *    `null`, соответствующий атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный скрытый тег ввода для проверки CSRF токена. Если 
      *    значение {@see \Gm\Http\Request::$enableCsrfValidation} false, то результат 
@@ -806,10 +847,10 @@ class Html
     public static function csrfInput(array $options = []): string
     {
         /** @var \Gm\Http\Request $request */
-        $request = Gm::$app->request;
+        $request = static::$app->request;
         // если проверка CSRF
         if ($request->enableCsrfValidation) {
-            return self::input('hidden', $request->csrfParamName, $request->getCsrfToken(), $options);
+            return static::input('hidden', $request->csrfParamName, $request->getCsrfToken(), $options);
         }
         return '';
     }
@@ -817,40 +858,43 @@ class Html
     /**
      * Создаёт поле ввода пароля.
      * 
+     * @see Html::input()
+     * 
      * @param string $name Атрибут имени.
-     * @param string $value Значение.
-     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет сгенерирован.
+     * @param string $value Значение (по умолчанию `null`).
      * @param array<string, string> $options Параметры тега в виде пар "имя => значение".
      *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий 
+     *    атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег ввода пароля.
      */
     public static function passwordInput(string $name, ?string $value = null, array $options = []): string
     {
-        return self::input('password', $name, $value, $options);
+        return static::input('password', $name, $value, $options);
     }
 
     /**
      * Создаёт поле ввода файла.
+     * 
      * Чтобы использовать поле ввода файла, вы должны установить для атрибута "enctype" 
      * формы значение "multipart/form-data". После отправки формы, информация о загруженном файле 
      * можно получить через $ _FILES [$ name] (см. документацию PHP).
      * 
+     * @see Html::input()
+     * 
      * @param string $name Атрибут имени.
-     * @param string $value Значение.
-     * @param string $label Атрибут значения. Если `null`, атрибут значения не будет сгенерирован.
+     * @param string $value Значение (по умолчанию `null`).
      * @param array<string, string> $options Параметры тега в виде пар "имя => значение".
      *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий 
+     *    атрибут не будет отображаться (по умолчанию `[]`).
      * 
      * @return string Сгенерированный тег ввода файла.
      */
     public static function fileInput(string $name, ?string $value = null, array $options = []): string
     {
-        return self::input('file', $name, $value, $options);
+        return static::input('file', $name, $value, $options);
     }
 
     /**
@@ -858,22 +902,32 @@ class Html
      * 
      * @param string $type Тип ввода. Это может быть либо `radio` или `checkbox`.
      * @param string $name Атрибут имени.
-     * @param bool $checked Установка флажка.
-     * @param array<string, string> $options Параметры тега в виде пар "имя => значение". Следующие параметры обрабатываются особым образом:
-     *    - `uncheck`: string, значение, связанное с состоянием снятого флажка. Когда этот атрибут присутствует, будет 
-     *      сгенерирован скрытый ввод (hidden input), так что, если флажок не установлен и отправлен, значение этого 
-     *      атрибута все равно будет отправлено на сервер через скрытый ввод (hidden input).
-     *    - `label`: string, рядом с флажком отображается метка. Он не будет закодирован в HTML. Поэтому вы можете передать 
-     *      HTML-код, например тег изображения. Если делает это сам пользователь, следует использовать {@see Html::encode()}, 
-     *      чтобы предотвратить XSS атаки. Когда этот параметр указан, флажок будет вложен в метку.
-     *    - `labelOptions`: array, атрибуты HTML для тега метки. Не устанавливайте эту опцию, если вы не установили опцию "label".
+     * @param bool $checked Установка флажка (по умолчанию `false`).
+     * @param array<string, string> $options Параметры тега в виде пар "имя => значение". 
+     *    Следующие параметры обрабатываются особым образом:
+     *    - `uncheck`: string, значение, связанное с состоянием снятого флажка. Когда 
+     *    этот атрибут присутствует, будет сгенерирован скрытый ввод (hidden input), 
+     *    так что, если флажок не установлен и отправлен, значение этого атрибута все 
+     *    равно будет отправлено на сервер через скрытый ввод (hidden input).
+     *    - `label`: string, рядом с флажком отображается метка. Он не будет закодирован 
+     *    в HTML. Поэтому вы можете передать HTML-код, например тег изображения. Если делает 
+     *    это сам пользователь, следует использовать {@see Html::encode()}, чтобы 
+     *    предотвратить XSS атаки. Когда этот параметр указан, флажок будет вложен в метку.
+     *    - `labelOptions`: array, атрибуты HTML для тега метки. Не устанавливайте эту опцию, 
+     *    если вы не установили опцию "label".
      *
-     *      Остальные параметры будут отображаться как атрибуты, результирующего тега флажка. Значения будут закодированы в 
-     *      HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут не будет отображаться.
+     *    Остальные параметры будут отображаться как атрибуты, результирующего тега флажка. 
+     *    Значения будут закодированы в HTML с использованием {@see Html::encode()}. Если 
+     *    значение `null`, соответствующий атрибут не будет отображаться.
      *
      * @return string Cгенерированный тег логического поля ввода.
      */
-    protected static function booleanInput(string $type, string $name, bool $checked = false, array $options = []): string
+    protected static function booleanInput(
+        string $type, 
+        string $name, 
+        bool $checked = false, 
+        array $options = []
+    ): string
     {
         // опция "checked" имеет приоритет над аргументом $checked
         if (!isset($options['checked'])) {
@@ -890,7 +944,7 @@ class Html
             if (!empty($options['disabled'])) {
                 $hiddenOptions['disabled'] = $options['disabled'];
             }
-            $hidden = self::hiddenInput($name, $options['uncheck'], $hiddenOptions);
+            $hidden = static::hiddenInput($name, $options['uncheck'], $hiddenOptions);
             unset($options['uncheck']);
         } else {
             $hidden = '';
@@ -899,61 +953,70 @@ class Html
             $label = $options['label'];
             $labelOptions = isset($options['labelOptions']) ? $options['labelOptions'] : array();
             unset($options['label'], $options['labelOptions']);
-            $content = self::label(self::input($type, $name, $value, $options) . ' ' . $label, null, $labelOptions);
+            $content = static::label(static::input($type, $name, $value, $options) . ' ' . $label, null, $labelOptions);
             return $hidden . $content;
         }
-        return $hidden . self::input($type, $name, $value, $options);
+        return $hidden . static::input($type, $name, $value, $options);
     }
 
     /**
      * Создаёт радиокнопку формы.
      * 
+     * @see Html::booleanInput()
+     * 
      * @param string $name Атрибут имени.
-     * @param bool $checked Установка переключателя.
+     * @param bool $checked Установка переключателя (по умолчанию `false`).
      * @param array<string, string> $options Параметры тега в виде пар "имя => значение".
-     *    См. {@see Html::booleanInput()} для получения подробной информации о принятых атрибутах.
+     *    См. {@see Html::booleanInput()} для получения подробной информации о принятых 
+     *    атрибутах (по умолчанию `[]`).
      *
      * @return string Сгенерированный тег радиокнопки.
      */
     public static function radio(string $name, bool $checked = false, array $options = []): string
     {
-        return self::booleanInput('radio', $name, $checked, $options);
+        return static::booleanInput('radio', $name, $checked, $options);
     }
 
     /**
      * Создаёт флажок формы.
      * 
+     * @see Html::booleanInput()
+     * 
      * @param string $name Атрибут имени.
-     * @param bool $checked Установка флажка.
+     * @param bool $checked Установка флажка (по умолчанию `false`).
      * @param array<string, string> $options Параметры тега в виде пар "имя => значение".
-     *    См. {@see Html::booleanInput()} для получения подробной информации о принятых атрибутах.
+     *    См. {@see Html::booleanInput()} для получения подробной информации о принятых 
+     *    атрибутах (по умолчанию `[]`).
      *
      * @return string Сгенерированный тег флажка.
      */
     public static function checkbox(string $name, bool $checked = false, array $options = []): string
     {
-        return self::booleanInput('checkbox', $name, $checked, $options);
+        return static::booleanInput('checkbox', $name, $checked, $options);
     }
 
     /**
      * Создаёт ввод текстовой области.
      * 
+     * @see Html::tag()
+     * 
      * @param string $name Атрибут имени.
-     * @param string $value Входное значение, оно будет закодирован с использованием {@see Html::encode()}.
+     * @param string $value Входное значение, оно будет закодирован с использованием 
+     *    {@see Html::encode()} (по умолчанию '').
      * @param array<string, string> $options Параметры тега в виде пар "имя => значение".
-     *    Они будут отображаться как атрибуты результирующего тега. Значения будут закодированы 
-     *    в HTML с использованием {@see Html::encode()}. Если значение `null`, соответствующий атрибут 
-     *    не будет отображаться.
+     *    Они будут отображаться как атрибуты результирующего тега. Значения будут 
+     *    закодированы в HTML с использованием {@see Html::encode()}. Если значение `null`, 
+     *    соответствующий атрибут не будет отображаться.
      *    Специальные параметры:
-     *    - `doubleEncode`: определяет, следует ли дважды кодировать объекты HTML в `$value`. Если `false`, 
-     *    HTML сущности в `$value` не будут кодироваться.
+     *    - `doubleEncode`: определяет, следует ли дважды кодировать объекты HTML в `$value`. 
+     *    Если `false`, HTML сущности в `$value` не будут кодироваться.
      *
      * @return string Cгенерированный тег текстовой области.
      */
     public static function textarea(string $name, string $value = '', array $options = []): string
     {
         $options['name'] = $name;
-        return static::tag('textarea', self::encode($value, $options['doubleEncode'] ?? true), $options);
+        return static::tag('textarea', static::encode($value, $options['doubleEncode'] ?? true), $options);
     }
 
     /**
@@ -962,22 +1025,20 @@ class Html
      * @param array $options Параметры.
      * @param mixed $cssClass CSS класс.
      * 
-     * @return string
+     * @return void
      */
-    public static function addCssClass(array &$options, mixed $cssClass): string
+    public static function addCssClass(array &$options, mixed $cssClass): void
     {
-        if (empty($cssClass)) {
-            return '';
+        if ($cssClass) {
+            if (is_array($cssClass)) {
+                $cssClass = implode(' ', $cssClass);
+            } else
+                $cssClass = (string) $cssClass;
+            if (isset($options['class']))
+                $options['class'] = $options['class'] . ' ' . $cssClass;
+            else
+                $options['class'] = $cssClass;
         }
-
-        if (is_array($cssClass)) {
-            $cssClass = implode(' ', $cssClass);
-        } else
-            $cssClass = (string) $cssClass;
-        if (isset($options['class']))
-            $options['class'] = $options['class'] . ' ' . $cssClass;
-        else
-            $options['class'] = $cssClass;
     }
 
     /**
