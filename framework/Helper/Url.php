@@ -3,7 +3,7 @@
  * Этот файл является частью пакета GM Framework.
  * 
  * @link https://gearmagic.ru/framework/
- * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @copyright Copyright (c) 2015-2025 Веб-студия GearMagic
  * @license https://gearmagic.ru/license/
  */
 
@@ -12,13 +12,14 @@ namespace Gm\Helper;
 use Gm;
 
 /**
- * Вспомогательный класс Url, представлен в виде набора статических методов для управления URL.
+ * Вспомогательный класс Url, представлен в виде набора статических методов для 
+ * управления URL.
  * 
  * @author Anton Tivonenko <anton.tivonenko@gmail.com>
  * @package Gm\Helper
  * @since 2.0
  */
-class Url
+class Url extends Helper
 {
     /**
      * Создаёт URL-адрес с указанием параметров (компонентов URL-адреса).
@@ -26,29 +27,31 @@ class Url
      * @see \Gm\Url\UrlManager::createUrl()
      * 
      * @param string|array $params Параметры (компоненты) {@see \Gm\Url\UrlManager::buildUrl()} 
-     * используются при создании URL-адреса.
-     * @param null|bool|string $ruleName Если false, правило не будет применяться к компонентам URL.
-     *    Если null, используется правило по умолчанию, иначе указывается имя правила.
+     *    используются при создании URL-адреса.
+     * @param null|bool|string $ruleName Если значение `false`, правило не будет 
+     *    применяться к компонентам URL. Если значение `null`, то используется правило 
+     *    по умолчанию, иначе указывается имя правила (по умолчанию `null`).
      * 
      * @return string
      */
-    public static function to(string|array $params, string $ruleName = null): string
+    public static function to(string|array $params, null|bool|string $ruleName = null): string
     {
         // подготовка компонентов URL согласно правилу $ruleName
         if ($ruleName !== false) {
             $params = (array) $params;
-            Gm::$app->urlRules->prepareUrlComponents($params, $ruleName);
+            static::$app->urlRules->prepareUrlComponents($params, $ruleName);
         }
-        return Gm::$app->urlManager->createUrl($params);
+        return static::$app->urlManager->createUrl($params);
     }
 
     /**
-     * Создаёт URL-адрес для панели управления с указанием параметров (компонентов URL-адреса).
+     * Создаёт URL-адрес для панели управления с указанием параметров (компонентов 
+     * URL-адреса).
      * 
      * @see \Gm\Url\UrlManager::createUrl()
      * 
      * @param string|array $params Параметры (компоненты) {@see \Gm\Url\UrlManager::buildUrl()} 
-     * используются при создании URL-адреса.
+     * используются при создании URL-адреса (по умолчанию `[]`).
      * 
      * @return string
      */
@@ -63,17 +66,17 @@ class Url
             $params[0] = $backend;
         else
             $params[0] = $backend . '/' . $params[0];
-        return Gm::$app->urlManager->createUrl($params);
+        return static::$app->urlManager->createUrl($params);
     }
 
     /**
-     * Добавляет маршрут (полученный из запроса) к создаваемому 
-     * URL-адресу с указанием параметров (компонентов URL-адреса).
+     * Добавляет маршрут (полученный из запроса) к создаваемому URL-адресу с указанием 
+     * параметров (компонентов URL-адреса).
      * 
      * @see \Gm\Url\UrlManager::createUrl()
      * 
      * @param string|array $params Параметры (компоненты) {@see \Gm\Url\UrlManager::buildUrl()} 
-     * используются при создании URL-адреса.
+     * используются при создании URL-адреса (по умолчанию `[]`).
      * 
      * @return string
      */
@@ -89,17 +92,17 @@ class Url
             $params[0] = $route;
         else
             $params[0] = $route . '/' . $params[0];
-        return Gm::$app->urlManager->createUrl($params);
+        return static::$app->urlManager->createUrl($params);
     }
 
     /**
-     * Добавляет маршрут (найденного модуля маршрутизатором) к создаваемому 
-     * URL-адресу с указанием параметров (компонентов URL-адреса).
+     * Добавляет маршрут (найденного модуля маршрутизатором) к создаваемому URL-адресу 
+     * с указанием параметров (компонентов URL-адреса).
      * 
      * @see \Gm\Url\UrlManager::createUrl()
      * 
      * @param string|array $params Параметры (компоненты) {@see \Gm\Url\UrlManager::buildUrl()} 
-     * используются при создании URL-адреса.
+     * используются при создании URL-адреса (по умолчанию `[]`).
      * 
      * @return string
      */
@@ -108,7 +111,7 @@ class Url
         static $match;
 
         if ($match === null) {
-            $match = Gm::$app->router->get('baseRoute', '');
+            $match = static::$app->router->get('baseRoute', '');
         }
 
         $params = (array) $params;
@@ -116,7 +119,7 @@ class Url
             $params[0] = $match;
         else
             $params[0] = $match . '/' . $params[0];
-        return Gm::$app->urlManager->createUrl($params);
+        return static::$app->urlManager->createUrl($params);
     }
 
     /**
@@ -128,33 +131,34 @@ class Url
      */
     public static function uploads(): string
     {
-        return Gm::$app->uploader->url;
+        return static::$app->uploader->url;
     }
 
     /**
      * Добавляет указанный URL-путь к URL-адресу загруженного ресурса.
      * 
-     * @see \Gm\Helper\Url::uploads()
+     * @see Url::uploads()
      * 
-     * @param string $url URL-путь (например: "/images/sample.jpg").
+     * @param string $url URL-путь, например, '/images/sample.jpg'.
      * 
      * @return string
      */
     public static function toUploads(string $url): string
     {
-        return Gm::$app->uploader->url . $url;
+        return static::$app->uploader->url . $url;
     }
 
     /**
      * Возвращает URL-адрес ресурса модулей.
      * 
-     * Имеет вид: "[<схема>://]<хост> </BASE_URL> </MODULE_BASE_URL>".
+     * URL-адрес имеет вид: "[<схема>://]<хост> </BASE_URL> </MODULE_BASE_URL>".
      * 
-     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста.
+     * @param bool|null $scheme Если значение `true`, добавляет схему к имени хоста 
+     *     (по умолчанию `null`).
 
      * @return string
      */
-    public static function module(bool $scheme = null): string
+    public static function module(?bool $scheme = null): string
     {
         static $module;
 
@@ -171,12 +175,12 @@ class Url
      * 
      * Имеет вид: "[<схема>://]<хост> </BASE_URL> </MODULE_BASE_URL> </URL-путь>".
      * 
-     * @param string $url URL-путь (например: "/foo/bar").
-     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста.
-
+     * @param string $url URL-путь, например, '/foo/bar'.
+     * @param bool|null $scheme Если значение `true`, добавляет схему к имени хоста
+     *     (по умолчанию `null`).
      * @return string
      */
-    public static function toModule(string $url, bool $scheme = null): string
+    public static function toModule(string $url, ?bool $scheme = null): string
     {
         return self::module($scheme) . $url;
     }
@@ -184,21 +188,22 @@ class Url
     /**
      * Возвращает URL-адрес ресурса для публичного доступа.
      * 
-     * Имеет вид:: "[<схема>://]<хост> </public>".
+     * URL-адрес имеет вид: "[<схема>://]<хост> </public>".
      * 
-     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста.
+     * @param bool|null $scheme Если значение `true`, добавляет схему к имени хоста 
+     *     (по умолчанию `null`).
      * 
      * @return string
      */
-    public static function published(bool $scheme = null): string
+    public static function published(?bool $scheme = null): string
     {
         static $published;
 
         if ($scheme !== null) {
-            return self::home($scheme) . Gm::$app->clientScript->baseUrl;
+            return self::home($scheme) . static::$app->clientScript->baseUrl;
         }
         if ($published === null) {
-            $published = Gm::$app->clientScript->publishedUrl;
+            $published = static::$app->clientScript->publishedUrl;
         }
         return $published;
     }
@@ -208,14 +213,15 @@ class Url
      * 
      * Имеет вид:: "[<схема>://]<хост> </public> </URL-путь>".
      * 
-     * @see \Gm\Helper\Url::published()
+     * @see Url::published()
      * 
-     * @param string $url URL-путь (например: "/foo/bar").
-     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста.
+     * @param string $url URL-путь, например, '/foo/bar'.
+     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста
+     *      (по умолчанию `null`).
      * 
      * @return string
      */
-    public static function toPublished(string $url, bool $scheme = null): string
+    public static function toPublished(string $url, ?bool $scheme = null): string
     {
         return self::published($scheme) . $url;
     }
@@ -223,7 +229,7 @@ class Url
     /**
      * Возвращает абсолютный URL-адрес ресурса текущей темы.
      * 
-     * Имеет вид: "</URL-путь к темам> </имя темы>".
+     * URL-адрес имеет вид: "</URL-путь к темам> </имя темы>".
      * 
      * @see \Gm\Theme\Theme::$url
      * 
@@ -236,7 +242,7 @@ class Url
         if ($theme !== null) {
             return $theme;
         }
-        return $theme = Gm::$app->theme->url;
+        return $theme = static::$app->theme->url;
     }
 
     /**
@@ -244,20 +250,21 @@ class Url
      * 
      * Имеет вид:: "[<схема>://]<хост> </public> </URL-путь>".
      * 
-     * @param string $url URL-путь (например: "/foo/bar").
-     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста.
+     * @param string $url URL-путь, например, '/foo/bar'.
+     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста
+     *     (по умолчанию `null`).
      * 
      * @return string
      */
-    public static function toTheme(string $url, bool $scheme = null): string
+    public static function toTheme(string $url, ?bool $scheme = null): string
     {
         static $theme;
 
         if ($scheme !== null) {
-            return self::home($scheme) . Gm::$app->theme->url;
+            return self::home($scheme) . static::$app->theme->url;
         }
         if ($theme === null) {
-            $theme = Gm::$app->theme->url;
+            $theme = static::$app->theme->url;
         }
         return $theme;
     }
@@ -265,7 +272,7 @@ class Url
     /**
      * Возвращает абсолютный URL-адрес ресурсов тем.
      * 
-     * Имеет вид: "<схема>://<хост> </URL-путь к темам>".
+     * URL-адрес имеет вид: "<схема>://<хост> </URL-путь к темам>".
      * 
      * @see \Gm\Theme\Theme::$themesUrl
      * 
@@ -278,7 +285,7 @@ class Url
         if ($themes !== null) {
             return $themes;
         }
-        return $themes = Gm::$app->theme->themesUrl;
+        return $themes = static::$app->theme->themesUrl;
     }
 
     /**
@@ -286,10 +293,11 @@ class Url
      * 
      * Имеет вид: "[<схема>://]<хост> </BASE_URL>".
      * 
-     * Если приложение установлено не в "корень", а в указанную 
-     * директорию. Базовый URL-путь включает эту директорию.
+     * Если приложение установлено не в "корень", а в указанную директорию. Базовый 
+     * URL-путь включает эту директорию.
      * 
-     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста.
+     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста
+     *    (по умолчанию `true`).
      * 
      * @return string
      */
@@ -317,7 +325,8 @@ class Url
      * 
      * Имеет вид: "[<схема>://]<хост>".
      * 
-     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста.
+     * @param bool $scheme Если значение `true`, добавляет схему к имени хоста
+     *     (по умолчанию `true`).
      * 
      * @return string
      */
@@ -338,6 +347,8 @@ class Url
 
     /**
      * Возвращает имя хоста.
+     * 
+     * @link https://www.php.net/manual/ru/reserved.variables.server.php
      * 
      * @return string
      */
@@ -364,7 +375,9 @@ class Url
     /**
      * Возвращает схему URL-адреса.
      * 
-     * @return string Результат "https://", "'http://".
+     * @see Url::isSSL()
+     * 
+     * @return string Возвращает "https://" ил "http://".
      */
     public static function scheme(): string
     {
@@ -388,7 +401,7 @@ class Url
         static $home;
 
         if ($home === null) {
-            $home = Gm::$app->urlManager->isHome();
+            $home = static::$app->urlManager->isHome();
         }
         return $home;
     }
@@ -427,7 +440,7 @@ class Url
         static $scriptUrl;
 
         if ($scriptUrl === null) {
-            $scriptUrl = Gm::$app->urlManager->getScriptUrl();
+            $scriptUrl = static::$app->urlManager->getScriptUrl();
         }
         return $scriptUrl;
     }
@@ -444,7 +457,7 @@ class Url
         static $scriptName;
 
         if ($scriptName === null) {
-            $script     = Gm::$app->urlManager->getScript();
+            $script     = static::$app->urlManager->getScript();
             $scriptName = $script['filename'] ?? '';
         }
         return $scriptName;
@@ -462,7 +475,7 @@ class Url
         static $scriptPath;
 
         if ($scriptPath === null) {
-            $script     = Gm::$app->urlManager->getScript();
+            $script     = static::$app->urlManager->getScript();
             $scriptPath = $script['path'] ?? '';
         }
         return $scriptPath;
