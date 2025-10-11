@@ -103,6 +103,13 @@ class BaseController extends Component
     protected string $actionName = '';
 
     /**
+     * Параметры действия контроллера.
+     * 
+     * @var array
+     */
+    protected array $actionParams = [];
+
+    /**
      * Имя действия контроллера по умолчанию.
      * 
      * @var string
@@ -153,7 +160,11 @@ class BaseController extends Component
      * 
      * @return string|array
      */
-    public function t(string|array $message, array $params = [], string $locale = ''): string|array
+    public function t(
+        string|array $message, 
+        array $params = [], 
+        string $locale = ''
+    ): string|array
     {
         return Gm::$app->translator->translate($this->module->id, $message, $params, $locale);
     }
@@ -189,7 +200,11 @@ class BaseController extends Component
      * 
      * @return string
      */
-    public function makeAppEventName(string $prefix = '', string $controllerName = '', string $actionName = ''): string
+    public function makeAppEventName(
+        string $prefix = '', 
+        string $controllerName = '', 
+        string $actionName = ''
+    ): string
     {
         $controllerName = ucfirst($controllerName ?: $this->getName());
         $actionName = $actionName ?: $this->actionName;
@@ -206,13 +221,14 @@ class BaseController extends Component
      * @see \Gm\Mvc\Module\BaseModule::getModel()
      * 
      * @param string|null $name Имя модели данных (по умолчанию `null`).
-     * @param array $config Параметры конфигурации модели данных (передаются в конструктор).
+     * @param array $config Параметры конфигурации модели данных передаются в 
+     *     конструктор (по умолчанию `[]`).
      * 
      * @return BaseObject|null Возвращает значение `null`, если невозможно 
      *     создать модель данных. Если модель данных создана, делает ёё последней 
      *     {@see BaseController::$lastDataModel} для контроллера.
      */
-    public function getModel(string $name = null, array $config = []): ?BaseObject
+    public function getModel(?string $name = null, array $config = []): ?BaseObject
     {
         return $this->lastDataModel = $this->module->getModel($name, $config);
     }
@@ -260,11 +276,11 @@ class BaseController extends Component
     /**
      * Возвращает HTTP-ответ.
      * 
-     * @param string $format Формат ответа. 
+     * @param string|null $format Формат ответа (по умолчанию `null`). 
      * 
      * @return Response
      */
-    public function getResponse(string $format = null): Response
+    public function getResponse(?string $format = null): Response
     {
         if (!isset($this->response)) {
             $this->response = Gm::$app->response;
@@ -378,6 +394,20 @@ class BaseController extends Component
     }
 
     /**
+     * Устанавливает текущему действию контроллера параметры вызова.
+     * 
+     * @param array $params Параметры вызова текущего действия контроллера в 
+     *    виде пар "ключ-значение".
+     * 
+     * @return $this
+     */
+    public function setActionParams(array $params): static
+    {
+        $this->actionParams = $params;
+        return $this;
+    }
+
+    /**
      * Возвращает имя текущего действия контроллера.
      * 
      * @see BaseController::$actionName
@@ -390,22 +420,38 @@ class BaseController extends Component
     }
 
     /**
+     * Возвращает параметры вызова текущего действия контроллера.
+     * 
+     * @see BaseController::$actionParams
+     * 
+     * @return array
+     */
+    public function getActionParams(): array
+    {
+        return $this->actionParams;
+    }
+
+    /**
      * Возвращает или устанавливает имя текущего действия контроллера.
      * 
      * @param string|null $name Имя текущего действия контроллера.
      *    Если `null`, возвратит текущее действие контроллера. Иначе, установит его 
-     *    методом {@see BaseController::setActionName()}.
+     *    методом {@see BaseController::setActionName()} (по умолчанию `null`).
+     * @param array $actionParams Параметры вызова действия в виде пары "ключ-значение". 
+     *    Устанавливаются только при указании имени действия $name. В остальных случая 
+     *    методом {@see BaseController::setActionParams()} (по умолчанию `[]`).
      * 
-     * @return BaseController|string Если `BaseController`, значит устанавливается 
-     *    текущее действие контроллера. Иначе, имя текущеего действия.
+     * @return BaseController|string Возвращает имя текущего действия или указатель 
+     *     на контроллер.
      */
-    public function action(string $name = null): static|string
+    public function action(?string $name = null, array $actionParams = []): static|string
     {
         if ($name === null) {
             return $this->actionName;
         }
 
         $this->setActionName($name);
+        $this->setActionParams($actionParams);
         return $this;
     }
 
@@ -490,7 +536,14 @@ class BaseController extends Component
     protected function beforeAction(string $action): mixed
     {
         $result = true;
-        $this->trigger(self::EVENT_BEFORE_ACTION, ['controller' => $this, 'action' => $action, 'result' => &$result]);
+        $this->trigger(
+            self::EVENT_BEFORE_ACTION, 
+            [
+                'controller' => $this, 
+                'action'     => $action, 
+                'result'     => &$result
+            ]
+        );
         return $result;
     }
 
@@ -504,7 +557,14 @@ class BaseController extends Component
      */
     protected function afterAction(string $action, $result): void
     {
-        $this->trigger(self::EVENT_AFTER_ACTION, ['controller' => $this, 'action' => $action, 'result' => $result]);
+        $this->trigger(
+            self::EVENT_AFTER_ACTION, 
+            [
+                'controller' => $this, 
+                'action'     => $action, 
+                'result'     => $result
+            ]
+        );
     }
 
     /**
@@ -523,12 +583,14 @@ class BaseController extends Component
      * где одним из параметров - его результат.
      * 
      * @param string $name Имя действия контроллера.
+     * @param array $params Параметры вызова текущего действия контроллера в 
+     *    виде пар "ключ-значение" (по умолчанию `[]`).
      * 
      * @return mixed
      * 
      * @throws Exception\ActionNotFoundException Контроллер не имеет указанное действие.
      */
-    protected function doAction(string $name): mixed
+    protected function doAction(string $name, array $params = []): mixed
     {
         $method = $name . 'Action';
         if (!method_exists($this, $method)) {
@@ -541,7 +603,7 @@ class BaseController extends Component
         $result = $this->beforeAction($name);
 
         if ($result === true) {
-            $result = call_user_func([$this, $method]);
+            $result = call_user_func_array([$this, $method], $this->actionParams);
         }
 
         // если результат запроса - `\Gm\Http\Response`
@@ -594,8 +656,9 @@ class BaseController extends Component
      * по умолчанию `.phtml`.
      *
      * @param string $viewFile Имя представления или имя файла.
-     * @param array $params Параметры в виде пары "имя-значение", которые будут переданы 
-     *     в представление. Эти параметры не будут доступны в макете.
+     * @param array $params Параметры в виде пары "имя-значение", которые будут 
+     *     переданы в представление. Эти параметры не будут доступны в макете (по 
+     *     умолчанию `[]`).
      * @param array $config Параметры конфигурации представления (по умолчанию `[]`).
      *     Если представление было создано ранее с помощью {@see BaseController::getView()}, 
      *     параметры конфигурации применяться не будут.
@@ -618,7 +681,7 @@ class BaseController extends Component
      * 
      * @param string $viewFile Имя представления или его файла.
      * @param array $params Параметры в виде пары "имя-значение", которые будут переданы 
-     *     в представление.
+     *     в представление (по умолчанию `[]`).
      * @param array $config Параметры конфигурации представления (по умолчанию `[]`).
      *     Если представление было создано ранее с помощью {@see BaseController::getView()}, 
      *     параметры конфигурации применяться не будут.
@@ -638,9 +701,9 @@ class BaseController extends Component
      * 
      * @see \Gm\Mvc\Application::getLayoutView()
      * 
-     * @param string $viewFile Имя макета или его файла.
-     * @param array $params Параметры в виде пары "имя-значение", которые будут переданы 
-     *     в макет.
+     * @param string $viewFile Имя макета или его файла (по умолчанию `null`).
+     * @param array $params Параметры в виде пары "имя-значение", которые будут 
+     *     переданы в макет (по умолчанию `[]`).
      * @param array $config Параметры конфигурации макета (по умолчанию `[]`).
      *     Если представление было создано ранее с помощью {@see \Gm\Mvc\Application::getLayoutView()}, 
      *     параметры конфигурации применяться не будут.
@@ -650,7 +713,7 @@ class BaseController extends Component
      * @throws Gm\View\Exception\TemplateNotFoundException Невозможно получить имя 
      *     файла макета или макет не существует.
      */
-    public function renderLayout(string $viewFile = null, array $params = [], array $config = []): mixed
+    public function renderLayout(?string $viewFile = null, array $params = [], array $config = []): mixed
     {
         if ($viewFile === null) {
             $viewFile = $this->findLayout();
@@ -783,7 +846,7 @@ class BaseController extends Component
      * Этот метод выполняется перед вызовом события {@see BaseController::EVENT_BEFORE_RUN}.
      * Для проверки доступа к контроллеру, вы можете переопределить этот метод.
      * 
-     * @return bool Если `true`, контроллер доступен.
+     * @return bool Результат `true`, если контроллер доступен.
      */
     public function onAccess(): bool
     {
@@ -806,7 +869,7 @@ class BaseController extends Component
         if ($result = $this->onAccess()) {
             if ($result = $this->beforeRun($this, $this->actionName)) {
                 // выполняет действие
-                $result = $this->doAction($this->actionName);
+                $result = $this->doAction($this->actionName, $this->actionParams);
                 $this->afterRun($this, $this->actionName, $result);
             }
         }
