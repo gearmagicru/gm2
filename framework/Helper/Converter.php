@@ -3,24 +3,23 @@
  * Этот файл является частью пакета GM Framework.
  * 
  * @link https://gearmagic.ru/framework/
- * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @copyright Copyright (c) 2015-2025 Веб-студия GearMagic
  * @license https://gearmagic.ru/license/
  */
 
 namespace Gm\Helper;
 
-use Gm;
 use IntlDateFormatter;
 
 /**
- * Вспомогательный класс Convert, позволяет конвертировать формат одних 
- * единиц в формат других.
+ * Вспомогательный класс Convert, позволяет конвертировать формат одних единиц в 
+ * формат других.
  * 
  * @author Anton Tivonenko <anton.tivonenko@gmail.com>
  * @package Gm\Helper
  * @since 2.0
  */
-class Converter
+class Converter extends Helper
 {
     /**
      * Определение коротких шаблонов даты и времени для ICU.
@@ -108,9 +107,9 @@ class Converter
     /**
      * Преобразует шаблон формата даты из формата ICU в формат функции PHP date().
      *
-     * Преобразование ограничено шаблонами даты, в которых не используются экранированные символы.
-     * Такой шаблон, как "d 'of' MMMM yyyy", приведет к дате "1 января 2015", не может быть 
-     * преобразован правильно из-за использования экранированных символов
+     * Преобразование ограничено шаблонами даты, в которых не используются экранированные 
+     * символы. Такой шаблон, как "d 'of' MMMM yyyy", приведет к дате "1 января 2015", 
+     * не может быть преобразован правильно из-за использования экранированных символов
      *
      * Конструкции шаблонов, не поддерживаемые форматом PHP, будут удалены.
      *
@@ -118,18 +117,23 @@ class Converter
      * @link http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax
      *
      * @param string $pattern Шаблон формата даты в формате ICU.
-     * @param string $type Тип: "date", "time" или "datetime".
-     * @param string $locale Код локади, используемый для преобразования коротких шаблонов ICU "short", "medium", "long" и "full".
-     *    Если не указан, будет использоваться Gm::$app->language->locale.
+     * @param string $type Тип: "date", "time" или "datetime" (по умолчанию 'date').
+     * @param string $locale Код локади, используемый для преобразования коротких 
+     *    шаблонов ICU "short", "medium", "long" и "full". Если не указан, будет 
+     *    использоваться `Gm::$app->language->locale` (по умолчанию `null`).
      * 
      * @return string
      */
-    public static function convertDateIcuToPhp(string $pattern, string $type = 'date', ?string $locale = null): string
+    public static function convertDateIcuToPhp(
+        string $pattern, 
+        string $type = 'date', 
+        ?string $locale = null
+    ): string
     {
         if (isset(self::$icuShortFormats[$pattern])) {
             if (extension_loaded('intl')) {
                 if ($locale === null) {
-                    $locale = Gm::$app->language->locale;
+                    $locale = static::$app->language->locale;
                 }
                 if ($type === 'date') {
                     $formatter = new IntlDateFormatter($locale, self::$icuShortFormats[$pattern], IntlDateFormatter::NONE);
