@@ -3,7 +3,7 @@
  * Этот файл является частью пакета GM Framework.
  * 
  * @link https://gearmagic.ru/framework/
- * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @copyright Copyright (c) 2015-2025 Веб-студия GearMagic
  * @license https://gearmagic.ru/license/
  */
 
@@ -18,7 +18,7 @@ use Gm;
  * @package Gm\Helper
  * @since 2.0
  */
-class Str
+class Str extends Helper
 {
     /**
      * @var string Разделитель идентификатора и строки.
@@ -141,11 +141,16 @@ class Str
      * @param string $str Строка.
      * @param int $start Начало строки.
      * @param int $width Максимальная длина.
-     * @param string $trimmarker Знак после урезания строки.
+     * @param string $trimmarker Знак после урезания строки (по умолчанию '...').
      * 
      * @return string
      */
-    public static function ellipsis(string $str, int $start, int $width, string $trimmarker = '...' ): string
+    public static function ellipsis(
+        string $str, 
+        int $start, 
+        int $width, 
+        string $trimmarker = '...' 
+    ): string
     {
         return $str ? rtrim(mb_strimwidth(trim((string) $str), $start, $width, $trimmarker)) : '';
     }
@@ -172,11 +177,15 @@ class Str
      * 
      * @param string $str Разбираемая строка с разделителем.
      * @param string $delimiterRows Разделитель выражаений (по умолчанию ';').
-     * @param string $delimiterVars Разделитель атрибутов и их значений  (по умолчанию '=').
+     * @param string $delimiterVars Разделитель атрибутов и их значений (по умолчанию '=').
      * 
      * @return array
      */
-    public static function parseStringToArray(string $str, string $delimiterRows = ';', string $delimiterVars = '='): array
+    public static function parseStringToArray(
+        string $str, 
+        string $delimiterRows = ';', 
+        string $delimiterVars = '='
+    ): array
     {
         $items = [];
         $rows = explode($delimiterRows, trim($str));
@@ -195,11 +204,15 @@ class Str
      * 
      * @param array $array Разбираемый массив.
      * @param string $delimiterRows Разделитель выражаений (по умолчанию ';').
-     * @param string $delimiterVars Разделитель атрибутов и их значений  (по умолчанию '=').
+     * @param string $delimiterVars Разделитель атрибутов и их значений (по умолчанию '=').
      * 
      * @return string
      */
-    public static function parseArrayToString(array $array, string $delimiterRows = ';', string $delimiterVars = '='): string
+    public static function parseArrayToString(
+        array $array, 
+        string $delimiterRows = ';', 
+        string $delimiterVars = '='
+    ): string
     {
         if (empty($array)) return '';
 
@@ -216,11 +229,16 @@ class Str
      * @param array $pieces Массив в виде пар "атрибут - значение".
      * @param string $glueVars Разделитель атрибутов и из значений.
      * @param string $glueRows Разделитель выражаений
-     * @param string $varLength Максимальная длина значений.
+     * @param int $varLength Максимальная длина значений (по умолчанию 0).
      * 
      * @return string
      */
-    public static function implodeParameters(array $pieces, string $glueVars, string $glueRows, int $varLength = 0): string
+    public static function implodeParameters(
+        array $pieces, 
+        string $glueVars, 
+        string $glueRows, 
+        int $varLength = 0
+    ): string
     {
         $str = '';
         if (empty($pieces)) return $str;
@@ -312,7 +330,11 @@ class Str
      * 
      * @return false|string
      */
-    public static function idFromStr(string $str, string $position = self::ID_POS_LEFT, string $separator = self::ID_SEPARATOR): false|string
+    public static function idFromStr(
+        string $str, 
+        string $position = self::ID_POS_LEFT, 
+        string $separator = self::ID_SEPARATOR
+    ): false|string
     {
         if (strpos($str, $separator) === false) return false;
 
@@ -334,7 +356,12 @@ class Str
      * 
      * @return string
      */
-    public static function idToStr(string $str, string|int $id, string $position = self::ID_POS_LEFT, string $separator = self::ID_SEPARATOR): string
+    public static function idToStr(
+        string $str, 
+        string|int $id, 
+        string $position = self::ID_POS_LEFT, 
+        string $separator = self::ID_SEPARATOR
+    ): string
     {
         if ($position === self::ID_POS_LEFT)
             return $id . $separator . $str;
@@ -400,7 +427,7 @@ class Str
      * 
      * Обратите внимание, что вывод не может быть ASCII.
      * 
-     * @param int $length Количество байтов для генерации (по умоочанию 32).
+     * @param int $length Количество байтов для генерации (по умолчанию 32).
      * 
      * @return string Возвращает сгенерированные случайные байты.
      */
@@ -451,15 +478,19 @@ class Str
      * Например: 'filename.php' => 'filename-ru_RU.php'.
      *
      * @param string $filename Имя файла.
-     * @param string $language Язык (по умолчанию `null`).
-     * @param string $extension Расширение файла (по умолчанию `null`).
+     * @param \Gm\Language\Language|null $language Язык (по умолчанию `null`).
+     * @param string|null $extension Расширение файла (по умолчанию `null`).
      * 
      * @return string
      */
-    public static function localizeFilename(string $filename, $language = null, string $extension = null): string
+    public static function localizeFilename(
+        string $filename, 
+        $language = null, 
+        ?string $extension = null
+    ): string
     {
         if ($language === null) {
-            $language = Gm::$app->language;
+            $language = static::$app->language;
         }
         if ($extension === null) {
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -475,7 +506,8 @@ class Str
      * @link https://www.php.net/manual/ru/function.var-export.php
      * 
      * @param mixed $value Переменная, которую необходимо экспортировать. 
-     * @param bool $format Выполнить форматирование результата (всё в одну строку).
+     * @param bool $format Выполнить форматирование результата в одну строку 
+     *     (по умолчанию `false`).
      * 
      * @return string
      */
@@ -496,11 +528,16 @@ class Str
      * 
      * @param string $filename Имя файла.
      * @param string $prefix Приставка к имени файла.
-     * @param string $position Позиция приставки к имени файла: 'left', 'right'.
+     * @param string $position Позиция приставки к имени файла: 'left', 'right'
+     *    (по умолчанию 'right').
      * 
      * @return string
      */
-    public static function addPefixToFilename(string $filename, string $prefix, string $position = 'right'): string
+    public static function addPefixToFilename(
+        string $filename, 
+        string $prefix, 
+        string $position = 'right'
+    ): string
     {
         $info = pathinfo($filename);
 
