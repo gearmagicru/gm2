@@ -3,7 +3,7 @@
  * Этот файл является частью пакета GM Framework.
  * 
  * @link https://gearmagic.ru/framework/
- * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @copyright Copyright (c) 2015-2025 Веб-студия GearMagic
  * @license https://gearmagic.ru/license/
  */
 
@@ -14,6 +14,7 @@ use Throwable;
 use DateTimeZone;
 use Gm\Exception;
 use Gm\View\View;
+use Gm\Helper\Helper;
 use Gm\Helper\Url;
 use Gm\Theme\Theme;
 use Gm\Router\Router;
@@ -656,7 +657,7 @@ class Application extends BaseObject
      * 
      * @return string
      */
-    public function getLayoutPath(string $side = null): string
+    public function getLayoutPath(?string $side = null): string
     {
         if ($side === null) {
             $side = SIDE;
@@ -794,8 +795,10 @@ class Application extends BaseObject
             /** @var \Gm\Mvc\Application $application */
             $application = $serviceManager->get(static::class);
             $application->services = $serviceManager;
+
             Gm::$services = $serviceManager;
             Gm::$app      = $application;
+
             $application->bootstrap();
         } catch (Exception\BootstrapException $e) {
             $e->render();
@@ -821,11 +824,11 @@ class Application extends BaseObject
             /** @var \Gm\Mvc\Application $application */
             $application = $serviceManager->get(static::class);
             $application->services = $serviceManager;
+
             Gm::$services = $serviceManager;
             Gm::$app      = $application;
 
             $application->setConfigParams($params);
-
             $application->bootstrap();
         } catch (Exception\BootstrapException $e) {
             $e->render();
@@ -844,6 +847,8 @@ class Application extends BaseObject
     public function bootstrap(): static
     {
         $this->initLoader();
+        // инициализация помощника
+        $this->initHelper();
         // обработчик ошибок
         $this->registerErrorHandler();
         // директории и ресурсы приложения
@@ -945,6 +950,16 @@ class Application extends BaseObject
             return $this->services->createAs('frontendTheme');
         else
             return null;
+    }
+
+    /**
+     * Инициализация помощника.
+     * 
+     * @return void
+     */
+    protected function initHelper(): void
+    {
+        Helper::setApplication($this);
     }
 
     /**
@@ -1345,6 +1360,26 @@ class Application extends BaseObject
     }
 
     /**
+     * Событие перед запуском приложения.
+     *
+     * @return void
+     * 
+     * @throws Exception\BaseException
+     */
+    protected function beforeRun(): void
+    {
+    }
+
+    /**
+     * Событие после запуска приложения.
+     *
+     * @return void
+     */
+    protected function afterRun(): void
+    {
+    }
+
+    /**
      * Запуск приложения.
      *
      * @return $this
@@ -1354,6 +1389,8 @@ class Application extends BaseObject
     public function run(): static
     {
         try {
+            $this->beforeRun();
+
             $this->router->run();
             // если ни один из модулей не найден маршрутизатором
             if ($this->module === null) {
@@ -1362,7 +1399,46 @@ class Application extends BaseObject
         } catch (Exception\BaseException $e) {
             $this->endException($e);
         }
+
+        $this->afterRun();
         return $this;
+    }
+
+    /**
+     * Выполняет действие контроллера модуля или расширения модуля по указанной 
+     * сигнатуре (записи).
+     * 
+     * Сигнатура (записи) компонента указывается в виде строки {@see \Gm::signatureToArray()} 
+     * или массива элементов.
+     * 
+     * @param string|array<string, string> $signature Cигнатура или элементы сигнатуры.
+     * @param array $actionParams Параметры передаваемые в действие контроллера (по умолчанию `[]`).
+     * @param array $params Параметры модуля или расширения, передаваемые в конструктор (по умолчанию `[]`).
+     * 
+     * @return void
+     */
+    public function runAs(string|array $signature, array $actionParams = [], array $params = []): void
+    {
+        if (is_string($signature)) {
+            $signature = Gm::signatureToArray($signature, true);
+        }
+        // если указан модуль
+        if ($signature['type'] === 'module') {
+            $this->modules->run(
+                $signature['id'], $signature['controller'], $signature['action'], $actionParams, $params
+            );
+            $this->response->send();
+        } else
+        // если указано расширение модуля
+        if ($signature['type'] === 'extension') {
+            $this->extensions->run(
+                $signature['id'], $signature['controller'], $signature['action'], $actionParams, $params
+            );
+            $this->response->send();
+        } else
+            throw new Exception\InvalidArgumentException(
+                'The component type in the signature is specified incorrectly.'
+            );
     }
 
     /**
