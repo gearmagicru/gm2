@@ -3,7 +3,7 @@
  * Этот файл является частью пакета GM Framework.
  * 
  * @link https://gearmagic.ru/framework/
- * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @copyright Copyright (c) 2015-2025 Веб-студия GearMagic
  * @license https://gearmagic.ru/license/
  */
 
@@ -39,8 +39,8 @@ class Request extends Service
     public string $hashParam = '_hash';
 
     /**
-     * Значение свойства hash интерфейса URL (идентификатор фрагмента 
-     * URL после символа «#»).
+     * Значение свойства hash интерфейса URL (идентификатор фрагмента URL после 
+     * символа «#»).
      * 
      * @see Request::$hashParam
      * 
@@ -136,8 +136,8 @@ class Request extends Service
     /**
      * Абсолютный путь к исполняемому скрипту.
      * 
-     * @see setScriptFile()
-     * @see getScriptFile()
+     * @see Request::setScriptFile()
+     * @see Request::getScriptFile()
      * 
      * @var string
      */
@@ -146,7 +146,7 @@ class Request extends Service
     /**
      * Путь к текущему исполняемому скрипту.
      * 
-     * @see getScriptName()
+     * @see Request::getScriptName()
      * 
      * @var string
      */
@@ -155,7 +155,7 @@ class Request extends Service
     /**
      * Относительный URL-адрес исполняемого скрипта.
      * 
-     * @see getScriptUrl()
+     * @see Request::getScriptUrl()
      * 
      * @var string
      */
@@ -259,7 +259,7 @@ class Request extends Service
     /**
      * Имя токена cookie для хранения CSRF значения.
      * 
-     * Если значение null, используется значение {@see Request::$csrfParam}.
+     * Если значение `null`, используется значение {@see Request::$csrfParam}.
      * Это свойство устанавливается для {@see Request::$csrfCookie}.
 
      * @var string
@@ -269,7 +269,7 @@ class Request extends Service
     /**
      * Имя токена сессии для хранения CSRF значения.
      * 
-     * Если значение null, используется значение {@see Request::$csrfParam}.
+     * Если значение `null`, используется значение {@see Request::$csrfParam}.
 
      * @var string
      */
@@ -328,7 +328,7 @@ class Request extends Service
     /**
      * Использовать сессию для хранения токена CSRF.
      * 
-     * Если значение true, токен CSRF будет храниться в сессии под именем 
+     * Если значение `true`, токен CSRF будет храниться в сессии под именем 
      * {@see Request::$csrfSessionName} или {@see Request::$csrfParam}.
      * Хранение токенов CSRF в сессии повышает безопасность, оно требует 
      * запуска сессии для каждой страницы, что снизит производительность.
@@ -378,6 +378,22 @@ class Request extends Service
     public bool $regenerateCsrfToken = false;
 
     /**
+     * Имена методов для проверки значений параметров запроса.
+     * 
+     * @see Request::validateParam()
+     * 
+     * @var array
+     */
+    protected array $validatorNames = [
+        'ip'     => 'isUserIp',
+        'userIp' => 'isUserIp',
+        'domain' => 'isHost',
+        'host'   => 'isHost',
+        'method' => 'isMethod',
+        'port'   => 'isServerPort'
+    ];
+
+    /**
      * Коллекция cookie.
      * 
      * @see Request::loadCookies()
@@ -398,7 +414,7 @@ class Request extends Service
     /**
      * Возвращает метод текущего запроса.
      * 
-     * @return string Метод текущего запроса в верхнем регистре, такой как: GET, POST, HEAD, PUT, PATCH, DELETE.
+     * @return string Метод текущего запроса в верхнем регистре: GET, POST, HEAD, PUT, PATCH, DELETE.
      */
     public function getMethod(): string
     {
@@ -415,11 +431,12 @@ class Request extends Service
     }
 
     /**
-     * Проверка метода текущего запроса.
+     * Проверяет метод текущего запроса.
      * 
      * @param $method Имя метода.
      * 
-     * @return bool Если true, метод $method совпал с методом запроса.
+     * @return bool Возвращает значение `true`, если метод $method совпал с методом 
+     *     запроса.
      */
     public function isMethod(string $method): bool
     {
@@ -429,7 +446,7 @@ class Request extends Service
     /**
      * Проверяет, является ли текущий метод запроса безопасным.
      * 
-     * @return bool Если true, метод запроса безопасный.
+     * @return bool Возвращает значение `true`, если метод запроса безопасный.
      */
     public function isSafeMethod(): bool
     {
@@ -444,8 +461,10 @@ class Request extends Service
     /**
      * Определение текущего метода запроса.
      * 
-     * В зависимости от метода запроса, такие атрибуты как: $isPost, $isOptions, $isHead, $isDelete, $isPatch, $isGet, $isPut 
-     * будут иметь true.
+     * В зависимости от метода запроса, такие атрибуты как: {@see Request::$isPost}, 
+     * {@see Request::$isOptions}, {@see Request::$isHead}, {@see Request::$isDelete}, 
+     * {@see Request::$isPatch}, {@see Request::$isGet}, {@see Request::$isPut} будут 
+     * иметь значение `true`.
      * 
      * @return $this
      */
@@ -463,8 +482,8 @@ class Request extends Service
      * Установка значения POST параметра.
      * 
      * @param string $name Имя параметра.
-     * @param mixed $value Значение параметра.
-     *    Если значение не указано, параметр будет удален.
+     * @param mixed $value Значение параметра. Если значение не указано, параметр будет 
+     *     удален (по умолчанию `null`).
      * 
      * @return $this
      */
@@ -581,19 +600,23 @@ class Request extends Service
     }
 
     /**
-     * Проверка существования GET параметра.
-     * Если имя не указано, проверяет существование параметров GET.
+     * Проверяет параметр в массиве GET-запросов.
+     * 
+     * @param string $name Имя параметра. Если имя не указано, проверяет пустой ли 
+     *     массив GET (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function hasQuery(string $name = null): bool
+    public function hasQuery(?string $name = null): bool
     {
         return $name === null ? !empty($_GET) : isset($_GET[$name]);
     }
 
     /**
-     * Проверка существования GET параметра.
-     * Если имя не указано, проверяет существование параметров GET.
+     * Проверяет параметр в массиве POST-запросов.
+     * 
+     * @param string $name Имя параметра. Если имя не указано, проверяет пустой ли 
+     *     массив POST (по умолчанию `null`).
      * 
      * @return bool
      */
@@ -602,14 +625,14 @@ class Request extends Service
         return $name === null ? !empty($_POST) : isset($_POST[$name]);
     }
 
-     /**
-     * Установка GET параметра.
+    /**
+     * Устанавливает значение параметру в массиве GET-запросов.
      * 
-     * @param string $name Имя пераметра.
-     * @param mixed $value Значение параметра.
-     *    Если значение не указано, параметр будет удален.
+     * @param string $name Имя параметра.
+     * @param mixed $value Значение параметра. Если значение не указано, то параметр 
+     *     будет удалён (по умолчанию `null`).
      * 
-     * @return Request
+     * @return $this
      */
     public function setQuery(string $name, mixed $value = null): static
     {
@@ -621,60 +644,55 @@ class Request extends Service
     }
 
     /**
-     * Возвращает значение GET параметра.
-     * Если имя не указано, возвращает массив всех параметров GET.
+     * Возвращает значение параметра из массива GET-запросов.
      * 
-     * @param string|null $name Имя GET параметра.
-     * @param mixed $default Значение по умолчанию, возвращаемое если параметр не существует.
+     * @param string|null $name Имя параметра.Если имя не указано, то возвратит 
+     *     массив GET-запросов в виде пар "ключ-значение".
+     * @param mixed $default Значение по умолчанию, если параметр не существует 
+     *     (по умолчанию `null`).
      * 
      * @return mixed
      */
     public function get(?string $name, mixed $default = null): mixed
     {
-        if ($name == null) {
-            return $_GET;
-        }
-        return isset($_GET[$name]) ? $_GET[$name] : $default;
+        return $name ? (isset($_GET[$name]) ? $_GET[$name] : $default) : $_GET;
     }
 
     /**
-     * Возвращает значение POST параметра.
-     * Если имя не указано, возвращает массив всех параметров POST.
+     * Возвращает значение параметра из массива POST-запросов.
      * 
-     * @param string|null $name Имя POST параметра.
-     * @param mixed $default Значение по умолчанию, возвращаемое если параметр не существует.
+     * @param string|null $name Имя параметра.Если имя не указано, то возвратит 
+     *     массив POST-запросов в виде пар "ключ-значение".
+     * @param mixed $default Значение по умолчанию, если параметр не существует 
+     *     (по умолчанию `null`).
      * 
      * @return mixed
      */
     public function post(?string $name, mixed $default = null): mixed
     {
-        if ($name == null) {
-            return $_POST;
-        }
-        return isset($_POST[$name]) ? $_POST[$name] : $default;
+        return $name ? (isset($_POST[$name]) ? $_POST[$name] : $default) : $_POST;
     }
 
     /**
-     * Возвращает значение $_REQUEST параметра.
-     * Если имя не указано, возвращает массив всех параметров POST.
+     * Возвращает значение параметра из массива REQUEST-запросов.
      * 
-     * @param string|null $name Имя $_REQUEST параметра.
-     * @param mixed $default Значение по умолчанию, возвращаемое если параметр не существует.
+     * @param string|null $name Имя параметра.Если имя не указано, то возвратит 
+     *     массив REQUEST-запросов в виде пар "ключ-значение".
+     * @param mixed $default Значение по умолчанию, если параметр не существует 
+     *     (по умолчанию `null`).
      * 
      * @return mixed
      */
     public function param(?string $name, mixed $default = null): mixed
     {
-        if ($name == null) {
-            return $_REQUEST;
-        }
-        return isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
+        return $name ? (isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default) : $_REQUEST;
     }
 
     /**
-     * Возвращает, является ли текущий запрос AJAX (XMLHttpRequest).
+     * Проверяет, является ли текущий запрос AJAX (XMLHttpRequest) запросом.
      * 
-     * @return bool Возвращает true, если запрос является запросом AJAX (XMLHttpRequest).
+     * @return bool Возвращает значение `true`, если запрос является запросом 
+     *     AJAX (XMLHttpRequest).
      */
     protected function _isAjax(): bool
     {
@@ -685,9 +703,10 @@ class Request extends Service
     }
 
     /**
-     * Возвращает, является ли текущий запрос AJAX (XMLHttpRequest).
+     * Проверяет, является ли текущий запрос AJAX (XMLHttpRequest) запросом.
      * 
-     * @return bool Возвращает `true`, если запрос является запросом AJAX (XMLHttpRequest).
+     * @return bool Возвращает значение `true`, если запрос является запросом 
+     *     AJAX (XMLHttpRequest).
      */
     public function isAjax(string $headerName = null): bool
     {
@@ -698,9 +717,9 @@ class Request extends Service
     }
 
     /**
-     * Возвращает, является ли текущий запрос PJAX.
+     * Проверяет, является ли текущий запрос PJAX запросом.
      * 
-     * @return bool Возвращает `true`, если запрос является запросом PJAX.
+     * @return bool Возвращает значение `true`, если запрос является запросом PJAX.
      */
     public function IsPjax(): bool
     {
@@ -711,9 +730,9 @@ class Request extends Service
     }
 
     /**
-     * Возвращает, является ли текущий запрос GJAX.
+     * Проверяет, является ли текущий запрос GJAX запросом.
      * 
-     * @return bool Возвращает `true`, если запрос является запросом GJAX.
+     * @return bool Возвращает значение `true`, если запрос является запросом GJAX.
      */
     public function IsGjax(): bool
     {
@@ -724,9 +743,10 @@ class Request extends Service
     }
 
     /**
-     * Возвращает, является ли это запросом Adobe Flash или Flex.
+     * Проверяет, является ли запрос запросом Adobe Flash или Flex.
      * 
-     * @return bool Возвращает `true`, если запрос Adobe Flash или Adobe Flex.
+     * @return bool Возвращает значение `true`, если запрос является запросом 
+     *     Adobe Flash или Adobe Flex.
      */
     public function IsFlash(): bool
     {
@@ -738,7 +758,7 @@ class Request extends Service
     }
 
     /**
-     * Возвращает значение, показывающее, выполняется ли текущий запрос через командную строку.
+     * Проверяет, выполняется ли текущий запрос через командную строку.
      * 
      * @return bool Значение, указывающее, выполняется ли текущий запрос через консоль.
      */
@@ -747,7 +767,7 @@ class Request extends Service
         return IS_CONSOLE;
     }
 
-  /**
+   /**
      * Возвращает абсолютный путь к исполняемому скрипту.
      * 
      * Простая реализация вернёт "$_SERVER['SCRIPT_FILENAME']".
@@ -868,8 +888,9 @@ class Request extends Service
      * Возвращает значение параметра заголовка.
      * 
      * @param string $name Имя параметра.
-     * @param mixed $default Значение по умолчнаию.
-     * @param bool $сouple Если true, возвращает строку вида "параметр: значение", иначе значение параметра.
+     * @param mixed $default Значение по умолчнаию (по умолчанию `null`).
+     * @param bool $сouple Если значение `true`, возвращает строку вида "параметр: значение", 
+     *     иначе значение параметра (по умолчанию `false`).
      * 
      * @return string|null
      */
@@ -879,9 +900,11 @@ class Request extends Service
     }
 
     /**
-     * Возвращает IP на другом конце соединения.
+     * Возвращает IP-адрес на другом конце соединения.
      *
-     * @return string
+     * @link https://www.php.net/manual/ru/reserved.variables.server.php
+     * 
+     * @return string|null
      */
     public function getRemoteIp(): ?string
     {
@@ -891,7 +914,9 @@ class Request extends Service
     /**
      * Возвращает IP-адрес, с которого пользователь просматривает текущую страницу.
      *
-     * @return string
+     * @see Request::getRemoteIp()
+     * 
+     * @return string|null
      */
     public function getUserIp(): ?string
     {
@@ -899,9 +924,25 @@ class Request extends Service
     }
 
     /**
+     * Проверяет IP-адрес, с которого пользователь просматривает текущую страницу.
+     * 
+     * @see Request::getRemoteIp()
+     * 
+     * @param string $ip Проверяемый IP-адес.
+     * 
+     * @return bool
+     */
+    public function isUserIp(string $ip): bool
+    {
+        return $this->getRemoteIp() === $ip;
+    }
+
+    /**
      * Возвращает удаленный хост, с которого пользователь просматривает текущую страницу.
-     *
-     * @return string
+     * 
+     * @link https://www.php.net/manual/ru/reserved.variables.server.php
+     * 
+     * @return string|null
      */
     public function getRemoteHost(): ?string
     {
@@ -910,12 +951,29 @@ class Request extends Service
 
     /**
      * Возвращает удаленный хост на другом конце соединения.
-     *
-     * @return string
+     * 
+     * @see Request::getRemoteHost()
+     * 
+     * @return string|null
      */
     public function getUserHost(): ?string
     {
         return $this->getRemoteHost();
+    }
+
+    /**
+     * Проверяет удаленный хост на другом конце соединения.
+     *
+     * @param string $host Удаленный хост, с которого пользователь просматривает 
+     *     текущую страницу.
+     * 
+     * @see Request::getServerName()
+     * 
+     * @return bool
+     */
+    public function isHost(string $host): bool
+    {
+        return $this->getServerName() === $host;
     }
 
     /**
@@ -931,7 +989,9 @@ class Request extends Service
     /**
      * Возвращает номер порта сервера.
      * 
-     * @return int|null Если null, номер порта сервера недоступен.
+     * @link https://www.php.net/manual/ru/reserved.variables.server.php
+     * 
+     * @return int|null Возвращает значение `null`, если номер порта сервера недоступен.
      */
     public function getServerPort(): ?string
     {
@@ -939,9 +999,25 @@ class Request extends Service
     }
 
     /**
+     * Проверяет номер порта сервера.
+     *
+     * @param string $port Проверяемый номер порта сервера.
+     * 
+     * @see Request::getServerPort()
+     * 
+     * @return bool
+     */
+    public function isServerPort(string $port): bool
+    {
+        return $this->getServerPort() === $port;
+    }
+
+    /**
      * Возвращает имя сервера.
      * 
-     * @return string|null Если null, имя сервера недоступно.
+     * @link https://www.php.net/manual/ru/reserved.variables.server.php
+     * 
+     * @return string|null Возвращает значение `null`, имя сервера недоступно.
      */
     public function getServerName(): ?string
     {
@@ -951,7 +1027,9 @@ class Request extends Service
     /**
      * Возвращает роль FCGI.
      * 
-     * @return string|null Возвращает значение `null` если роль FCGI недоступна.
+     * @link https://www.php.net/manual/ru/reserved.variables.server.php
+     * 
+     * @return string|null Возвращает значение `null`, если роль FCGI недоступна.
      */
     public function geServerFCGIRole(): ?string
     {
@@ -961,17 +1039,20 @@ class Request extends Service
     /**
      * Проверяет, использует ли сервер Fast CGI.
      * 
+     * @link https://www.php.net/manual/ru/reserved.variables.server.php
+     * 
      * @return bool
      */
     public function serverUseFCGI(): bool
     {
-        return isset( $_SERVER['FCGI_ROLE']);
+        return isset($_SERVER['FCGI_ROLE']);
     }
 
     /**
      * Возвращает URL источник запроса.
      * 
-     * @return string|null Если null, URL источник запроса недоступен.
+     * @return string|null Возвращает значение `null`, если URL источник запроса 
+     *     недоступен.
      */
     public function getReferrer(): ?string
     {
@@ -979,11 +1060,13 @@ class Request extends Service
     }
 
     /**
-     * Возвращает URL адрес загрузки (из заголовка запроса "Origin"), если запрос отправлен как CORS.
+     * Возвращает URL адрес загрузки (из заголовка запроса "Origin"), если запрос 
+     * отправлен как CORS.
      *
      * Информация о заголовке запроса "Origin" здесь {@link https://developer.mozilla.org/ru/docs/Web/HTTP/Заголовки/Origin}.
      *
-     * @return string|null Если null, заголовок "Origin" в запросе отсутствует.
+     * @return string|null Возвращает значение `null`, если заголовок "Origin" в 
+     *     запросе отсутствует.
      */
     public function getOrigin(): ?string
     {
@@ -1013,13 +1096,13 @@ class Request extends Service
      * 
      * Если токен ранее создан и получен запросом, то его возвратит {@see Request::readCsrfToken()}.
      * 
-     * @param bool $regenerate Нужно ли регенерировать токен CSRF. Если true, то 
+     * @param bool|null $regenerate Нужно ли регенерировать токен CSRF. Если true, то 
      *    каждый раз, когда вызывается этот метод, будет создаваться и сохраняться 
      *    новый токен CSRF (в сессии или в cookie).
      * 
      * @return string Токен, используемый для проверки CSRF.
      */
-    public function getCsrfToken(bool $regenerate = null): string
+    public function getCsrfToken(?bool $regenerate = null): string
     {
         if ($regenerate === null) {
             $regenerate = $this->regenerateCsrfToken;
@@ -1038,8 +1121,8 @@ class Request extends Service
     /**
      * Загружает токен CSRF из cookie или сессии.
      * 
-     * @return null|string Токен CSRF, загруженный из cookie или сессии. Если cookie 
-     *     или сессия не имеют токен CSRF, возвращает null.
+     * @return string|null Возвращает токен CSRF, загруженный из cookie или сессии. Если cookie 
+     *     или сессия не имеют токен CSRF, возвращает `null`.
      */
     public function readCsrfToken(): ?string
     {
@@ -1065,7 +1148,7 @@ class Request extends Service
     /**
      * Создаёт незашифрованный случайный токен, используемый для проверки CSRF.
      * 
-     * @return string Случайный токен для проверки CSRF.
+     * @return string Возвращает cлучайный токен для проверки CSRF.
      */
     protected function generateCsrfToken(): string
     {
@@ -1075,8 +1158,8 @@ class Request extends Service
     /**
      * Вовзарщает токен CSRF, отправленный браузером через заголовок.
      * 
-     * @return null|string Если заголовок {@see Request::$csrfHeaderName} не отправлен, 
-     *     возвращает null.
+     * @return string|null Если заголовок {@see Request::$csrfHeaderName} не отправлен, 
+     *     возвращает `null`.
      */
     public function getCsrfTokenFromHeader(): ?string
     {
@@ -1086,8 +1169,8 @@ class Request extends Service
     /**
      * Вовзарщает токен CSRF, отправленный браузером через cookie.
      * 
-     * @return null|string Если cookie {@see Request::$csrfCookieName} не отправлен, 
-     *     возвращает null.
+     * @return string|null Если cookie {@see Request::$csrfCookieName} не отправлен, 
+     *     возвращает `null`.
      */
     public function getCsrfTokenFromCookie(): ?string
     {
@@ -1122,12 +1205,12 @@ class Request extends Service
      * {@see Request::$enableCsrfValidation} false или HTTP метод является безопасным 
      * {@see Request::$safeMethods}.
      *
-     * @param string $clientToken CSRF токен пользователя для проверки. Если null, токен будет извлечен 
+     * @param string|null $clientToken CSRF токен пользователя для проверки. Если null, токен будет извлечен 
      *     из поле {@see Request::$csrfParam} POST или HTTP-заголовока.
      * @return bool Действителен ли токен CSRF. Если {@see Request::$enableCsrfValidation} false, 
      *     то метод вернёт true.
      */
-    public function validateCsrfToken(string $clientToken = null): bool
+    public function validateCsrfToken(?string $clientToken = null): bool
     {
         // проверять только токен CSRF для небезопасных методов
         if (!$this->enableCsrfValidation || $this->isSafeMethod()) {
@@ -1158,6 +1241,7 @@ class Request extends Service
      * @see Request::$enableCsrfValidation
      * 
      * @param string $token Токен CSRF.
+     * @param bool $object Возвратит объект Cookie, если значение `true` (по умолчанию `false`).
      * 
      * @return array|Cookie Если `$object = true`, cгенерированный cookie, иначе 
      *     параметры cookie.
@@ -1215,12 +1299,13 @@ class Request extends Service
     /**
      * Возвращает значение cookie или коллекцию `CookieCollection`.
      * 
-     * @param null|string $name Имя cookie. Если null, возвратит коллекцию `CookieCollection`.
+     * @param string|null $name Имя cookie. Если значение `null`, возвратит коллекцию `CookieCollection`.
+     * @param bool $object Возвратит объект Cookie, если значение `true` (по умолчанию `false`).
      * 
      * @return mixed Если `$name = null`, результат коллекция `CookieCollection`, иначе 
      *     значение или объект cookie.
      */
-    public function cookie(string $name = null, bool $object = false): mixed
+    public function cookie(?string $name = null, bool $object = false): mixed
     {
         if ($name === null) {
             return $this->getCookies();
@@ -1275,5 +1360,55 @@ class Request extends Service
             $cookies->decrypt($this->cookieValidation, $this->cookieValidationKey);
         }
         return $cookies;
+    }
+
+    /**
+     * Выполняет проверку значения параметра запроса.
+     * 
+     * @see Request::$validatorNames
+     * 
+     * @param string $name Имя параметра. По имени параметра выберается метод 
+     *     проверки из {@see Request::$validatorName}.
+     * @param mixed $value Значение параметра.
+     * @param bool $skip Если значение `true`, то игнорируется исключение вызванное 
+     *     отсутствием метода проверка (по умоланию `false`).
+     * 
+     * @return bool Возвращает результат метода, проводивший проверку значения.
+     * 
+     * @throws Exception\InvalidArgumentException Неправильно указан метод проверки значения.
+     */
+    public function validateParam(string $name, mixed $value, bool $skip = false): bool
+    {
+        $validator = $this->validatorNames[$name] ?? null;
+        if ($validator) {
+            return $this->$validator($value);
+        }
+        if ($skip)
+            return true;
+        else
+            throw new Exception\InvalidArgumentException(
+                sprintf('The specified validator "%s" does not exist.', $name)
+            ); 
+    }
+
+    /**
+     * Выполняет проверку значений параметров запроса.
+     * 
+     * @see Request::validateParam()
+     * 
+     * @param string $params Параметры в виде пар "ключ-значение".
+     * @param bool $skip Если значение `true`, то игнорируется исключение вызванное 
+     *     отсутствием метода проверка (по умоланию `false`).
+     * 
+     * @return bool
+     * 
+     * @throws Exception\InvalidArgumentException Неправильно указан метод проверки значения.
+     */
+    public function validateParams(array $params, bool $skip = false): bool
+    {
+        foreach ($params as $name => $value) {
+            if (!$this->validateParam($name, $value, $skip)) return false;
+        }
+        return true;
     }
 }
