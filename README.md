@@ -6,7 +6,7 @@
 
 Это основной код фреймворка [GM 2.0](https://github.com/gearmagicru/gm#readme).
 
-Этот репозиторий является частью git только для чтения <https://github.com/gearmagicru/gm>.
+Этот репозиторий является частью git только для чтения <https://github.com/gearmagicru/gm2>.
 
 Для получения информации о лицензии см. [LICENSE](LICENSE).
 
@@ -27,7 +27,7 @@ GM облегчает разработку, упрощая общие задач
 
 ## О нас
 
-GM Framework разработан [веб-студией GearMagic](https://gearmagic.ru/).
+GM Framework разработан [веб-студией GearMagic](https://gearmagic.ru/framework/).
 
 
 ## Установка
@@ -39,13 +39,13 @@ GM Framework разработан [веб-студией GearMagic](https://gear
 Запустите
 
 ```
-composer require gearmagicru/gm
+composer require gearmagicru/gm2
 ```
 
 или добавьте
 
 ```json
-"gearmagicru/gm": "~2.0.0",
+"gearmagicru/gm2": "~2.0",
 ```
 
 в требуемый раздел вашего composer.json.
