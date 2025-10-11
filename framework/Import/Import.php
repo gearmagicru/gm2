@@ -131,7 +131,7 @@ class Import extends BaseObject
      *
      * @var string
      */
-    public string $allowedExtensions = 'jpg,jpeg,gif,tiff,png,svg,doc,docx,pdf,xls,xlsx,xml,json';
+    public string $allowedExtensions = 'mp3,mp4,webm,webp,jpg,jpeg,gif,tiff,png,svg,doc,docx,pdf,xls,xlsx,xml,json,zip,otf,ttf,woff';
 
     /**
      * Возвращает маску атрибутов (свойств, тегов) импортирумего файла.
