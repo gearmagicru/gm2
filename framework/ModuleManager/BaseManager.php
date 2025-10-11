@@ -3,7 +3,7 @@
  * Этот файл является частью пакета GM Framework.
  * 
  * @link https://gearmagic.ru/framework/
- * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @copyright Copyright (c) 2015-2025 Веб-студия GearMagic
  * @license https://gearmagic.ru/license/
  */
 
@@ -181,12 +181,12 @@ class BaseManager extends Service
      * @see BaseManager::create()
      * @see BaseManager::add()
      * 
-     * @param string $id Идентификатор компонент, например 'gm.foobar'.
+     * @param string $id Идентификатор компонента, например, 'gm.foobar'.
      * @param array $params Параметры компонента (по умолчанию `[]`).
      * @param bool $throwException Если значение `true`, будет исключение при не 
      *     успешном создании компонента (по умолчанию `true`).
      * 
-     * @return BaseObject|null Возвращаетзначение  `null`, если невозможно создать 
+     * @return BaseObject|null Возвращает значение `null`, если невозможно создать 
      *     компонент с указанным идентификатором.
      * 
      * @throws Exception\ModuleNotFoundException Компонент с указанным идентификатором 
@@ -331,7 +331,7 @@ class BaseManager extends Service
      * 
      * @return string|null
      */
-    public function getHelpFile(string $id, string $subject, string $locale = null): ?string
+    public function getHelpFile(string $id, string $subject, ?string $locale = null): ?string
     {
         if ($locale === null) {
             $locale = Gm::$app->language->locale;
@@ -467,7 +467,7 @@ class BaseManager extends Service
                 'icon'      => file_exists($modulePath . $icon) ? $moduleUrl . $icon : $iconNone,
                 'watermark' => file_exists($modulePath . $wmarkIcon) ? $moduleUrl . $wmarkIcon : $iconNone
             ];
-        } else
+        } else {
             // значок маленький
             if ($type === 'small') {
                 $icon = $srcPath . '/icon_small.svg';
@@ -483,6 +483,8 @@ class BaseManager extends Service
                         $icon = $srcPath . '/icon_fill.svg';
                         return file_exists($modulePath . $icon) ? $moduleUrl . $icon : $iconNone;
                     }
+        }
+        return '';
     }
 
     /**
@@ -946,5 +948,38 @@ class BaseManager extends Service
     public function encryptInstallId(string $path, string $namespace): string
     {
         return Gm::$app->encrypter->encryptString($path . ',' . $namespace);
+    }
+
+    /**
+     * Выполняет запуск компонента (модуля, расширения модуля).
+     * 
+     * @see \Gm\Mvc\Module\BaseModule::run()
+     * 
+     * @param string $id Идентификатор компонента, например, 'gm.foobar'.
+     * @param string $controller Имя контроллера {@see \Gm\Mvc\Module\BaseModule::controller()} (по умолчанию '').
+     * @param string $action Действие контроллера {@see \Gm\Mvc\Controller\BaseController::action()} (по умолчанию '').
+     * @param array $actionParams Параметры передаваемые в действие контроллера (по умолчанию `[]`).
+     * @param array $params Параметры компонента передаваемые в его конструктор (по умолчанию `[]`).
+     * 
+     * @return void
+     * 
+     * @throws Exception\ModuleNotFoundException Компонент с указанным идентификатором не существует.
+     * @throws Exception\ActionNotFoundException Действие контроллера не существует.
+     */
+    public function run(
+        string $id, 
+        string $controller = '', 
+        string $action = '',  
+        array $actionParams = [], 
+        array $params = []): void
+    {
+        /** @var \Gm\Mvc\Module\BaseModule|null $module */
+        $module = $this->get($id);
+        if ($module) {
+            $module
+                ->controller($controller)
+                    ->action($action, $actionParams);
+            $module->run();
+        }
     }
 }
