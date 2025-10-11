@@ -2,8 +2,8 @@
 /**
  * GM Framework.
  * 
- * @link https://apps.gearmagic.ru/framework/
- * @copyright Copyright (c) 2015 Веб-студия GearMagic
+ * @link https://gearmagic.ru/framework/
+ * @copyright Copyright (c) 2015-2025 Веб-студия GearMagic
  * @license https://gearmagic.ru/license/
  */
 
@@ -20,7 +20,7 @@ use Gm\ServiceManager\ServiceManager;
 use Composer\Autoload\ClassLoader;
 
 /**
- * Gm - вспомогательный класс для GM Framework.
+ * Gm - вспомогательный класс GM Framework.
  * 
  * @author Anton Tivonenko <anton.tivonenko@gmail.com>
  * @package Gm
@@ -46,7 +46,7 @@ class Gm
     public static Application $app;
 
     /**
-     * Менеджера служб.
+     * Менеджер служб.
      *
      * @var ServiceManager
      */
@@ -96,7 +96,7 @@ class Gm
     /**
      * Порядковый номер, который при получении увеличивается на единицу.
      * 
-     * Можно использовать, как уникальный идентификатор в пределах вызова. 
+     * Можно использовать, как уникальный идентификатор в пределах вызова.
      * 
      * @see Gm::index()
      * 
@@ -108,7 +108,8 @@ class Gm
      * Возвращает значение псевдонима (с разбивкой).
      * 
      * @param string $alias Название псевдонима.
-     * @param bool $throwException Создание исключения если псевдоним не найден.
+     * @param bool $throwException Создание исключения если псевдоним не найден 
+     *     (по умолчанию `false`).
      * 
      * @return false|string Значение `false`, если значение псевдонима неизвестно.
      * 
@@ -159,7 +160,7 @@ class Gm
      * Возвращает значение псевдонима.
      * 
      * @param string $alias Имя псевдонима.
-     * @param null|string $path Добавляет к значению псевдонима.
+     * @param null|string $path Добавляет к значению псевдонима (по умолчанию `null`).
      * 
      * @return null|string Значение '', если значение псевдонима неизвестно.
      */
@@ -185,7 +186,7 @@ class Gm
      */
     public static function index(): int
     {
-        return self::$index++;
+        return static::$index++;
     }
 
     /**
@@ -211,13 +212,13 @@ class Gm
      * Возвращает контент шорткода.
      * 
      * @param string $name Название шорткода.
-     * @param array<string, mixed> $attributes Атрибуты шорткода.
+     * @param array<string, mixed> $attributes Атрибуты шорткода (по умолчанию `[]`).
      * 
      * @return string
      */
     public static function shortcode(string $codeName, array $attributes = []): string
     {
-        return self::$app->shortcodes->getContent($codeName, $attributes);
+        return static::$app->shortcodes->getContent($codeName, $attributes);
     }
 
     /**
@@ -236,7 +237,7 @@ class Gm
      */
     public static function addShortcode(string $codeName, mixed $func)
     {
-        return self::$app->shortcodes->add($codeName, $func);
+        return static::$app->shortcodes->add($codeName, $func);
     }
 
     /**
@@ -248,17 +249,17 @@ class Gm
      */
     public static function removeShortcode(string $codeName)
     {
-        return self::$app->shortcodes->remove($codeName);
+        return static::$app->shortcodes->remove($codeName);
     }
 
     /**
      * Возвращает модуль по указанному идентификатору.
      * 
-     * @param string $id Идентификатор модуля, например 'gm.be.articles'.
-     * @param bool $throwException Если значение `true`, будет исключение  при не 
-     *     успешном создании модуля (по умолчанию `true`).
+     * @param string $id Идентификатор модуля, например, 'gm.be.articles'.
      * @param array<string, mixed> $params Параметры модуля передаваемые в конструктор 
      *     (по умолчанию []).
+     * @param bool $throwException Если значение `true`, будет исключение  при не 
+     *     успешном создании модуля (по умолчанию `true`).
      * 
      * @return null|BaseModule Если значение `null`, то невозможно создать модуль с 
      *     указанным идентификатором.
@@ -266,9 +267,13 @@ class Gm
      * @throws \Gm\ModuleManager\Exception\ModuleNotFoundException Модуль с указанным 
      *     идентификатором не существует.
      */
-    public static function getModule(string $id, array $params = [], bool $throwException = true): ?BaseModule
+    public static function getModule(
+        string $id, 
+        array $params = [], 
+        bool $throwException = true
+    ): ?BaseModule
     {
-        return self::$app->modules->get($id, $params, $throwException);
+        return static::$app->modules->get($id, $params, $throwException);
     }
 
     /**
@@ -278,7 +283,7 @@ class Gm
      */
     public static function module(): ?BaseModule
     {
-        return isset(self::$app) ? self::$app->module : null;
+        return isset(static::$app) ? static::$app->module : null;
     }
 
     /**
@@ -296,17 +301,19 @@ class Gm
      */
     public static function createModule(string $id, array $params = []): ?BaseModule
     {
-        return self::$app->modules->create($id, $params);
+        return static::$app->modules->create($id, $params);
     }
 
     /**
      * Возвращает текущую кодировку символов в HTML.
      * 
+     * @param string $default Возвращаемое значение по умолчанию (по умолчанию 'UTF-8').
+     * 
      * @return string Текущая кодировка символов в HTML.
      */
     public static function charset(string $default = 'UTF-8'): string
     {
-        return isset(self::$app) ? self::$app->charset : $default;
+        return isset(static::$app) ? static::$app->charset : $default;
     }
 
     /**
@@ -317,10 +324,10 @@ class Gm
      */
     public static function viewManager(): ?ViewManager
     {
-        if (!isset(self::$viewManager)) {
-            self::$viewManager = self::$app->module?->viewManager;
+        if (!isset(static::$viewManager)) {
+            static::$viewManager = static::$app->module?->viewManager;
         }
-        return self::$viewManager;
+        return static::$viewManager;
     }
 
     /**
@@ -331,15 +338,20 @@ class Gm
      *         - '@date': форматирование даты {@see \Gm\I18n\Source\DateSource};
      *         - '@message': форматирование сообщения {@see \Gm\I18n\Source\MessageSource};
      * @param string|array<string> $message Текст сообщения (сообщений).
-     * @param array<string, string> $params Параметры перевода.
-     * @param string $locale Код локали.
+     * @param array<string, string> $params Параметры перевода (по умолчанию `[]`).
+     * @param string $locale Код локали (по умолчанию '').
      * 
      * @return string|array Локализация сообщения или сообщений.
      */
-    public static function t(string $category, string|array $message, array $params = [], string $locale = ''): string|array
+    public static function t(
+        string $category, 
+        string|array $message, 
+        array $params = [], 
+        string $locale = ''
+    ): string|array
     {
-        if (isset(self::$app->translator))
-            return self::$app->translator->translate($category, $message, $params, $locale);
+        if (isset(static::$app->translator))
+            return static::$app->translator->translate($category, $message, $params, $locale);
         else
             return $message;
     }
@@ -362,7 +374,7 @@ class Gm
                 $name = $name->getObjectName();
             }
         }
-        return self::$app->unifiedConfig->get($name, null);
+        return static::$app->unifiedConfig->get($name, null);
     }
 
     /**
@@ -385,11 +397,11 @@ class Gm
                 // название конфигуратора
                 $name = $propConfig['name'] ?? 'config';
                 // deprecated PHP 8.2 (creation of dynamic property)
-                @$object->$name = self::createConfig($propConfig);
+                @$object->$name = static::createConfig($propConfig);
                 unset($properties['config']);
             }
         }
-        $unifiedProperties = $useUnifiedConfig ? self::getUnified($object) : null;
+        $unifiedProperties = $useUnifiedConfig ? static::getUnified($object) : null;
         if ($properties) {
             if ($unifiedProperties)
                 $properties = array_merge($properties, $unifiedProperties);
@@ -416,7 +428,7 @@ class Gm
      */
     public static function unifiedConfigure(mixed $object): mixed
     {
-        $properties = self::getUnified($object);
+        $properties = static::getUnified($object);
         if ($properties) {
             foreach ($properties as $name => $value) {
                 // deprecated PHP 8.2 (creation of dynamic property)
@@ -435,7 +447,7 @@ class Gm
      */
     public static function createConfig(array $params): BaseConfig
     {
-        return self::$services->createAs(
+        return static::$services->createAs(
             $params['class'] ?? 'config',
             [
                 $params['filename'] ?? null,
@@ -475,7 +487,7 @@ class Gm
      */
     public static function hasObject(string $invokeName): bool
     {
-        return self::$services->has($invokeName);
+        return static::$services->has($invokeName);
     }
 
     /**
@@ -488,13 +500,13 @@ class Gm
      * 
      * @return bool Значение `true`, если пользователь авторизован на указанной стороне.
      */
-    public static function hasUserIdentity(int $side = null): bool
+    public static function hasUserIdentity(?int $side = null): bool
     {
         static $userSide;
 
         if ($userSide === null) {
-            if (self::$app->user->hasIdentity()) {
-                $userSide = self::$app->user->getIdentity()->getSide();
+            if (static::$app->user->hasIdentity()) {
+                $userSide = static::$app->user->getIdentity()->getSide();
             } else
                 $userSide = false;
         }
@@ -508,7 +520,7 @@ class Gm
      */
     public static function theme(): ?Theme
     {
-        return isset(self::$app) ? self::$app->theme : null;
+        return isset(static::$app) ? static::$app->theme : null;
     }
 
     /**
@@ -523,7 +535,7 @@ class Gm
         static $identity;
 
         if ($identity === null) {
-            $identity  = self::$app->user->getIdentity();
+            $identity  = static::$app->user->getIdentity();
         }
         return $identity; 
     }
@@ -535,19 +547,19 @@ class Gm
      */
     public static function getVersion(): string
     {
-        return self::VERSION_NUMBER;
+        return static::VERSION_NUMBER;
     }
 
     /**
      * Возвращает строку, представляющую имя фреймворка.
      * 
-     * @param string $suffix Суффикс имени (по умолчанию `null`).
+     * @param null|string $suffix Суффикс имени (по умолчанию `null`).
      * 
      * @return string Имя фреймворка.
      */
-    public static function getName(string $suffix = null): string
+    public static function getName(?string $suffix = null): string
     {
-        return self::NAME . ($suffix === null ? '' : $suffix);
+        return static::NAME . ($suffix === null ? '' : $suffix);
     }
 
     /**
@@ -560,7 +572,7 @@ class Gm
      * 
      * @return false|string Значение `false`, если указанная директория или файл не существует.
      */
-    public static function getSafePath(string $path, string $basePath = null): false|string
+    public static function getSafePath(string $path, ?string $basePath = null): false|string
     {
         // если указан символ "@"
         if (strncmp($path, '@', 1) === 0) {
@@ -603,10 +615,14 @@ class Gm
      * 
      * @return void
      */
-    public static function error(array|string $message, array $extra = [], string $target = 'application'): void
+    public static function error(
+        array|string $message, 
+        array $extra = [], 
+        string $target = 'application'
+    ): void
     {
-        if (self::$app) {
-            self::$app->logger->error($message, $extra, null, $target);
+        if (static::$app) {
+            static::$app->logger->error($message, $extra, null, $target);
         }
     }
 
@@ -621,10 +637,14 @@ class Gm
      * 
      * @return void
      */
-    public static function warning(string $message, array $extra = [], string $target = 'application'): void
+    public static function warning(
+        string $message, 
+        array $extra = [], 
+        string $target = 'application'
+    ): void
     {
-        if (isset(self::$app)) {
-            self::$app->logger->warning($message, $extra, null, $target);
+        if (isset(static::$app)) {
+            static::$app->logger->warning($message, $extra, null, $target);
         }
     }
 
@@ -639,10 +659,14 @@ class Gm
      * 
      * @return void
      */
-    public static function notice(string $message, array $extra = [], string $target = 'application'): void
+    public static function notice(
+        string $message, 
+        array $extra = [], 
+        string $target = 'application'
+    ): void
     {
-        if (isset(self::$app)) {
-            self::$app->logger->notice($message, $extra, null, $target);
+        if (isset(static::$app)) {
+            static::$app->logger->notice($message, $extra, null, $target);
         }
     }
 
@@ -656,10 +680,15 @@ class Gm
      * 
      * @return void
      */
-    public static function debug(string $message, array $extra = [], ?string $category = 'debug', string $target = 'debug'): void
+    public static function debug(
+        string $message, 
+        array $extra = [], 
+        ?string $category = 'debug', 
+        string $target = 'debug'
+    ): void
     {
-        if (GM_DEBUG && isset(self::$app)) {
-            self::$app->logger->debug($message, $extra, $category, $target);
+        if (GM_DEBUG && isset(static::$app)) {
+            static::$app->logger->debug($message, $extra, $category, $target);
         }
     }
 
@@ -673,10 +702,15 @@ class Gm
      * 
      * @return void
      */
-    public static function mailProfiling(string $message, array $extra = [], ?string $category = 'mail', string $target = 'debug'): void
+    public static function mailProfiling(
+        string $message, 
+        array $extra = [], 
+        ?string $category = 'mail', 
+        string $target = 'debug'
+    ): void
     {
-        if (GM_DEBUG && isset(self::$app)) {
-            self::$app->logger->mailProfiling($message, $extra, $category, $target);
+        if (GM_DEBUG && isset(static::$app)) {
+            static::$app->logger->mailProfiling($message, $extra, $category, $target);
         }
     }
 
@@ -695,7 +729,7 @@ class Gm
     public static function sendMail(array $options, bool $autocomplete = false): bool|string
     {
         /** @var \Gm\Mail\Mail $mail */
-        $mail = self::$services->getAs('mail');
+        $mail = static::$services->getAs('mail');
         // удаляем адаптер, если ранее был создан, чтобы каждый раз он 
         // инициализировался новыми параметрами $options
         $mail->resetAdapter();
@@ -727,14 +761,14 @@ class Gm
      */
     public static function useDebugLogging(): bool
     {
-        if (!isset(self::$useDebugLogging)) {
+        if (!isset(static::$useDebugLogging)) {
             if (GM_DEBUG && self::$app->logger->enabled) {
                 $writer = self::$app->logger->getWriter('debug');
-                self::$useDebugLogging = $writer && $writer->enabled;
+                static::$useDebugLogging = $writer && $writer->enabled;
             } else
-                self::$useDebugLogging = false;
+                static::$useDebugLogging = false;
         }
-        return self::$useDebugLogging;
+        return static::$useDebugLogging;
     }
 
     /**
@@ -748,7 +782,12 @@ class Gm
      * 
      * @return string Информация для вывода.
      */
-    public static function dump($var, ?string $label = null, bool $highlight = true, bool $echo = true): string
+    public static function dump(
+        $var, 
+        ?string $label = null, 
+        bool $highlight = true, 
+        bool $echo = true
+    ): string
     {
         return \Gm\Debug\Dumper::dump($var, $label, $highlight, $echo);
     }
@@ -764,7 +803,7 @@ class Gm
      */
     public static function console(string $type, string $message, array $vars): void
     {
-        self::$app->clientScript->js->console($type, $message, $vars);
+        static::$app->clientScript->js->console($type, $message, $vars);
     }
 
     /**
@@ -772,7 +811,8 @@ class Gm
      * 
      * Точка будет установлена, только тогда, когда:
      *    - включен вывод ошибок `GM_DEBUG`;
-     *    - включен режим профилирования ({@see \Gm\Log\Logger::isProfilingEnabled()}) в службе Логгера.
+     *    - включен режим профилирования ({@see \Gm\Log\Logger::isProfilingEnabled()}) 
+     * в службе Логгера.
      * 
      * @param string $name Имя профиля.
      * @param string $category Имя категории к которой относится профилирование 
@@ -783,8 +823,8 @@ class Gm
      */
     public static function beginProfile(string $name, string $category = 'application'): ?array
     {
-        if (GM_DEBUG && self::$app->logger->isProfilingEnabled()) {
-            return self::$app->logger->beginProfile($name, $category);
+        if (GM_DEBUG && static::$app->logger->isProfilingEnabled()) {
+            return static::$app->logger->beginProfile($name, $category);
         }
         return null;
     }
@@ -794,20 +834,21 @@ class Gm
      * 
      * Точка будет установлена, только тогда, когда:
      *    - включен вывод ошибок `GM_DEBUG`;
-     *    - включен режим профилирования ({@see \Gm\Log\Logger::isProfilingEnabled()}) в службе Логгера.
+     *    - включен режим профилирования ({@see \Gm\Log\Logger::isProfilingEnabled()}) 
+     * в службе Логгера.
      * 
      * @param string $name Имя профиля (операнда).
-     * @param string $message Сообщение (например, значение операнда).
-     * @param array<string, mixed> $extra Дополнительные параметры (операнды или другая отладочная 
-     *     информация) сообщения.
+     * @param string $message Сообщение, например, значение операнда (по умолчанию '').
+     * @param array<string, mixed> $extra Дополнительные параметры (операнды или 
+     *     другая отладочная информация) сообщения (по умолчанию `[]`).
      * 
      * @return array|null Значение `null`, если точка не установлена, иначе 
      *     параметры профиля запроса.
      */
     public static function endProfile(string $name, string $message = '', array $extra = []): ?array
     {
-        if (GM_DEBUG && self::$app->logger->isProfilingEnabled()) {
-            return self::$app->logger->endProfile($name, $message, $extra);
+        if (GM_DEBUG && static::$app->logger->isProfilingEnabled()) {
+            return static::$app->logger->endProfile($name, $message, $extra);
         }
         return null;
     }
@@ -827,8 +868,8 @@ class Gm
      */
     public static function getProfiling(string $name): ?array
     {
-        if (GM_DEBUG && self::$app->logger->isProfilingEnabled()) {
-            return self::$app->logger->getProfiling($name);
+        if (GM_DEBUG && static::$app->logger->isProfilingEnabled()) {
+            return static::$app->logger->getProfiling($name);
         }
         return null;
     }
@@ -838,7 +879,8 @@ class Gm
      * 
      * @param string $id Идентификатор виджета, например "gm.wd.article".
      * @param array<string, mixed> $settings Параметры настроек виджета. Если виджет 
-     *     имеет файл конфигурации настроек, то указанные параметры будут заменены ими.
+     *     имеет файл конфигурации настроек, то указанные параметры будут заменены 
+     *     ими (по умолчанию `[]`).
      * @param bool $render Если значение `true`, выводить контент виджета, иначе, 
      *     экземпляр класса виджета (по умолчанию `true`).
      * 
@@ -847,7 +889,7 @@ class Gm
      */
     public static function widget(string $id, array $settings = [], bool $render = true)
     {
-         $widget = self::$app->widgets->createWidget($id, $settings);
+         $widget = static::$app->widgets->createWidget($id, $settings);
          if ($render)
             return $widget ? $widget->render() : '';
          else
@@ -864,7 +906,10 @@ class Gm
         static $defineOs;
 
         if ($defineOs === null) {
-            $possibleOs = ['CYGWIN_NT-5.1', 'Darwin', 'FreeBSD', 'HP-UX', 'IRIX64', 'Linux', 'NetBSD', 'OpenBSD', 'SunOS', 'Unix', 'WIN32', 'WINNT', 'Windows'];
+            $possibleOs = [
+                'CYGWIN_NT-5.1', 'Darwin', 'FreeBSD', 'HP-UX', 'IRIX64', 'Linux', 'NetBSD', 
+                'OpenBSD', 'SunOS', 'Unix', 'WIN32', 'WINNT', 'Windows'
+            ];
             foreach($possibleOs as $os) {
                 $defineOs[$os] = PHP_OS === $os;
             }
@@ -883,7 +928,7 @@ class Gm
      */
     public static function isWindowsOs(): bool
     {
-        return self::defineOs()['Windows'];
+        return static::defineOs()['Windows'];
     }
 
     /**
@@ -893,7 +938,7 @@ class Gm
      */
     public static function isLinuxOs(): bool
     {
-        return self::defineOs()['Linux'];
+        return static::defineOs()['Linux'];
     }
 
     /**
@@ -903,7 +948,7 @@ class Gm
      */
     public static function isUnixOs(): bool
     {
-        return self::defineOs()['Unix'];
+        return static::defineOs()['Unix'];
     }
 
     /**
@@ -925,10 +970,10 @@ class Gm
      */
     public static function tempPut(mixed $key, mixed $value): void
     {
-        if (!isset(self::$temp)) {
-            self::$temp = new Container('Gm_Temp');
+        if (!isset(static::$temp)) {
+            static::$temp = new Container('Gm_Temp');
         }
-        self::$temp->set($key, $value);
+        static::$temp->set($key, $value);
     }
 
     /**
@@ -941,18 +986,18 @@ class Gm
      */
     public static function tempGet(mixed $key, mixed $default = null): mixed
     {
-        if (!isset(self::$temp)) {
-            self::$temp = new Container('Gm_Temp');
+        if (!isset(static::$temp)) {
+            static::$temp = new Container('Gm_Temp');
         }
         if (is_callable($default)) {
-            $value = self::$temp->getValue($key, null);
+            $value = static::$temp->getValue($key, null);
             if ($value === null) {
                 $value = $default();
-                self::$temp->set($key, $value);
+                static::$temp->set($key, $value);
             }
             return $value;
         }
-        return self::$temp->getValue($key, $default);
+        return static::$temp->getValue($key, $default);
     }
 
     /**
@@ -979,7 +1024,7 @@ class Gm
      * @param string $id Идентификатор расширения модуля или название его пространства имён, 
      *     например: 'gm.foobar' '\Gm\FooBar'.
      * @param array $config Параметры объекта (модель данных, и т.п.), которые будут 
-     *     использоваться для инициализации его свойств.
+     *     использоваться для инициализации его свойств (по умолчанию `[]`).
      * 
      * @return mixed
      * 
@@ -1010,7 +1055,7 @@ class Gm
      * @param string $id Идентификатор модуля или название его пространства имён, 
      *     например: 'gm.foobar' '\Gm\FooBar'.
      * @param array $config Параметры объекта (модель данных, и т.п.), которые будут 
-     *     использоваться для инициализации его свойств.
+     *     использоваться для инициализации его свойств (по умолчанию `[]`).
      * 
      * @return mixed
      * 
@@ -1082,10 +1127,141 @@ class Gm
      */
     public static function getTermId(string $name, ?string $componentId = null): ?int
     {
-        $termId = self::$app->terms->getId($name, $componentId);
+        $termId = static::$app->terms->getId($name, $componentId);
         if ($termId === null) {
             Gm::error('The term "' . $name . '" for component "' . $componentId . '" does not exist.');
         }
         return $termId;
+    }
+
+    /**
+     * Разбор сигнатуры (записи) компонента (модуля, расширения модуля, виджета) в массив.
+     * 
+     * Например 'module:foo.bar::user@add'. Варианты записи:
+     * 1) `<type>:<id>::<controller>@<action>`;
+     * 2) `<type>:<id>::<controller>`;
+     * 3) `<type>:<id>`;
+     * 4) `<id>::<controller>@<action>`;
+     * 5) `<id>::<controller>`;
+     * 6) `<id>@<action>`;
+     * 7) `<id>`.
+     * 
+     * Где, составляющие сигнатуры: 
+     * - `<type>`, тип компонента ('module', 'extension', 'widget'), по умолчанию 'module';
+     * - `<id>`, идентификатор установленного компонента, например, 'foo.bar';
+     * - `<controller>`, имя контроллера компонента (из карты контроллеров {@see \Gm\Mvc\Module::controllerMap()}), 
+     * по умолчанию '';
+     * - `<action>`, действие контроллера, например 'add', по умолчанию ''.
+     * 
+     * @param string $signature Сигнатура (запись) компонента (модуля, расширение модуля, виджета).
+     * @param bool $useDefault Использовать значения по умолчанию при отсутствии элементов в 
+     *     сигнатуре $signature (по умолчанию `true`).
+     * 
+     * @return array<string, string>
+     */
+    public static function signatureToArray(string $signature, bool $useDefault = true): array
+    {
+        $result = [
+            'type'       => $useDefault ? 'module' : '', 
+            'id'         => '', 
+            'controller' => '',
+            'action'     => ''
+        ];
+    
+        // для '...<id>::<controller>...'
+        $chunks = explode('::', $signature);
+    
+        // если указан один из вариантов: 1,2,4,5
+        if (isset($chunks[1])) {
+            // ['<type>', '<id>'], ['<id>']
+            $chunks1 = explode(':', $chunks[0]);
+            // если '<type>:<id>'
+            if (isset($chunks1[1])) {
+                $result['type'] = $chunks1[0];
+                $result['id']   = $chunks1[1];
+            // если '<id>'
+            } else
+                $result['id'] = $chunks1[0];
+    
+            // ['<controller>', '<action>'], ['<controller>']
+            $chunks1 = explode('@', $chunks[1]);
+            // если '<controller>@<action>'
+            if (isset($chunks1[1])) {
+                $result['controller'] = $chunks1[0];
+                $result['action']     = $chunks1[1];
+            // если '<action>'
+            } else
+                $result['controller'] = $chunks1[0];
+    
+        // если указан один из вариантов: 3,6,7
+        } else {
+            // ['<type>', '<id>'], ['<id>@<action>'], ['<id>']
+            $chunks1 = explode(':', $chunks[0]);
+            // если '<type>:<id>'
+            if (isset($chunks1[1])) {
+                $result['type'] = $chunks1[0];
+                $result['id']   = $chunks1[1];
+            // если '<id>@<action>' или '<id>'
+            } else {
+                // ['<id>', '<action>'], ['<id>']
+                $chunks2 = explode('@', $chunks1[0]);
+                // если '<id>@<action>'
+                if (isset($chunks2[1])) {
+                    $result['id']     = $chunks2[0];
+                    $result['action'] = $chunks2[1];
+                // если '<id>'
+                } else
+                    $result['id'] = $chunks2[0];
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Возвращает сигнатуру (запись) компонента (модуля, расширения модуля, виджета) 
+     * из указанных элементов массив.
+     * 
+     * Возвращаемый результат сигнатуры (записи) компонента может иметь вид:
+     * 1) `<type>:<id>::<controller>@<action>`;
+     * 2) `<type>:<id>::<controller>`;
+     * 3) `<type>:<id>`;
+     * 4) `<id>::<controller>@<action>`;
+     * 5) `<id>::<controller>`;
+     * 6) `<id>@<action>`;
+     * 7) `<id>`.
+     * 
+     * Где, составляющие сигнатуры: 
+     * - `<type>`, тип компонента ('module', 'extension', 'widget'), по умолчанию 'module';
+     * - `<id>`, идентификатор установленного компонента, например, 'foo.bar';
+     * - `<controller>`, имя контроллера компонента (из карты контроллеров {@see \Gm\Mvc\Module::controllerMap()}), 
+     * по умолчанию '';
+     * - `<action>`, действие контроллера, например 'add', по умолчанию ''.
+     * 
+     * @param array<string, string> $elements Элементы сигнатуры (записи) компонента.
+     * @param bool $useDefault Использовать значения по умолчанию при отсутствии 
+     *     элементов в $elements (по умолчанию `true`).
+     * 
+     * @return string
+     */
+    public static function arrayToSignature(array $elements, bool $useDefault = true): string
+    {
+        // тип компонента
+        $type = empty($elements['type']) ? ($useDefault ? 'module' : $elements['type']) : $elements['type'];
+        // идентификатор компонента
+        $component = empty($elements['id']) ? '' : $elements['id'];
+        // контроллер компонента
+        $controller = empty($elements['controller']) ? '' : $elements['controller'];
+        // действие контроллера
+        $action = empty($elements['action']) ? '' : $elements['action'];
+        if ($action) {
+            $action = '@' . $action;
+        }
+        if ($controller) {
+            $controller = '::' . $controller;
+        }
+        if ($component) {
+            $component = $type ? ':' . $component : $component;
+        }
+        return $type . $component . $controller . $action;
     }
 }
