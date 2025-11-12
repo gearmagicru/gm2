@@ -294,14 +294,14 @@ class BasePlugin extends BaseObject
     /**
      * Возвращает значение параметра конфигурации модуля.
      * 
-     * @param string $name Имя параметра. Если значение `null`, то результатом будет 
+     * @param null|string $name Имя параметра. Если значение `null`, то результатом будет 
      *     {@see BaseModule::$config()} (по умолчанию `null`).
      * @param mixed $default Значение по умолчанию если параметр не существует 
      *     (по умолчанию `[]`).
      * 
      * @return mixed
      */
-    public function getConfigParam(string $name = null, mixed $default = []): mixed
+    public function getConfigParam(?string $name = null, mixed $default = []): mixed
     {
         if (!isset($this->config)) {
             $this->config = $this->getConfig();
