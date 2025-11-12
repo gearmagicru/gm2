@@ -322,17 +322,17 @@ abstract class AbstractSql
      * 
      * @param ExpressionInterface|Select|array|int|string|null $column Столбец.
      * @param PlatformInterface $platform Платформы адаптера.
-     * @param DriverInterface|null $driver Драйвера подключения (по умолчанию `null`).
-     * @param string|null $namedParameterPrefix (по умолчанию `null`).
-     * @param ParameterContainer|null $parameterContainer (по умолчанию `null`).
+     * @param null|DriverInterface $driver Драйвера подключения (по умолчанию `null`).
+     * @param null|ParameterContainer $parameterContainer (по умолчанию `null`).
+     * @param null|string $namedParameterPrefix (по умолчанию `null`).
      * 
      * @return string
      */
     protected function resolveColumnValue(
         mixed $column,
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null,
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null,
         ?string $namedParameterPrefix = null
     ): string 
     {
