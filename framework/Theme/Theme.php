@@ -178,7 +178,7 @@ class Theme extends Service
     /**
      * {@inheritdoc}
      */
-    public function __construct(array $config = null)
+    public function __construct(?array $config = null)
     {
         $this->unifiedName = $config['unifiedName'] ?? null;
 
@@ -232,11 +232,11 @@ class Theme extends Service
     /**
      * Установка темы.
      * 
-     * @param string $theme Имя темы из доступных {@see Theme::$available} имен тем.
+     * @param null|string $theme Имя темы из доступных {@see Theme::$available} имен тем.
      * 
      * @return $this
      */
-    public function set(string $theme = null): static
+    public function set(?string $theme = null): static
     {
         if ($theme === null) {
             $theme = $this->default;
@@ -285,13 +285,13 @@ class Theme extends Service
     /**
      * Возвращает параметры доступной (установленной) темы.
      * 
-     * @param string|null $themeName Имя темы. Если значение `null`, то 
+     * @param null|string $themeName Имя темы. Если значение `null`, то 
      *     возвратит параметры текущей задействованной темы или параметры 
      *     темы по умолчанию (по умолчанию `null`).
      * 
      * @return array
      */
-    public function get(string $themeName = null): array
+    public function get(?string $themeName = null): array
     {
         if ($themeName === null) {
             $themeName = $this->name ?: $this->default;
@@ -362,13 +362,13 @@ class Theme extends Service
     /**
      * Проверят, доступна (установлена) ли указанная тема.
      * 
-     * @param string|null $themeName Имя проверяемой темы. Если значение `null`, то 
+     * @param null|string $themeName Имя проверяемой темы. Если значение `null`, то 
      *     будет проверена текущая задействованная тема или тема по умолчанию  
      *     (по умолчанию `null`).
      * 
      * @return bool Если значение `false`, указанная тема не доступна (не установлена).
      */
-    public function exists(string $themeName = null): bool
+    public function exists(?string $themeName = null): bool
     {
         if ($themeName === null) {
             $themeName = $this->name ?: $this->default;
@@ -380,11 +380,11 @@ class Theme extends Service
      * Проверяет, существует ли файл шаблона.
      * 
      * @param string $filename Имя файла шаблона (может включать путь, начианется с "/").
-     * @param string $themeName Имя темы.
+     * @param null|string $themeName Имя темы.
      * 
      * @return bool Возвращает значение `false`, если файл шаблона не существует.
      */
-    public function templateExists(string $filename, string $themeName = null): bool
+    public function templateExists(string $filename, ?string $themeName = null): bool
     {
         return Filesystem::exists($this->getViewPath($themeName) . $filename);
     }
@@ -475,7 +475,7 @@ class Theme extends Service
      * 
      * @return string
      */
-    public function getPath(string $themeName = null): ?string
+    public function getPath(?string $themeName = null): ?string
     {
         if ($themeName === null) {
             return $this->path;
@@ -494,7 +494,7 @@ class Theme extends Service
      * 
      * @return bool
      */
-    public function hasPreview(string $themeName = null): bool
+    public function hasPreview(?string $themeName = null): bool
     {
         /** @var null|string $file */
         $file = $this->getPreviewFilename($themeName);
@@ -508,7 +508,7 @@ class Theme extends Service
      * 
      * @return null|string
      */
-    public function getPreviewFilename(string $themeName = null): ?string
+    public function getPreviewFilename(?string $themeName = null): ?string
     {
         if ($themeName === null) {
             return $this->path;
@@ -527,7 +527,7 @@ class Theme extends Service
      * 
      * @return string|null
      */
-    public function getViewPath(string $themeName = null): ?string
+    public function getViewPath(?string $themeName = null): ?string
     {
         if ($themeName === null) {
             return $this->viewPath;
@@ -565,11 +565,11 @@ class Theme extends Service
     /**
      * Возвращает пакет информации по указанной теме.
      * 
-     * @param string $themeName Имя темы. Если значение `null`, имя темы по умолчанию (по умолчанию `null`).
+     * @param null|string $themeName Имя темы. Если значение `null`, имя темы по умолчанию (по умолчанию `null`).
      * 
      * @return ThemePackage
      */
-    public function getPackage(string $themeName = null): ?ThemePackage
+    public function getPackage(?string $themeName = null): ?ThemePackage
     {
         if ($themeName === null) {
             $themeName = $this->default;
@@ -601,13 +601,13 @@ class Theme extends Service
      * 
      * @param array $componentPaths Локальные пути к компонентам.
      *     Например: `['/gm/gm.module', '/gm/gm.widget', ...]`.
-     * @param string|null $themeName Имя темы. Если значение null, имя текущей темы.
+     * @param null|string $themeName Имя темы. Если значение null, имя текущей темы.
      * @param bool $replace Заменить файлы шаблонов, которые уже находятся в директории темы.
      * @param int $mode Разрешение на директорию (по умолчанию "0755").
      * 
      * @return int|string Если копирование выполнено успешно, возвращает количество созданных копий, иначе ошибку.
      */
-    public function copyViewFiles(array $componentPaths, string $themeName = null, bool $replace = true, int $mode = 0755): int|string
+    public function copyViewFiles(array $componentPaths, ?string $themeName = null, bool $replace = true, int $mode = 0755): int|string
     {
         Filesystem::$throwException = false; // запретить исключение
 
