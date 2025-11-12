@@ -116,12 +116,12 @@ class IpManager extends Service
      * 
      * Если имя адаптера не указано, то возвратит последний созданный адаптер {@see IpManager::$list}.
      * 
-     * @param string|null $name Имя адаптера (по умолчанию `null`).
+     * @param null|string $name Имя адаптера (по умолчанию `null`).
      * 
      * @return AdapterInterface|null Значение `null`, если адаптер ещё не создан по 
      *     указанному имени.
      */
-    public function getList(string $name = null): ?AdapterInterface
+    public function getList(?string $name = null): ?AdapterInterface
     {
         if ($name) {
             return $this->lists[$name] ?? null;
