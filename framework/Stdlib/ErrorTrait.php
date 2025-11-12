@@ -165,11 +165,11 @@ trait ErrorTrait
     /**
      * Возвращает сообщение (ия) об ошибке из очереди.
      * 
-     * @param int $index Порядковый номер сообщения об ошибке в очереде (по умолчанию `null`).
+     * @param null|int $index Порядковый номер сообщения об ошибке в очереде (по умолчанию `null`).
      * 
      * @return array|string Если порядковый номер неверно указан, возвратит ''.
      */
-    public function getErrors(int $index = null): array|string
+    public function getErrors(?int $index = null): array|string
     {
         if ($index === null) {
             return $this->errors;
