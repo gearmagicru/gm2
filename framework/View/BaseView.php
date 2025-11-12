@@ -439,14 +439,14 @@ class BaseView extends BaseObject
      * 
      * @see BaseView::$renderer
      * 
-     * @param string|null $name Имя визуализатора. Если значение `null`, будет 
+     * @param null|string $name Имя визуализатора. Если значение `null`, будет 
      *     использоваться имя {@see BaseView::$renderer} (по умолчанию `null`).
      * 
      * @return AbstractRenderer
      * 
      * @throws Exception\RenderNotFoundException Визуализатор отсутствует.
      */
-    public function getRenderer(string $name = null): AbstractRenderer
+    public function getRenderer(?string $name = null): AbstractRenderer
     {
         if ($name === null) {
             $name = $this->renderer;
@@ -651,14 +651,14 @@ class BaseView extends BaseObject
      * Возвращает содержимое файла шаблона.
      * 
      * @param string $viewFile Имя шаблона или файла.
-     * @param Module|Extension $module Модуль или расширение к которому относится шаблон. 
+     * @param Module|Extension|null $module Модуль или расширение к которому относится шаблон. 
      *     Применяется для получения файла шаблона. Если значение `null`, 
      *     тогда применяется текущий модуль {@see \Gm\Mvc\Application::$module} (по 
      *     умолчанию `null`).
      * 
      * @return string
      */
-    public function loadFile(string $viewFile, Module|Extension $module = null): string
+    public function loadFile(string $viewFile, Module|Extension|null $module = null): string
     {
         if ($module) {
             $this->module = $module;
@@ -769,7 +769,7 @@ class BaseView extends BaseObject
      * @param string $name Имя шаблона или файл шаблона представления.
      * @param array $params Параметры с их значениями в виде пар "имя - значение" 
      *     передаваемые в шаблон представления (по умолчанию `[]`).
-     * @param Module|Extension $module Модуль к которому относится представление. 
+     * @param Module|Extension|null $module Модуль к которому относится представление. 
      *     Применяется для получения файла шаблона. Если значение `null`, 
      *     тогда применяется текущий модуль {@see \Gm\Mvc\Application::$module} (по 
      *     умолчанию `null`).
@@ -779,7 +779,7 @@ class BaseView extends BaseObject
      * @throws Exception\TemplateNotFoundException Невозможно получить имя файла 
      *     шаблона представления.
      */
-    public function render(string $viewFile, array $params = [], Module|Extension $module = null): mixed
+    public function render(string $viewFile, array $params = [], Module|Extension|null $module = null): mixed
     {
         if ($module) {
             $this->module = $module;
