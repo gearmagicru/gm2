@@ -117,7 +117,7 @@ class PluginManager extends AbstractManager
      * ]
      * ```
      */
-    public function getPluginRows(string $param = 'title', array $translator = null): array
+    public function getPluginRows(string $param = 'title', ?array $translator = null): array
     {
         $pluginMap = $this->getPluginMap();
         $rows = [];
