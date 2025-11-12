@@ -71,11 +71,11 @@ class UserIdentity extends ActiveRecord implements UserIdentityInterface, UserDa
     /**
      * Конструктор класса.
      *
-     * @param StorageInterface $storage Хранилище аутентификации пользователя.
+     * @param null|StorageInterface $storage Хранилище аутентификации пользователя.
      * 
      * @return void
      */
-    public function __construct(StorageInterface $storage = null)
+    public function __construct(?StorageInterface $storage = null)
     {
         $this->configure([]);
 
