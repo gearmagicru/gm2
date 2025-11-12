@@ -51,11 +51,11 @@ trait AdapterTrait
     /**
      * Возвращает адаптер по указанному имени.
      * 
-     * @param string $name Имя адаптера. Если `null`, имя адаптера по умолчанию.
+     * @param null|string $name Имя адаптера. Если `null`, имя адаптера по умолчанию.
      *
      * @return mixed Если значение `null`, адаптер с указанным именем отсутствует.
      */
-    public function getAdapter(string $name = null): mixed
+    public function getAdapter(?string $name = null): mixed
     {
         if ($name === null) {
             if ($this->defaultAdapter === null) {
@@ -76,11 +76,11 @@ trait AdapterTrait
     /**
      * Удаляет адаптер из контейнера.
      * 
-     * @param string|null $name Имя адаптера.
+     * @param null|string $name Имя адаптера.
      * 
      * @return bool
      */
-    public function resetAdapter(string $name = null): bool
+    public function resetAdapter(?string $name = null): bool
     {
         if ($name === null) {
             if ($this->defaultAdapter === null) {
