@@ -328,7 +328,7 @@ class UploadedFile extends BaseObject
      * 
      * @return bool Если значение `false`, ошибка перемещения файла.
      */
-    public function upload(string $to = null): bool
+    public function upload(?string $to = null): bool
     {
         if (!$this->validate()) {
             return false;
@@ -410,7 +410,7 @@ class UploadedFile extends BaseObject
      * 
      * @return bool Если значение `false`, ошибка перемещения файла.
      */
-    public function move(string $to = null): bool
+    public function move(?string $to = null): bool
     {
         return $this->upload($to);
     }
