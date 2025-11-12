@@ -155,11 +155,11 @@ class Package
     /**
      * Добавление информации пакета обновлений в базу данных.
      * 
-     * @param array|null $columns Информации о пакете обновлений. 
+     * @param null|array $columns Информации о пакете обновлений. 
      * 
      * @return int Идентификатор записи пакета обновлений в базе данных.
      */
-    public function add(array $columns = null): int
+    public function add(?array $columns = null): int
     {
         if ($columns === null) {
             $columns = $this->getFormatter()->dataToColumns();
@@ -189,12 +189,12 @@ class Package
      * Обновление информации пакета обновлений в базе данных.
      * 
      * @param array $columns Имена полей с их значениями.
-     * @param string|null $packageId Идентификатор пакета обновлений. Если `null`,
+     * @param null|string $packageId Идентификатор пакета обновлений. Если `null`,
      *    идентификатор соответсвует {@see Package::$id}.
      * 
      * @return bool Возвращает значение `false`, если информация не обновлена.
      */
-    public function update(array $columns, string $packageId = null): bool
+    public function update(array $columns, ?string $packageId = null): bool
     {
         if ($packageId === null) {
             $packageId = $this->id;
@@ -219,13 +219,13 @@ class Package
     /**
      * Возвращает информацию пакета обновлений из базы данных.
      * 
-     * @param string|null $packageId Идентификатор пакета обновлений. Если `null`,
+     * @param null|string $packageId Идентификатор пакета обновлений. Если `null`,
      *    идентификатор соответсвует {@see Package::$id}.
      * 
      * @return array|null Возвращает значение `null`, если информация о пакете не 
      *     найдена.
      */
-    public function select(string $packageId = null): ?array
+    public function select(?string $packageId = null): ?array
     {
         if ($packageId === null) {
             $packageId = $this->id;
@@ -242,18 +242,18 @@ class Package
     /**
      * Удаление пакета обновлений и его информации.
      * 
-     * @param string|null $packageId Идентификатор пакета обновлений. Если `null`,
+     * @param null|string $packageId Идентификатор пакета обновлений. Если `null`,
      *    идентификатор соответсвует {@see Package::$id}.
 
      * @return int|false Возвращает значение `false` или '0', то пакета обновлений 
      *     не удалён.
      */
-    public function remove(string $packageId = null): int|false
+    public function remove(?string $packageId = null): int|false
     {
         if ($packageId === null) {
             $packageId = $this->id;
         }
-        if (empty($packageId)) return null;
+        if (empty($packageId)) return false;
 
         /** @var \Gm\Db\Adapter\Driver\AbstractCommand $command */
         $command = Gm::$app->db->createCommand();
@@ -264,11 +264,11 @@ class Package
     /**
      * Проверяет, установлен ли пакет обновлений (имеет статус "installed").
      * 
-     * @param string $packageId Идентификатор пакет обновлений.
+     * @param null|string $packageId Идентификатор пакет обновлений.
      * 
      * @return bool Возвращает значение `true`, если пакет установлен.
      */
-    public function isInstalled(string $packageId = null): bool
+    public function isInstalled(?string $packageId = null): bool
     {
         if ($packageId === null) {
             $packageId = $this->id;
@@ -806,11 +806,11 @@ class Package
     /**
      * Проверяет, добавлена ли информация о пакете обновлений в базу данных.
      * 
-     * @param string $packageId Идентификатор пакета обновлений.
+     * @param null|string $packageId Идентификатор пакета обновлений.
      * 
      * @return bool Возвращает значение `true`, если информация добавлена.
      */
-    public function exists(string $packageId = null)
+    public function exists(?string $packageId = null)
     {
         if ($packageId === null) {
             $packageId = $this->id;
@@ -847,11 +847,11 @@ class Package
      * 
      * Директория соответствует идентификатору пакета.
      * 
-     * @param string $packageId Идентификатор пакета обновлений.
+     * @param null|string $packageId Идентификатор пакета обновлений.
      * 
      * @return void
      */
-    public function makePath(string $packageId = null): void
+    public function makePath(?string $packageId = null): void
     {
         if ($packageId === null)
             $path = $this->path;
@@ -1081,12 +1081,12 @@ class Package
     /**
      * Возвращает ошибку(и) по указанному индексу очереди ошибок.
      * 
-     * @param int|null $index Порядковы номер ошибки. Если значение `null`, то возвратит 
+     * @param null|int $index Порядковы номер ошибки. Если значение `null`, то возвратит 
      *     все ошибки.
      * 
      * @return mixed
      */
-    public function getErrors(int $index = null): mixed
+    public function getErrors(?int $index = null): mixed
     {
         return $index === null ? $this->errors : ($this->errors[$index] ?? '');
     }
