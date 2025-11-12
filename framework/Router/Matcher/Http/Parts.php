@@ -105,10 +105,10 @@ class Parts extends BaseMatcher
     /**
      * {@inheritdoc}
      * 
-     * @param string $parts Cопоставляемые сегменты (части) маршрута, например 
+     * @param null|array $parts Cопоставляемые сегменты (части) маршрута, например 
      *     `['module', 'controller', 'action', 'id']` (по умолчанию `null`).
      */
-    public function match(array $parts = null): mixed
+    public function match(?array $parts = null): mixed
     {
         if ($parts === null) {
             $parts = Gm::$app->urlManager->explodeRoute();
