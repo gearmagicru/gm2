@@ -61,13 +61,13 @@ class Config extends BaseConfig
     /**
      * Конструктор класса.
      * 
-     * @param string|null $filename Имя файла конфигурации.
+     * @param null|string $filename Имя файла конфигурации.
      * @param bool $useSerialize Если значение `true`, использовать сериализацию 
      *     параметров конфигурации.
      * 
      * @return void
      */
-    public function __construct(string $filename = null, bool $useSerialize = false)
+    public function __construct(?string $filename = null, bool $useSerialize = false)
     {
         $this->filename = $filename;
         $this->useSerialize = $useSerialize;
@@ -174,12 +174,12 @@ class Config extends BaseConfig
     /**
      * Возвращает объект сериализации параметров конфигуратора.
      * 
-     * @param string $filename Имя файла конфигурации, если значение `null` используется 
+     * @param null|string $filename Имя файла конфигурации, если значение `null` используется 
      *    текущий файл конфигурации {@see Config::$filename} (по умолчанию `null`).
      * 
      * @return Serializer
      */
-    public function getSerializer(string $filename = null): Serializer
+    public function getSerializer(?string $filename = null): Serializer
     {
         if (!isset($this->serializer)) {
             if ($filename === null) {
@@ -202,14 +202,14 @@ class Config extends BaseConfig
     /**
      * Загружает параметры из файла конфигурации.
      * 
-     * @param string $filename Имя файла конфигурации, если значение `null` используется 
+     * @param null|string $filename Имя файла конфигурации, если значение `null` используется 
      *    текущий файл конфигурации {@see Config::$filename} (по умолчанию `null`).
      * 
      * @return $this
      * 
      * @throws Exception\FileNotFoundException Файл конфигурации не найден.
      */
-    public function load(string $filename = null): static
+    public function load(?string $filename = null): static
     {
         $require = false;
         if ($filename === null) {
@@ -285,12 +285,12 @@ class Config extends BaseConfig
     /**
      * Загружает параметры конфигурации из указанного файла.
      *
-     * @param string $filename Имя файла конфигурации, если значение `null` используется 
+     * @param null|string $filename Имя файла конфигурации, если значение `null` используется 
      *    текущий файл конфигурации {@see Config::$filename} (по умолчанию `null`).
      * 
      * @return array
      */
-    public function loadConfig(string $filename = null): array
+    public function loadConfig(?string $filename = null): array
     {
         if ($filename === null) {
             $filename = $this->filename;
@@ -319,7 +319,7 @@ class Config extends BaseConfig
     /**
      * Сохраняет параметры конфигуратора.
      * 
-     * @param string $filename Имя файла конфигурации, если значение `null` используется 
+     * @param null|string $filename Имя файла конфигурации, если значение `null` используется 
      *    текущий файл конфигурации {@see Config::$filename} (по умолчанию `null`).
      * @param bool $onlyUpdatable Только обновить. Для обновления текущих параметров, 
      *     в файле конфигурации должен быть раздел 'updatable'. В котром будут указаны 
@@ -327,7 +327,7 @@ class Config extends BaseConfig
      * 
      * @return bool
      */
-    public function save(string $filename = null, bool $onlyUpdatable = false): bool
+    public function save(?string $filename = null, bool $onlyUpdatable = false): bool
     {
         $parameters = $this->getAll();
         // только параметры разделов которые могут обновлятся "извне"
