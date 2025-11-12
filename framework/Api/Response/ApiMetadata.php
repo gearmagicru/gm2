@@ -81,7 +81,7 @@ class ApiMetadata extends Collection
      * 
      * @return $this
      */
-    public function success(string $message = null): static
+    public function success(?string $message = null): static
     {
         if ($message) {
             $this->message($message);
@@ -98,7 +98,7 @@ class ApiMetadata extends Collection
      * 
      * @return $this
      */
-    public function error(string $message = null, string $status = ''): static
+    public function error(?string $message = null, string $status = ''): static
     {
         if ($message) {
             $this->message($message);
