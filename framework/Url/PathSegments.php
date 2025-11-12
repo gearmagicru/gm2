@@ -44,11 +44,11 @@ class PathSegments
     /**
      * Конструктор.
      * 
-     * @param string $path URL-путь.
+     * @param null|string $path URL-путь.
      * 
      * @return void
      */
-    public function __construct(string $path = null)
+    public function __construct(?string $path = null)
     {
         if ($path !== null) {
             $this->path = $path;
@@ -203,11 +203,11 @@ class PathSegments
     /**
      * Склеивает сегменты в строку.
      * 
-     * @param string $delimiter Разделитель.
+     * @param null|string $delimiter Разделитель.
      * 
      * @return string
      */
-    public function implode(string $delimiter = null): string
+    public function implode(?string $delimiter = null): string
     {
         if (empty($this->segments)) return '';
         
