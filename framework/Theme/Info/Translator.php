@@ -60,7 +60,7 @@ class Translator
      * 
      * @return $this
      */
-    public function loadPattern(string $locale = null)
+    public function loadPattern(?string $locale = null)
     {
         if ($locale === null) {
             $locale = $this->locale;
