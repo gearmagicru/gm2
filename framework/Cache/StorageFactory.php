@@ -29,13 +29,15 @@ abstract class StorageFactory
      *
      * @var null|Storage\AdapterPluginManager
      */
-    protected static $adapters;
+    protected static $adapters = null;
 
     /**
-     * Создание адаптеров хранения
+     * Создаёт адаптер хранения.
      *
      * @param array $cfg
+     * 
      * @return Storage\StorageInterface
+     * 
      * @throws Exception\InvalidArgumentException
      */
     public static function factory($cfg)
@@ -78,13 +80,14 @@ abstract class StorageFactory
     }
 
     /**
-     * Возвращение указателя на созданный менеджер плагинов адаптера
+     * Возвращает указатель на созданный менеджер плагинов адаптера.
      *
-     * @param  string|Storage\StorageInterface $adapterName название адаптера
-     * @param  array|Storage\Adapter\AdapterOptions $options опции адаптера
+     * @param string|Storage\StorageInterface $adapterName Название адаптера.
+     * @param array|Storage\Adapter\AdapterOptions $options Параметры адаптера.
+     * 
      * @return Storage\StorageInterface
      */
-    public static function adapterFactory($adapterName, $options = array())
+    public static function adapterFactory($adapterName, $options = [])
     {
         if ($adapterName instanceof Storage\StorageInterface)
             $adapter = $adapterName;
@@ -97,7 +100,7 @@ abstract class StorageFactory
     }
 
     /**
-     * Возвращение указателя на менеджер плагинов адаптера
+     * Возвращает указатель на менеджер плагинов адаптера.
      *
      * @return Storage\AdapterPluginManager
      */
@@ -110,22 +113,23 @@ abstract class StorageFactory
     }
 
     /**
-     * Установка менеджера плагинов адаптера
+     * Устаналвивает менеджер плагинов адаптера.
      *
      * @param Storage\AdapterPluginManager $adapters
+     * 
      * @return void
      */
-    public static function setAdapterPluginManager(Storage\AdapterPluginManager $adapters)
+    public static function setAdapterPluginManager(Storage\AdapterPluginManager $adapters): void
     {
         static::$adapters = $adapters;
     }
 
     /**
-     * Сбрасывание менеджера плагинов адаптера
+     * Сбрасывает менеджер плагинов адаптера.
      *
      * @return void
      */
-    public static function resetAdapterPluginManager()
+    public static function resetAdapterPluginManager(): void
     {
         static::$adapters = null;
     }
