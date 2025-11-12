@@ -71,7 +71,7 @@ class BaseRegistry extends Config
      * 
      * @param null|BaseManager $manager Менеджер компонентов.
      */
-    public function __construct(string $filename = null, bool $useSerialize = false, ?BaseManager $manager = null)
+    public function __construct(?string $filename = null, bool $useSerialize = false, ?BaseManager $manager = null)
     {
         parent::__construct($filename, $useSerialize);
 
@@ -189,7 +189,7 @@ class BaseRegistry extends Config
      * 
      * @return mixed
      */
-    public function getAtMap(int $id, string $parameter = null, mixed $default = null): mixed
+    public function getAtMap(int $id, ?string $parameter = null, mixed $default = null): mixed
     {
         if (!isset($this->map)) {
             $this->createMap();
@@ -496,7 +496,7 @@ class BaseRegistry extends Config
      * 
      * @return string|array
      */
-    public function getIcon(array|string|int $id, string $type = null): string|array
+    public function getIcon(array|string|int $id, ?string $type = null): string|array
     {
         $prefix = 'module';
         // URL-путь к значкам по умолчанию
@@ -514,7 +514,7 @@ class BaseRegistry extends Config
             if ($type === 'icon' || $type === 'watermark') {
                 return $iconNone;
             }
-            return null;
+            return '';
         }
         return $this->manager->getIcon($params['path'], $type, 'module');
     }
