@@ -48,6 +48,8 @@ class ErrorHandler
     /**
      * Карта кодов серьезности ошибок с описанием.
      * 
+     * E_STRICT - deprecated PHP 8.4
+     * 
      * @var array
      */
     public static array $severityMap = [
@@ -62,7 +64,7 @@ class ErrorHandler
         E_USER_ERROR        => ['error', 'PHP User error'],
         E_USER_WARNING      => ['warning', 'PHP User warning'],
         E_USER_NOTICE       => ['notice', 'PHP User notice'],
-        E_STRICT            => ['notice', 'PHP Runtime notice'],
+        // E_STRICT         => ['notice', 'PHP Runtime notice'],
         E_RECOVERABLE_ERROR => ['error', 'PHP Catchable fatal error'],
         E_DEPRECATED        => ['notice', 'PHP Deprecated'],
         E_USER_DEPRECATED   => ['notice', 'PHP User deprecated']
