@@ -1,7 +1,7 @@
-# Компонент Widget входит в состав GM Framework.
+# Пакет компонента PluginManager входит в состав GM Framework.
 
-Компонент включает "Менеджер виджетов", предназначен для управления установленными виджетами на страницах сайта.
+Пакет компонента включает "Менеджер палагинов", предназначен для управления установленными плагинами на страницах сайта.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-widgetmanager)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-pluginmanager/)
