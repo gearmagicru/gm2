@@ -451,7 +451,7 @@ class ActiveRecord extends AbstractModel
      * @return array Все записи текущей таблицы.
      */
     public function fetchAll(
-        string $fetchKey = null, 
+        ?string $fetchKey = null, 
         array $columns = ['*'], 
         Where|Closure|string|array|null $where = null, 
         string|array|null $order = null
@@ -474,14 +474,14 @@ class ActiveRecord extends AbstractModel
      * По умолчанию `PDO::FETCH_ASSOC`.
      * 
      * @param mixed $keys Значение или значения первичного ключа.
-     * @param string|null $fetchKey Ключ возвращаемого ассоциативного массива записей. Если `null`, 
+     * @param null|string $fetchKey Ключ возвращаемого ассоциативного массива записей. Если `null`, 
      *     результатом будет индексированный массив записей (по умолчачнию `null`).
      * @param array $columns Столбцы выборки текущей таблицы. Если вы не укажете столбцы 
      *     для выборки, то по умолчанию будет подставлено значение `['*']` (означающее "все столбцы"). 
      * 
      * @return array
      */
-    public function fetchByPk(mixed $keys, string $fetchKey = null, array $columns = ['*']): array
+    public function fetchByPk(mixed $keys, ?string $fetchKey = null, array $columns = ['*']): array
     {
         /** @var Select $select */
         $select = $this->select($columns, [$this->primaryKey() => $keys]);
@@ -522,7 +522,7 @@ class ActiveRecord extends AbstractModel
      * @see \Gm\Db\Adapter\Driver\AbstractCommand::fetchToGroups()
      * 
      * @param string $groupKey Ключ для группирования результата выбранных строк.
-     * @param string|null $fetchKey Ключ возвращаемого ассоциативного массива результирующего 
+     * @param null|string $fetchKey Ключ возвращаемого ассоциативного массива результирующего 
      *     набора. Если `null`, результатом будет индексированный массив результирующего 
      *     набора (по умолчачнию `null`).
      * @param array $columns Столбцы выборки текущей таблицы. Если вы не укажете столбцы 
@@ -534,7 +534,7 @@ class ActiveRecord extends AbstractModel
      */
     public function fetchToGroups(
         string $groupKey, 
-        string $fetchKey = null, 
+        ?string $fetchKey = null, 
         array $columns = ['*'], 
         string|array|null $order = null
     ): array
@@ -590,7 +590,7 @@ class ActiveRecord extends AbstractModel
      * Иначе, метод {@see ActiveRecord::insert()}.
      *
      * @param bool $useValidation Выполнять проверку значений атрибутов (по умолчанию `false`).
-     * @param array $attributeNames Имена атрибутов, значения которых необходимо сохранить.
+     * @param null|array $attributeNames Имена атрибутов, значения которых необходимо сохранить.
      *     Если `null`, значения всех атрибутов будут сохранены (по умолчанию `null`).
      * 
      * @return bool|int|string Результат изменения значений атрибутов записи:
@@ -599,7 +599,7 @@ class ActiveRecord extends AbstractModel
      *     - для insert, если `false`, ошибка выполнения запроса SQL. Значение `true` (если составной первичный ключ), 
      *    запрос SQL был успешно выполнен. Иначе, идентификатор добавленной записи.
      */
-    public function save(bool $useValidation = false, array $attributeNames = null): bool|int|string
+    public function save(bool $useValidation = false, ?array $attributeNames = null): bool|int|string
     {
         if ($this->IsNewRecord()) {
             $result = $this->insert($useValidation, $attributeNames);
@@ -722,7 +722,7 @@ class ActiveRecord extends AbstractModel
      * 
      * @throws CommandException Ошибка выполнения инструкции SQL.
      */
-    public function update(bool $useValidation = false, array $attributes = null): false|int
+    public function update(bool $useValidation = false, ?array $attributes = null): false|int
     {
         if ($useValidation && !$this->validate($attributes)) {
             return false;
@@ -742,7 +742,7 @@ class ActiveRecord extends AbstractModel
      * 
      * @throws CommandException Ошибка выполнения инструкции SQL.
      */
-    protected function updateProcess(array $attributes = null): false|int
+    protected function updateProcess(?array $attributes = null): false|int
     {
         if (!$this->beforeSave(false)) {
             return false;
@@ -802,7 +802,7 @@ class ActiveRecord extends AbstractModel
      * 
      * @param array<string, mixed> $attributes Атрибуты записи со значениями в виде 
      *     пар "ключ - значение", которые необходимо изменить.
-     * @param Where|Closure|string|array $where Условие изменения записи или записей 
+     * @param Where|Closure|string|array|null $where Условие изменения записи или записей 
      *     (по умолчанию `null`).
      * 
      * @return false|int Значение `false`, если ошибка выполнения запроса. Иначе, 
@@ -810,7 +810,7 @@ class ActiveRecord extends AbstractModel
      * 
      * @throws CommandException Ошибка выполнения инструкции SQL.
      */
-    public function updateRecord(array $attributes, Where|Closure|string|array $where = null): false|int
+    public function updateRecord(array $attributes, Where|Closure|string|array|null $where = null): false|int
     {
         /** @var AbstractCommand $command */
         $command = $this->db->createCommand();
@@ -841,7 +841,7 @@ class ActiveRecord extends AbstractModel
      * 
      * @throws CommandException Ошибка выполнения инструкции SQL.
      */
-    public function insert(bool $useValidation = false, array $attributes = null): false|int|string
+    public function insert(bool $useValidation = false, ?array $attributes = null): false|int|string
     {
         if ($useValidation && !$this->validate($attributes)) {
             return false;
