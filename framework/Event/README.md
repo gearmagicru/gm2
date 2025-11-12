@@ -1,4 +1,4 @@
-# Компонент EventManager входит в состав GM Framework.
+# Пакет компонента EventManager входит в состав GM Framework.
 
 Компонент разработан для следующих случаев использования:
 - реализация простых шаблонов субъект / наблюдатель;
@@ -8,5 +8,5 @@
 Базовая архитектура позволяет присоединять и отсоединять слушателей к именованным событиям как для каждого экземпляра, так и через общие коллекции, триггерные события, и прервать выполнение слушателей.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-event)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-event/)
