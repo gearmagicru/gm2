@@ -122,7 +122,7 @@ class ModuleManager extends BaseManager
     /**
      * {@inheritdoc}
      */
-    public function selectAll(string $key = null, string|array $where = ''): array
+    public function selectAll(?string $key = null, string|array $where = ''): array
     {
         $module = new Model\Module();
         return $module->fetchAll($key, $module->maskedAttributes(), $where ?: null);
@@ -139,7 +139,7 @@ class ModuleManager extends BaseManager
     /**
      * {@inheritdoc}
      */
-    public function selectNames(string $attribute = null, int $languageCode = null): ?array
+    public function selectNames(?string $attribute = null, ?int $languageCode = null): ?array
     {
         return (new Model\ModuleLocale())->fetchNames($attribute, $languageCode);
     }
