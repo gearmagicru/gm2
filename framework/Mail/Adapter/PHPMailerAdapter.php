@@ -54,7 +54,7 @@ class PHPMailerAdapter extends AbstractAdapter
     /**
      * {@inheritdoc}
      */
-    public function addCustomHeader(string $name, string $value = null): bool
+    public function addCustomHeader(string $name, ?string $value = null): bool
     {
         return $this->mailer->addCustomHeader($name, $value);
     }
