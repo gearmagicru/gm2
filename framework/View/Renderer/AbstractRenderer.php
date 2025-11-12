@@ -79,12 +79,12 @@ class AbstractRenderer
     /**
      * Возвращение значения переменной шаблона.
      * 
-     * @param string $name Название переменной (по умолчанию `null`).
+     * @param null|string $name Название переменной (по умолчанию `null`).
      * @param string $default Значение переменной по умолчанию (если не найдена).
      * 
      * @return mixed
      */
-    public function getContext(string $name = null, mixed $default = ''): mixed
+    public function getContext(?string $name = null, mixed $default = ''): mixed
     {
         if ($name === null) {
             return $this->context;
