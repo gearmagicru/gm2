@@ -451,7 +451,7 @@ class Formatter extends Service
      *    пояс {@see Formatter::$timeZone}.
      * @param string $interval Интервал {@link https://www.php.net/manual/ru/dateinterval.construct.php}, 
      *    отрицательный интервал с приставкой '-'.
-     * @param string $format Формат преобразования значения (по умолчанию `null`). Если 
+     * @param null|string $format Формат преобразования значения (по умолчанию `null`). Если 
      *    формат `null`, используется текущий формат {@see Formatter::$dateFormat}.  
      *    Формат может иметь значения 'short', 'medium', 'long' или 'full'.  
      *    Также, может быть пользовательский формат, указанный в ICU {@link http://userguide.icu-project.org/formatparse/datetime}.  
@@ -469,7 +469,7 @@ class Formatter extends Service
     public function toDateInterval(
         DateTimeInterface|string|int $value, 
         string $interval, 
-        string $format = null, 
+        ?string $format = null, 
         DateTimeZone|string|null $timeZone = null
     ): string
     {
@@ -519,7 +519,7 @@ class Formatter extends Service
      *    Форматтер преобразует значение даты в соответствии с указанным часовым поясом
      *    `$timeZone`. Если часовой пояс не указан, будет применяться текущий часовой 
      *    пояс {@see Formatter::$timeZone}.
-     * @param string $format Формат преобразования значения (по умолчанию `null`). Если 
+     * @param null|string $format Формат преобразования значения (по умолчанию `null`). Если 
      *    формат `null`, используется текущий формат {@see Formatter::$dateFormat}.  
      *    Формат может иметь значения 'short', 'medium', 'long' или 'full'.  
      *    Также, может быть пользовательский формат, указанный в ICU {@link http://userguide.icu-project.org/formatparse/datetime}.  
@@ -539,7 +539,7 @@ class Formatter extends Service
      */
     public function toDate(
         DateTimeInterface|string|int $value, 
-        string $format = null, 
+        ?string $format = null, 
         bool $normalize = true, 
         DateTimeZone|string|null $timeZone = null
     ): string
@@ -567,7 +567,7 @@ class Formatter extends Service
      *    Форматтер преобразует значение времени в соответствии с указанным часовым поясом
      *    `$timeZone`. Если часовой пояс не указан, будет применяться текущий часовой 
      *    пояс {@see Formatter::$timeZone}.
-     * @param string $format Формат преобразования значения (по умолчанию `null`). Если 
+     * @param null|string $format Формат преобразования значения (по умолчанию `null`). Если 
      *    формат `null`, используется текущий формат {@see Formatter::$dateFormat}.  
      *    Формат может иметь значения 'short', 'medium', 'long' или 'full'.  
      *    Также, может быть пользовательский формат, указанный в ICU {@link http://userguide.icu-project.org/formatparse/datetime}.  
@@ -588,7 +588,7 @@ class Formatter extends Service
      */
     public function toTime(
         DateTimeInterface|string|int $value, 
-        string $format = null, 
+        ?string $format = null, 
         bool $normalize = true, 
         DateTimeZone|string|null $timeZone = null
     ): string
@@ -612,7 +612,7 @@ class Formatter extends Service
      *    - string, может использоваться для создания DateTime объекта {@link https://www.php.net/manual/ru/datetime.formats.php};  
      *    - PHP DateTime объект {@see https://www.php.net/manual/ru/class.datetime.php};  
      *    - PHP DateTimeImmutable объект {@see https://www.php.net/manual/ru/class.datetimeimmutable.php}.
-     * @param string $format Формат преобразования значения (по умолчанию `null`). Если 
+     * @param null|string $format Формат преобразования значения (по умолчанию `null`). Если 
      *    формат `null`, используется текущий формат {@see Formatter::$dateFormat}.  
      *    Формат может иметь значения 'short', 'medium', 'long' или 'full'.  
      *    Также, может быть пользовательский формат, указанный в ICU {@link http://userguide.icu-project.org/formatparse/datetime}.  
@@ -629,7 +629,7 @@ class Formatter extends Service
      */
     public function toTimeUTC(
         DateTimeInterface|string|int $value, 
-        string $format = null, 
+        ?string $format = null, 
         bool $normalize = true, 
         DateTimeZone|string|null $fromTimeZone = null
     ): string
@@ -690,7 +690,7 @@ class Formatter extends Service
      *    - string, может использоваться для создания DateTime объекта {@link https://www.php.net/manual/ru/datetime.formats.php};  
      *    - PHP DateTime объект {@see https://www.php.net/manual/ru/class.datetime.php};  
      *    - PHP DateTimeImmutable объект {@see https://www.php.net/manual/ru/class.datetimeimmutable.php}.
-     * @param string $format Формат преобразования значения (по умолчанию `null`). Если 
+     * @param null|string $format Формат преобразования значения (по умолчанию `null`). Если 
      *    формат `null`, используется текущий формат {@see Formatter::$dateFormat}.  
      *    Формат может иметь значения 'short', 'medium', 'long' или 'full'.  
      *    Также, может быть пользовательский формат, указанный в ICU {@link http://userguide.icu-project.org/formatparse/datetime}.  
@@ -711,7 +711,7 @@ class Formatter extends Service
      */
     public function toDateTime(
         DateTimeInterface|string|int $value, 
-        string $format = null, 
+        ?string $format = null, 
         bool $normalize = true, 
         DateTimeZone|string|null $timeZone = null
     ): string
@@ -818,7 +818,7 @@ class Formatter extends Service
      * 
      * @return NumberFormatter
      */
-    public function createNumberFormatter(int $style, int $decimals = null, array $options = [], array $textOptions = []): NumberFormatter
+    public function createNumberFormatter(int $style, ?int $decimals = null, array $options = [], array $textOptions = []): NumberFormatter
     {
         $formatterId = "$style\0{$this->locale}\0$decimals";
 
