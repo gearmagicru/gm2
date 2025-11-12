@@ -199,14 +199,14 @@ class AccessControl extends Behavior
      * 
      * @see AccessControl::$_accessRules
      * 
-     * @param string|null $controllerName Имя контроллера для которого выполняется 
+     * @param null|string $controllerName Имя контроллера для которого выполняется 
      *     проверка доступа. 
-     * @param string|null $actionName Имя действия для которого выполняется проверка 
+     * @param null|string $actionName Имя действия для которого выполняется проверка 
      *     доступа.
      * 
      * @return BaseObject
      */
-    public function getAccessRules(string $controllerName = null, string $actionName = null)
+    public function getAccessRules(?string $controllerName = null, ?string $actionName = null)
     {
         if ($this->_accessRules === null) {
             if ($this->owner instanceof BaseController) {
