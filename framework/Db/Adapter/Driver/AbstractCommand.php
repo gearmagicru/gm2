@@ -272,9 +272,9 @@ abstract class AbstractCommand
      * @param null|array<string, string> $params Параметры замены имен таблиц в виде 
      *     пар "ключ - значение" (по умолчанию `null`).
      * 
-     * @return string|null 
+     * @return string 
      */
-    protected function getRawTable(array $params = null): string
+    protected function getRawTable(?array $params = null): string
     {
         $connection = $this->db->connectionParams;
         if (key_exists('tablePrefix', $connection)) {
@@ -453,7 +453,7 @@ abstract class AbstractCommand
      * @see AbstractCommand::query()
      * @see AbstractCommand::fetchAll()
      * 
-     * @param string|null $fetchKey Ключ возвращаемого ассоциативного массива записей. 
+     * @param null|string $fetchKey Ключ возвращаемого ассоциативного массива записей. 
      *     Если значение `null`, то результатом будет индексированный массив записей 
      *     (по умолчачнию `null`).
      * 
@@ -461,7 +461,7 @@ abstract class AbstractCommand
      * 
      * @throws Exception\CommandException Невозможно выполнить инструкцию SQL.
      */
-    public function queryAll(string $fetchToKey = null): array
+    public function queryAll(?string $fetchToKey = null): array
     {
         $this->query();
         return $this->fetchAll($fetchToKey);
@@ -479,7 +479,7 @@ abstract class AbstractCommand
      * @see AbstractCommand::query()
      * @see AbstractCommand::fetchTo()
      * 
-     * @param string $columns Имена возвращаемых столбцов. Если столбцы не указаны, 
+     * @param array<int, string> $columns Имена возвращаемых столбцов. Если столбцы не указаны, 
      *     результатом будут, только значения этих столбцов в виде индексированного 
      *     массива.
      * 
@@ -661,6 +661,7 @@ abstract class AbstractCommand
      */
     public function fetch(): mixed
     {
+        return null;
     }
 
     /**
@@ -699,13 +700,13 @@ abstract class AbstractCommand
      * 
      * @see AbstractCommand::fetch()
      * 
-     * @param string|null $fetchKey Ключ возвращаемого ассоциативного массива результирующего 
+     * @param null|string $fetchKey Ключ возвращаемого ассоциативного массива результирующего 
      *     набора. Если `null`, результатом будет индексированный массив результирующего 
      *     набора (по умолчачнию `null`).
      * 
      * @return array<int|string, array|object>
      */
-    public function fetchAll(string $fetchKey = null): array
+    public function fetchAll(?string $fetchKey = null): array
     {
         $rows = [];
         if ($fetchKey) {
@@ -749,13 +750,13 @@ abstract class AbstractCommand
      * @see AbstractCommand::fetch()
      * 
      * @param string $groupKey Ключ для группирования результата выбранных строк.
-     * @param string|null $fetchKey Ключ возвращаемого ассоциативного массива результирующего 
+     * @param null|string $fetchKey Ключ возвращаемого ассоциативного массива результирующего 
      *     набора. Если `null`, результатом будет индексированный массив результирующего 
      *     набора (по умолчачнию `null`).
      * 
      * @return array
      */
-    public function fetchToGroups(string $groupKey, string $fetchKey = null): array
+    public function fetchToGroups(string $groupKey, ?string $fetchKey = null): array
     {
         if (!$this->isFetchAssoc()) return [];
 
