@@ -181,12 +181,12 @@ class InstallerStep extends BaseObject
     /**
      * Проверяет, было ли вызвано текущее или указанное действие шагом установки.
      * 
-     * @param string $action Если значение `null`, проверит, было ли действие. Если 
+     * @param null|string $action Если значение `null`, проверит, было ли действие. Если 
      *     значение отличное от `null`, то было ли вызвано указанное действие (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function hasAction(string $action = null): bool
+    public function hasAction(?string $action = null): bool
     {
         $posted = $_POST[$this->paramAction] ?? null;
         if ($posted !== null) {
