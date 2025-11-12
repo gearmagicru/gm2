@@ -60,7 +60,7 @@ class ThemePackage
      * 
      * @return void
      */
-    public function __construct(string $path, Theme $theme = null)
+    public function __construct(string $path, ?Theme $theme = null)
     {
         $this->theme = $theme;
         $this->setFilenameFromPath($path);
