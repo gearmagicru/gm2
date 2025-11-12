@@ -125,7 +125,7 @@ class Mimes extends Config
      * 
      * @return bool Возвращает значение `false`, если расширение не проходит проверку.
      */
-    public function exists(string $extension, string $mime = null, string $type = null): bool
+    public function exists(string $extension, ?string $mime = null, ?string $type = null): bool
     {
         if (isset($this->container[$extension])) {
             $row = $this->container[$extension];
