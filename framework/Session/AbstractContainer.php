@@ -103,13 +103,13 @@ abstract class AbstractContainer extends Collection
     /**
      * Устанавливает сессию для контейнера.
      *
-     * @param Session|null $session Сессия.
+     * @param null|Session $session Сессия.
      * 
      * @return void
      * 
      * @throws Exception\InvalidArgumentException Если объект не является экземпляром класса сессии.
      */
-    public function setSession(Session $session = null): void
+    public function setSession(?Session $session = null): void
     {
         if (null === $session) {
             $session = Gm::$services->getAs('session');
