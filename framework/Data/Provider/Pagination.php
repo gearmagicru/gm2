@@ -252,7 +252,7 @@ class Pagination extends BaseObject
     /**
      * Возвращает количество элементов на странице.
      * 
-     * @param int|null $totalCount Общее количество элементов. Если значение `null`,
+     * @param null|int $totalCount Общее количество элементов. Если значение `null`,
      *     будет использовано {@see Pagination::$totalCount} (по умолчанию `null`).
      * 
      * @see Pagination::$totalCount
@@ -260,7 +260,7 @@ class Pagination extends BaseObject
      * 
      * @return int
      */
-    public function getPageCount(int $totalCount = null): int
+    public function getPageCount(?int $totalCount = null): int
     {
         if ($totalCount === null) {
             $totalCount = (int) $this->totalCount;
@@ -279,14 +279,14 @@ class Pagination extends BaseObject
      * 
      * @see BaseProvider::getQueryParams()
      * 
-     * @param int|null $page Количество элементов на странице. Если значение указано, 
+     * @param null|int $page Количество элементов на странице. Если значение указано, 
      *     то оно обязательно будет в возвращаемом параметре (по умолчанию `null`).
-     * @param int|null $limit Количество элементов выводимых на странице. Если значение 
+     * @param null|int $limit Количество элементов выводимых на странице. Если значение 
      *     указано, то оно обязательно будет в возвращаемом параметре (по умолчанию `null`).
      * 
      * @return array Возвращаемые параметры могут иметь вид: `['page' => 1, 'limit' => 20]`.
      */
-    public function getQueryParams(int $page = null, int $limit = null): array
+    public function getQueryParams(?int $page = null, ?int $limit = null): array
     {
         $params = [];
         if ($page)
