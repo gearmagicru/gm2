@@ -74,7 +74,7 @@ class ExtensionRegistry extends BaseRegistry
     /**
      * {@inheritdoc}
      */
-    public function getIcon(array|string|int $id, string $type = null): string|array
+    public function getIcon(array|string|int $id, ?string $type = null): string|array
     {
         // URL-путь к значкам по умолчанию
         $iconNoneUrl = Url::theme() . '/widgets/images/module';
@@ -91,7 +91,7 @@ class ExtensionRegistry extends BaseRegistry
             if ($type === 'icon' || $type === 'watermark') {
                 return $iconNone;
             }
-            return null;
+            return '';
         }
         return $this->manager->getIcon($params['path'], $type, 'extension');
     }
@@ -201,7 +201,7 @@ class ExtensionRegistry extends BaseRegistry
     /**
      * {@inheritdoc}
      */
-    public function getTranslatedPermissions(string|int $id, string $locale = null): array
+    public function getTranslatedPermissions(string|int $id, ?string $locale = null): array
     {
         // параметры конфигурации установленного модуля
         $params = is_array($id) ? $id : $this->getAt($id);
