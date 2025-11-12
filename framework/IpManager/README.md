@@ -1,10 +1,10 @@
-# Компонент IpManager входит в состав GM Framework.
+# Пакет компонента IpManager входит в состав GM Framework.
 
-Компонент управляет списками IP-адресов, имеющие ограничения.
+Пакет компонента управляет списками IP-адресов, имеющие ограничения.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-ipmanager)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-ipmanager/)
 
 
 ## Список проверяемых IP-адресов
