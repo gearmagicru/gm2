@@ -127,11 +127,11 @@ class Mbac
      * @param bool $toArray Если значение `false`, то результатом будут идентификаторы 
      *     через разделитель ",". Иначе, массив идентификаторов со значением `true` 
      *     (по умолчанию `false`).
-     * @param string|null $permission Имя разрешения, которые имеют модули (по умолчанию `null`).
+     * @param null|string $permission Имя разрешения, которые имеют модули (по умолчанию `null`).
      * 
      * @return string|array
      */
-    public function getModules(bool $toArray = false, string $permission = null): string|array
+    public function getModules(bool $toArray = false, ?string $permission = null): string|array
     {
         $moduleIds = '';
         if ($permission !== null) {
