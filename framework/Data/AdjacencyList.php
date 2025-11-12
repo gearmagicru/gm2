@@ -58,11 +58,11 @@ class AdjacencyList extends BaseModel
     /**
      * Конструктор класса.
      * 
-     * @param DataManager|null $dataManager
+     * @param null|DataManager $dataManager
      * 
      * @return void
      */
-    public function __construct(DataManager $dataManager = null)
+    public function __construct(?DataManager $dataManager = null)
     {
         $this->dataManager = $dataManager;
     }
