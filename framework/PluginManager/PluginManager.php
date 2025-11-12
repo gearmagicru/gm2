@@ -385,7 +385,7 @@ class PluginManager extends Service
      * 
      * @return string|null
      */
-    public function getHelpFile(string $id, string $subject, string $locale = null): ?string
+    public function getHelpFile(string $id, string $subject, ?string $locale = null): ?string
     {
         if ($locale === null) {
             $locale = Gm::$app->language->locale;
@@ -547,6 +547,7 @@ class PluginManager extends Service
                     $icon = $srcPath . '/icon.svg';
                     return file_exists($modulePath . $icon) ? $moduleUrl . $icon : $iconNone;
                 }
+        return '';
     }
 
     /**
@@ -826,12 +827,12 @@ class PluginManager extends Service
     /**
      * Возвращает атрибуты всех плагинов из базы данных.
      * 
-     * @param string|null $key Имя ключа (атрибута) возвращаемой записи (по умолчанию `null`).
+     * @param null|string $key Имя ключа (атрибута) возвращаемой записи (по умолчанию `null`).
      * @param string|array<string, string> $where Условие выполнения запроса (по умолчанию `null`).
      * 
      * @return array
      */
-    public function selectAll(string $key = null, string|array $where = ''): array
+    public function selectAll(?string $key = null, string|array $where = ''): array
     {
         $plugin = new Model\Plugin();
         return $plugin->fetchAll($key, $plugin->maskedAttributes(), $where ?: null);
@@ -868,15 +869,15 @@ class PluginManager extends Service
      *     // ...
      * ]
      * ```
-     * @param string $attribute Название атрибута ('name', 'description') возвращаемого 
+     * @param null|string $attribute Название атрибута ('name', 'description') возвращаемого 
      *     для каждого идентификатора компонента. Если значение `null`, возвратит
      *     все атрибуты (по умолчанию `null`).
-     * @param int $languageCode Идентификатор языка. Если значение `null`, то идентификатор 
+     * @param null|int $languageCode Идентификатор языка. Если значение `null`, то идентификатор 
      *     текущего языка (по умолчанию `null`).
      * 
      * @return array<int, array{name:string, description:string}>
      */
-    public function selectNames(string $attribute = null, int $languageCode = null): ?array
+    public function selectNames(?string $attribute = null, ?int $languageCode = null): ?array
     {
         return (new Model\PluginLocale())->fetchNames($attribute, $languageCode);
     }
