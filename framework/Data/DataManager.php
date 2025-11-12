@@ -287,7 +287,7 @@ class DataManager
      * 
      * @return void
      */
-    public function __construct(array $config, $model, string $assignType = null)
+    public function __construct(array $config, $model, ?string $assignType = null)
     {
         $this->model = $model;
         $this->module = $model->module;
@@ -946,10 +946,12 @@ class DataManager
      * Под просмотром аудита записей понимают: отображение соответствующих элементов 
      * (поля формы, столбцы списка и т.д.) представления.
      * 
+     * @param null|bool $canView (по умолчанию `null`).
+     * 
      * @return bool Возвращает значение `true`, если пользователь имеет разрешение для 
      *     просмотра аудита записей.
      */
-    public function canViewAudit(bool $canView = null): bool
+    public function canViewAudit(?bool $canView = null): bool
     {
         if ($canView !== null) {
             $this->_prmViewAudit = $canView;
