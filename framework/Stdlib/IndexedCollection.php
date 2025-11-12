@@ -109,14 +109,14 @@ class IndexedCollection implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * Проверяет, пустой ли элемент или вся коллекция элементов.
      * 
-     * @param int $index Порядковый номер элемента. Если `null`, проверяет на пустоту 
+     * @param null|int $index Порядковый номер элемента. Если `null`, проверяет на пустоту 
      * всю коллекцию элементов.
      * 
      * @return bool Возвращает `false`, если элемент или вся коллекция элементов
      *     существует и содержит непустое ненулевое значение или строку `false`. 
      *     В противном случае возвращает `true`. 
      */
-    public function empty(int $index = null): bool
+    public function empty(?int $index = null): bool
     {
         if ($index === null)
             return empty($this->container);
