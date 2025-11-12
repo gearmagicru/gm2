@@ -1,7 +1,7 @@
-# Компонент ModuleManager входит в состав GM Framework.
+# Пакет компонентов ExtensionManager входит в состав GM Framework.
 
-Компонент менеджера модулей позволяет проектировать модульную архитектуру приложений PHP.
+Пакет компонентов Менеджера расширений модулей позволяет проектировать модульную архитектуру приложений PHP.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-extensionmanager)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-extensionmanager/)
