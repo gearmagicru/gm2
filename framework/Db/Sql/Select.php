@@ -703,8 +703,8 @@ class Select extends AbstractSql
      * Возвращает выражение GROUP для инструкции SQL.
      * 
      * @param PlatformInterface $platform Платформа адаптера.
-     * @param DriverInterface|null $driver Драйвера подключения (по умолчанию `null`).
-     * @param ParameterContainer|null $parameterContainer Контейнер параметров (по умолчанию `null`).
+     * @param null|DriverInterface $driver Драйвера подключения (по умолчанию `null`).
+     * @param null|ParameterContainer $parameterContainer Контейнер параметров (по умолчанию `null`).
      * 
      * @return string|array
      * 
@@ -712,8 +712,8 @@ class Select extends AbstractSql
      */
     protected function processGroup(
         PlatformInterface $platform, 
-        DriverInterface $driver = null, 
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null, 
+        ?ParameterContainer $parameterContainer = null
     ): string|array
     {
         if ($this->group === null) return '';
