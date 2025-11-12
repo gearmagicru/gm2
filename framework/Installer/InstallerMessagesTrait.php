@@ -181,7 +181,7 @@ trait InstallerMessagesTrait
      * @return array|null Если значение `null`, сообщение отсутствует по указанному 
      *     порядковому номеру.
      */
-    public function getMessages(int $index = null): ?array
+    public function getMessages(?int $index = null): ?array
     {
         if ($index === null) {
             return $this->messages;
