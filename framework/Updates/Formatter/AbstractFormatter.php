@@ -99,7 +99,7 @@ class AbstractFormatter
      * 
      * @param string $path Путь к файлам пакета.
      * 
-     * @return array Имена файлов с указанными для них действиями.
+     * @return false|array Имена файлов с указанными для них действиями.
      * Имеет вид:
      * ```php
      *    [
@@ -112,7 +112,7 @@ class AbstractFormatter
      *    ]
      * ```
      */
-    public function validateInstallFiles(string $path): array
+    public function validateInstallFiles(string $path): false|array
     {
         return [];
     }
@@ -332,11 +332,11 @@ class AbstractFormatter
     /**
      * Возвращает ошибку(и) по указанному индексу очереди ошибок.
      * 
-     * @param int|null $index Индекс очереди ошибки. Если null, возвратит все ошибки.
+     * @param null|int $index Индекс очереди ошибки. Если null, возвратит все ошибки.
      * 
      * @return array|string Если указан идекс и нет ошибки, то "".
      */
-    public function getErrors(int $index = null): array|string
+    public function getErrors(?int $index = null): array|string
     {
         return $index === null ? $this->errors : ($this->errors[$index] ?? '');
     }
