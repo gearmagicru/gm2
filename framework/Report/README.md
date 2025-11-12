@@ -1,7 +1,7 @@
-# Компонент Report входит в состав GM Framework.
+# Пакет компонента Report входит в состав GM Framework.
 
-Компонент формирования отчёта о полученных ошибках в процессе работы приложения.
+Пакет компонента формирования отчёта о полученных ошибках в процессе работы приложения.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-report)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-report/)
