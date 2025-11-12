@@ -216,7 +216,7 @@ class DbListAdapter extends AbstractListAdapter
     /**
      * {@inheritdoc}
      */
-    public function remove(int $id = null): bool
+    public function remove(?int $id = null): bool
     {
         if ($id === null) {
             if ($this->id === null)
@@ -244,7 +244,7 @@ class DbListAdapter extends AbstractListAdapter
     /**
      * {@inheritdoc}
      */
-    public function get(int $id = null): mixed
+    public function get(?int $id = null): mixed
     {
         if ($id === null) {
             return $this->attributes;
