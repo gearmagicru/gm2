@@ -88,11 +88,11 @@ class Html implements HelperInterface
      * Установка значения атрибута владельца.
      *
      * @param string $owner Владелец атрибута.
-     * @param string $attribute Название атрибута.
+     * @param null|string $attribute Название атрибута.
      * 
      * @return string|null
      */
-    public function getAttribute(string $owner, string $attribute = null): ?string
+    public function getAttribute(string $owner, ?string $attribute = null): ?string
     {
         if (!isset($this->attributes[$owner])) return null;
 
