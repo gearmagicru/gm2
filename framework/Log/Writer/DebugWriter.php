@@ -397,12 +397,12 @@ class DebugWriter extends BaseWriter
     /**
      * Возвращает имя файла (включая путь) стика.
      * 
-     * @param string|null $stickId Идентификатор стика. Если значение `null`, то используется 
+     * @param null|string $stickId Идентификатор стика. Если значение `null`, то используется 
      *     {@see DebugWriter::$stickId} (по умолчанию `null`).
      * 
      * @return string
      */
-    public function getStickFilename(string $stickId = null): string
+    public function getStickFilename(?string $stickId = null): string
     {
         if ($stickId === null) {
             $stickId = $this->stickId;
@@ -415,12 +415,12 @@ class DebugWriter extends BaseWriter
      * 
      * @see DebugWriter::getStickFilename()
      * 
-     * @param string|null $stickId Идентификатор стика. Если значение `null`, то используется 
+     * @param null|string $stickId Идентификатор стика. Если значение `null`, то используется 
      *     {@see DebugWriter::$stickId} (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function existsStickFile(string $stickId = null): bool
+    public function existsStickFile(?string $stickId = null): bool
     {
         return file_exists($this->getStickFilename($stickId));
     }
