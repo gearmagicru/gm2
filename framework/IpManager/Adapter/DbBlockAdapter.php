@@ -25,7 +25,7 @@ class DbBlockAdapter extends AbstractBlockAdapter
     /**
      * {@inheritdoc}
      */
-    public function add(array $ipInfo, string $ipAddress = null): bool
+    public function add(array $ipInfo, ?string $ipAddress = null): bool
     {
         $this->resetError();
         $ipAddress = $ipAddress ?: $this->ipAddress;
@@ -55,7 +55,7 @@ class DbBlockAdapter extends AbstractBlockAdapter
     /**
      * {@inheritdoc}
      */
-    public function update(array $ipInfo, string $ipAddress = null): bool
+    public function update(array $ipInfo, ?string $ipAddress = null): bool
     {
         $this->resetError();
         $ipAddress = $ipAddress ?: $this->ipAddress;
@@ -102,7 +102,7 @@ class DbBlockAdapter extends AbstractBlockAdapter
     /**
      * {@inheritdoc}
      */
-    public function remove(string $ipAddress = null): bool
+    public function remove(?string $ipAddress = null): bool
     {
         $this->resetError();
         $ipAddress = $ipAddress ?: $this->ipAddress;
@@ -132,7 +132,7 @@ class DbBlockAdapter extends AbstractBlockAdapter
     /**
      * {@inheritdoc}
      */
-    public function get(string $ipAddress = null): mixed
+    public function get(?string $ipAddress = null): mixed
     {
         $this->resetError();
         $ipAddress = $ipAddress ?: $this->ipAddress;
