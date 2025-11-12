@@ -190,13 +190,13 @@ class Breadcrumbs extends Widget
      * Добавляет элемент (ссылку) в навигационную цепочку.
      * 
      * @param string $label Название элемента навигационной цепочки.
-     * @param string|null $url URL-адрес (по умолчанию `null`).
-     * @param string|null $template Шаблон элемента, если не указан, будет 
+     * @param null|string $url URL-адрес (по умолчанию `null`).
+     * @param null|string $template Шаблон элемента, если не указан, будет 
      *     использоваться {@see Breadcrumbs::$itemTemplate} (по умолчанию `null`).
      * 
      * @return $this
      */
-    public function addLink(string $label, string $url = null, string $template = null): static
+    public function addLink(string $label, ?string $url = null, ?string $template = null): static
     {
         $item = ['label' => $label];
 
