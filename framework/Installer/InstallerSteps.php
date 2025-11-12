@@ -265,7 +265,7 @@ class InstallerSteps extends BaseObject
      * 
      * @return bool
      */
-    public function has(string $stepName, string $choice = null): bool
+    public function has(string $stepName, ?string $choice = null): bool
     {
         if ($choice == null) {
             $choice = $this->choice;
@@ -289,12 +289,12 @@ class InstallerSteps extends BaseObject
     /**
      * Возвращает параметры шага установки для текущего выбора.
      *
-     * @param string $name Имя шага установки. Если значение `true`, текущий шаг 
+     * @param null|string $name Имя шага установки. Если значение `true`, текущий шаг 
      *     установки (по умолчанию `null`). 
      * 
      * @return mixed
      */
-    public function get(string $name = null): mixed
+    public function get(?string $name = null): mixed
     {
         if ($name === null) {
             $name = $this->stepName;
@@ -314,7 +314,7 @@ class InstallerSteps extends BaseObject
      * 
      * @return null|InstallerStep Если значение `null`, то невозможно создать шаг установки.
      */
-    public function createStep(string $stepName = null, string $choice = null): ?InstallerStep
+    public function createStep(?string $stepName = null, ?string $choice = null): ?InstallerStep
     {
         if ($stepName === null) {
             $stepName = $this->stepName;
