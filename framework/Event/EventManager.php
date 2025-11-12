@@ -133,11 +133,11 @@ class EventManager
      * - если `false`, имя события;
      * - если `null`, массив `[name, parameters]`.
      * 
-     * @param bool|null $parameters Значение указывает на возвращаемый результат.
+     * @param null|bool $parameters Значение указывает на возвращаемый результат.
      * 
      * @return string|array|null Последнее вызываемое событие (имя и/или параметры).
      */
-    public function getLastEvent(bool $parameters = null): string|array|null
+    public function getLastEvent(?bool $parameters = null): string|array|null
     {
         if ($parameters === true)
             return $this->lastEvent[1];
