@@ -76,11 +76,11 @@ class Dumper
      * Форматирует данные для вывода в формат HTML.
      * 
      * @param string $output Данные для вывода.
-     * @param string|null $label Метка добавляемая в начало вывода.
+     * @param null|string $label Метка добавляемая в начало вывода.
      * 
      * @return string
      */
-    protected static function exportHtml(string $output, string $label = null): string
+    protected static function exportHtml(string $output, ?string $label = null): string
     {
         return strtr(
             self::$formatHtml,
@@ -98,12 +98,13 @@ class Dumper
      * новой строки, и отступы, и выполняет `htmlentities()` перед выводом.
      *
      * @param mixed $var Переменная для вывода.
-     * @param string $label Метка добавляемая в начало вывода.
+     * @param null|string $label Метка добавляемая в начало вывода.
+     * @param bool $highlight
      * @param bool $echo Вывод `echo`, если истина.
      * 
      * @return string
      */
-    public static function dump($var, string $label = null, bool $highlight = true, bool $echo = true)
+    public static function dump($var, ?string $label = null, bool $highlight = true, bool $echo = true)
     {
         $dump = self::dumpAsString($var, $highlight);
         if (defined('IS_CONSOLE') && IS_CONSOLE)
