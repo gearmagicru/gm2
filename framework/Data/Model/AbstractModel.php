@@ -474,12 +474,12 @@ class AbstractModel extends BaseObject
      * 
      * Если при проверки появились ошибки, то они будут в {@see AbstractModel::$errors}.
      * 
-     * @param array<string, mixed> $attributes Атрибуты со значениями в виде пар 
+     * @param null|array<string, mixed> $attributes Атрибуты со значениями в виде пар 
      *     "ключ - значение" (по умолчанию `null`).
      * 
      * @return bool Значение `true`, если проверка всех атрибутов была успешна.
      */
-    public function validate(array $attributes = null): bool
+    public function validate(?array $attributes = null): bool
     {
         if ($attributes === null) {
             $attributes = $this->getAttributes();
@@ -608,7 +608,7 @@ class AbstractModel extends BaseObject
      * 
      * @return array Атрибуты со значениями, которые были изменены.
      */
-    public function getDirtyAttributes(array $names = null): array
+    public function getDirtyAttributes(?array $names = null): array
     {
         if ($names === null) {
             $names = array_keys($this->attributes);
