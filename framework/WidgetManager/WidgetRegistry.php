@@ -60,7 +60,7 @@ class WidgetRegistry extends Config
      * 
      * @param null|WidgetManager $manager Менеджер виджетов.
      */
-    public function __construct(string $filename = null, bool $useSerialize = false, WidgetManager $manager = null)
+    public function __construct(?string $filename = null, bool $useSerialize = false, ?WidgetManager $manager = null)
     {
         parent::__construct($filename, $useSerialize);
 
@@ -161,7 +161,7 @@ class WidgetRegistry extends Config
      * 
      * @return mixed
      */
-    public function getAt(string|int $id, string $parameter = null, mixed $default = null): mixed
+    public function getAt(string|int $id, ?string $parameter = null, mixed $default = null): mixed
     {
         if (is_numeric($id)) {
             return $this->getAtMap($id, $parameter, $default);
@@ -185,7 +185,7 @@ class WidgetRegistry extends Config
      * 
      * @return mixed
      */
-    public function getAtMap(int $id, string $parameter = null, mixed $default = null)
+    public function getAtMap(int $id, ?string $parameter = null, mixed $default = null)
     {
         if (!isset($this->map)) {
             $this->createMap();
@@ -471,7 +471,7 @@ class WidgetRegistry extends Config
      * 
      * @return string|array
      */
-    public function getIcon($id, string $type = null): string|array
+    public function getIcon($id, ?string $type = null): string|array
     {
         // параметры конфигурации установленного виджета
         $params = is_array($id) ? $id : $this->getAt($id);
@@ -488,7 +488,7 @@ class WidgetRegistry extends Config
             if ($type === 'icon') {
                 return $iconNone;
             }
-            return null;
+            return '';
         }
         return $this->manager->getIcon($params['path'], $type);
     }
