@@ -60,7 +60,7 @@ class ArrayToXml
      * @param string $rootElement (по умолчанию '').
      * @param bool $replaceSpacesByUnderScoresInKeyNames Заменить пробелы на символы подчеркивания 
      *     в именах ключей (по умолчанию `true`).
-     * @param null $xmlEncoding Кодировка документа как часть объявления XML (по умолчанию ''). 
+     * @param string $xmlEncoding Кодировка документа как часть объявления XML (по умолчанию ''). 
      * @param string $xmlVersion Номер версии документа как часть объявления XML (по умолчанию '1.0'). 
      * @param array $domProperties
      * @param bool $xmlStandalone Указывает на то, что документ автономный. Принимает 
@@ -117,7 +117,7 @@ class ArrayToXml
      * @param string $rootElement (по умолчанию ''). 
      * @param bool $replaceSpacesByUnderScoresInKeyNames Заменить пробелы на символы подчеркивания 
      *     в именах ключей (по умолчанию `true`).
-     * @param null $xmlEncoding Кодировка документа как часть объявления XML (по умолчанию ''). 
+     * @param string $xmlEncoding Кодировка документа как часть объявления XML (по умолчанию ''). 
      * @param string $xmlVersion Номер версии документа как часть объявления XML (по умолчанию '1.0'). 
      * @param array $domProperties
      * @param bool $xmlStandalone Указывает на то, что документ автономный. Принимает 
@@ -355,9 +355,9 @@ class ArrayToXml
      * 
      * @param array $value
      * 
-     * @return false|array
+     * @return bool
      */
-    protected function isArrayAllKeySequential(array $value): false|array
+    protected function isArrayAllKeySequential(array $value): bool
     {
         if (!is_array($value)) {
             return false;
