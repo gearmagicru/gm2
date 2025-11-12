@@ -189,7 +189,7 @@ class Apache extends BaseObject implements PasswordInterface
      * 
      * @return string
      */
-    protected function apr1Md5(string $password, string $salt = null): string
+    protected function apr1Md5(string $password, ?string $salt = null): string
     {
         if (null === $salt) {
             $salt = Str::randomChars(8, self::ALPHA64);
