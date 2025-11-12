@@ -60,7 +60,7 @@ class MySqli extends AbstractPlatform
      * 
      * @param null|Connection $driver Соединение с помощью драйвера "MySqli" к серверу базы данных.
      */
-    public function __construct(Connection $driver = null)
+    public function __construct(?Connection $driver = null)
     {
         if ($driver) {
             $this->setDriver($driver);
