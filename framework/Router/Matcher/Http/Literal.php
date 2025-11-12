@@ -62,9 +62,9 @@ class Literal extends BaseMatcher
     /**
      * {@inheritdoc}
      * 
-     * @param string $route Cопоставляемый маршрут, например 'user/account' (по умолчанию `null`).
+     * @param null|string $route Cопоставляемый маршрут, например 'user/account' (по умолчанию `null`).
      */
-    public function match(string $route = null): mixed
+    public function match(?string $route = null): mixed
     {
         if ($route === null) {
             // сравнение маршрута
