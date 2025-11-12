@@ -59,12 +59,12 @@ class BaseVersion extends BaseObject
   /**
      * Возвращает дату выпуска версии в указанном формате.
      * 
-     * @param string|null $format Формат даты {@link https://www.php.net/manual/ru/datetime.format.php}.
+     * @param null|string $format Формат даты {@link https://www.php.net/manual/ru/datetime.format.php}.
      *    Если значение `null`, форматирование даты не будет.
      * 
      * @return string
      */
-    public function getDate(string $format = null): string
+    public function getDate(?string $format = null): string
     {
         if ($format === null) {
             return $this->date;
@@ -150,7 +150,7 @@ class BaseVersion extends BaseObject
      * @return bool Если значение `false`, указанный номер или название версии не 
      *     соответствует текущей.
      */
-    public function compare(string $name, string $number = null): bool
+    public function compare(string $name, ?string $number = null): bool
     {
         if ($name !== $this->name) {
             return false;
