@@ -29,7 +29,7 @@ class Container extends AbstractContainer
      * 
      * @throws Exception\InvalidArgumentException Имя, переданное контейнеру, недействительно.
      */
-    public function __construct(string $name = 'Default', Session $session = null)
+    public function __construct(string $name = 'Default', ?Session $session = null)
     {
         $this->setName($name);
         $this->setSession($session);
