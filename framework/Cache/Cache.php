@@ -134,6 +134,11 @@ class Cache extends Service
     public $path;
 
     /**
+     * @var null|HashTable
+     */
+    public $hash = null;
+
+    /**
      * {@inheritdoc}
      */
     public function getObjectName(): string
@@ -230,12 +235,13 @@ class Cache extends Service
      * Создаёт адаптер кэширования из указанного имени.
      *
      * @param string $name Имя адаптера кэширования.
+     * @param null|array $config Параметры адаптера.
      * 
      * @return \Symfony\Component\Cache\Adapter\AbstractAdapter
      * 
      * @throws Exception\InvalidArgumentException
      */
-    public function createAdapter(string $name, array $config = null)
+    public function createAdapter(string $name, ?array $config = null)
     {
         $config = $config === null ? $this->getAdapterConfig($name) : $config;
         if ($config === null) {
@@ -283,12 +289,12 @@ class Cache extends Service
      *
      * @param string $key Ключ, идентифицирующий кэшированное значение.
      * @param mixed $value Значение для кэширования.
-     * @param int $expiration Продолжительность, по умолчанию в секундах до истечения срока 
+     * @param null|int $expiration Продолжительность, по умолчанию в секундах до истечения срока 
      *    действия кэша. Если не установлен, используется значение по умолчанию {@see Cache:defaultExpiration}.
      * 
      * @return bool Если true, значение успешно сохранено в кэш.
      */
-    public function set(string $key, $value, int $expiry = null): bool
+    public function set(string $key, $value, ?int $expiry = null): bool
     {
         $key  = $this->buildKey($key);
         $item = $this->adapter()->getItem($key);
@@ -308,7 +314,7 @@ class Cache extends Service
      * Если кэш уже содержит такие ключи, существующие значения и срок 
      * годности будет заменен на новый соответственно.
      *
-     * @param mixed[string] $values Список строковых ключей с кэшированными значениями.
+     * @param mixed<string, string> $values Список строковых ключей с кэшированными значениями.
      * @param int $expiration Продолжительность (срок действия), по умолчанию в секундах до истечения срока 
      *    действия кэша. Если не установлен, используется значение по умолчанию {@see Cache:defaultExpiry}.
      * 
@@ -512,12 +518,12 @@ class Cache extends Service
      * @param callable $callback Callback-функция должна вернуть кэшируемое значение.
      *     Аргументы функции:
      *     - `$item` mixed, элемент адаптера кэша, используемый для манипуляции со значением ключа.
-     * @param int $expiration Продолжительность, по умолчанию в секундах до истечения срока 
+     * @param null|int $expiration Продолжительность, по умолчанию в секундах до истечения срока 
      *     действия кэша. Если не установлен, используется значение по умолчанию {@see Cache:defaultExpiry}.
      * 
      * @return mixed Значение хранящееся в кэше. Если false, значение нет в кэше или время истекло.
      */
-    public function getOrSet(string $key, callable $callback, int $expiry = null) // remember
+    public function getOrSet(string $key, callable $callback, ?int $expiry = null) // remember
     {
         if (!$this->enabled) {
             return $callback(null);
