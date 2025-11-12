@@ -61,7 +61,7 @@ class PluginRegistry extends Config
      * 
      * @param null|PluginManager $manager Менеджер плагинов.
      */
-    public function __construct(string $filename = null, bool $useSerialize = false, PluginManager $manager = null)
+    public function __construct(?string $filename = null, bool $useSerialize = false, ?PluginManager $manager = null)
     {
         parent::__construct($filename, $useSerialize);
 
@@ -162,7 +162,7 @@ class PluginRegistry extends Config
      * 
      * @return mixed
      */
-    public function getAt(string|int $id, string $parameter = null, mixed $default = null): mixed
+    public function getAt(string|int $id, ?string $parameter = null, mixed $default = null): mixed
     {
         if (is_numeric($id)) {
             return $this->getAtMap($id, $parameter, $default);
@@ -186,7 +186,7 @@ class PluginRegistry extends Config
      * 
      * @return mixed
      */
-    public function getAtMap(int $id, string $parameter = null, mixed $default = null)
+    public function getAtMap(int $id, ?string $parameter = null, mixed $default = null)
     {
         if (!isset($this->map)) {
             $this->createMap();
@@ -472,7 +472,7 @@ class PluginRegistry extends Config
      * 
      * @return string|array
      */
-    public function getIcon($id, string $type = null): string|array
+    public function getIcon($id, ?string $type = null): string|array
     {
         // параметры конфигурации установленного плагина
         $params = is_array($id) ? $id : $this->getAt($id);
@@ -489,7 +489,7 @@ class PluginRegistry extends Config
             if ($type === 'icon') {
                 return $iconNone;
             }
-            return null;
+            return '';
         }
         return $this->manager->getIcon($params['path'], $type);
     }
