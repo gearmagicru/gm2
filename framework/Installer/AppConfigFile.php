@@ -25,7 +25,7 @@ class AppConfigFile
      * 
      * @var string
      */
-    protected $smplFilename;
+    protected string $smplFilename;
 
     /**
      * Имя файла конфигурации, включая путь к устанавливаемому приложению.
@@ -35,7 +35,7 @@ class AppConfigFile
      * 
      * @var string
      */
-    protected string $filename;
+    protected string $filename = '';
 
     /**
      * Конструктор класса.
