@@ -340,14 +340,14 @@ class BaseProvider extends BaseObject
     /**
      * Возвращает параметры запроса (к поставщику данных) полученные из URL-адреса.
      * 
-     * @param int|null $page Порядковый номер страницы.
-     * @param int|null $limit Количество элементов на странице.
-     * @param string|null $sort Сортировка элементов.
+     * @param null|int $page Порядковый номер страницы.
+     * @param null|int $limit Количество элементов на странице.
+     * @param null|string $sort Сортировка элементов.
      * 
      * @return array Возвращаемые параметры могут иметь вид:
      *     `['page' => 1, 'limit' => 20, 'sort' => 'name,d']`.
      */
-    public function getQueryParams(int $page = null, int $limit = null, string $sort = null): array
+    public function getQueryParams(?int $page = null, ?int $limit = null, ?string $sort = null): array
     {
         $params = [];
         if ($this->pagination !== null) {
