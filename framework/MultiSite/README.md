@@ -1,7 +1,7 @@
-# Компонент MultiSite входит в состав GM Framework.
+# Пакет компонента MultiSite входит в состав GM Framework.
 
-Компонент MultiSite предоставляет возможность использовать одно приложение для нескольких сайтов.
+Пакет компонента MultiSite предоставляет возможность использовать одно приложение для нескольких сайтов.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-multisite)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-multisite/)
