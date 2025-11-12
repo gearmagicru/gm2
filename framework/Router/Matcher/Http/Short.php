@@ -46,7 +46,7 @@ class Short extends BaseMatcher
      * 
      * @param string $route Cопоставляемый маршрут, например 'user/account'.
      */
-    public function match(string $route = null): mixed
+    public function match(?string $route = null): mixed
     {
         if ($route === null) {
             $route = Gm::$app->urlManager->route;
