@@ -116,12 +116,12 @@ class AbstractMeta implements HelperInterface
      * 
      * @param string $name Название тега.
      * @param string|array $content Значение атрибута тега "content".
-     * @param string $prefix Префикс к имени тега. Если значение `null`, то будет 
+     * @param null|string $prefix Префикс к имени тега. Если значение `null`, то будет 
      *     применяться {@see AbstractMeta::$namePrefix} (по умолчанию `null`).
      * 
      * @return $this
      */
-    public function setName(string $name, string|array $content, string $prefix = null): static
+    public function setName(string $name, string|array $content, ?string $prefix = null): static
     {
         if ($content) {
             if ($prefix === null) {
