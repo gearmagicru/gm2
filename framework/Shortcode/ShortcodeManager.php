@@ -233,12 +233,12 @@ class ShortcodeManager extends Service
     /**
      * Возвращает имя текущего обработчика шорткодов.
      * 
-     * @param string|null $name Имя обработчика. Если значение `null`, использует 
+     * @param null|string $name Имя обработчика. Если значение `null`, использует 
      *     обработчик по умолчанию {@see ShortcodeManager::$handler}.
      * 
      * @return false|string Возвращает значение `false`, если обработчик не найден.
      */
-    public function getHandler(string $name = null): false|string
+    public function getHandler(?string $name = null): false|string
     {
         if ($name === null) {
             $name = $this->handler;
