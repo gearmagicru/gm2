@@ -179,11 +179,11 @@ class BaseSource
      * Конструктор класса.
      * 
      * @param array $baseConfig Базовая конфигурация источника сообщений.
-     * @param Language|null $language Используемый язык.
+     * @param null|Language $language Используемый язык.
      * 
      * @return void
      */
-    public function __construct(array $baseConfig, Language $language = null)
+    public function __construct(array $baseConfig, ?Language $language = null)
     {
         $this->language = $language ?: Gm::$app->language;
         $this->baseConfig = $baseConfig;
