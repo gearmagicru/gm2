@@ -92,7 +92,7 @@ class FontAwesome extends Service
     ];
 
     /**
-     * Карта css классов шрифта.
+     * Карта CSS классов шрифта.
      * 
      * @var array
      */
@@ -213,7 +213,7 @@ class FontAwesome extends Service
      * 
      * @return bool Если false, невозможно получить имя файла карты.
      */
-    public function loadMap(string $mapName): bool
+    public function loadMap(string $mapName): array|bool
     {
         if ($mapName === $this->mapName) {
             return $this->map;
