@@ -438,7 +438,7 @@ trait DataModelTrait
      * 
      * @return void
      */
-    public function deleteCacheTableRows(array $identifier = null): void
+    public function deleteCacheTableRows(?array $identifier = null): void
     {
         /** @var \Gm\Cache\CacheTable $table */
         if ($table = $this->getCacheTable()) {
