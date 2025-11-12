@@ -78,13 +78,13 @@ class Rbac extends AbstractIterator
      * Добавляет роль.
      * 
      * @param RoleInterface|string $child Дочерняя роль.
-     * @param array<int, RoleInterface|string> $parents Родительские роли.
+     * @param null|array<int, RoleInterface|string> $parents Родительские роли.
      * 
      * @return RoleInterface
      * 
      * @throws Exception\InvalidArgumentException Дочеряя роль должна быть строкой или интерфейсом.
      */
-    public function addRole(RoleInterface|string $child, array $parents = null): RoleInterface
+    public function addRole(RoleInterface|string $child, ?array $parents = null): RoleInterface
     {
         if (is_string($child)) {
             $child = new Role($child);
