@@ -1,7 +1,7 @@
-# Компонент Updates входит в состав GM Framework.
+# Пакет компонентов Updates входит в состав GM Framework.
 
-Компонент  предназначен для обновления расширений, плагинов, модулей приложения и файлов фреймворка с помощью пакетов.
+Пакет компонентов предназначен для обновления компонентов (модулей, расширений модулей, плагинов, виджетов) приложения и файлов фреймворка.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-updates)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-updates/)
