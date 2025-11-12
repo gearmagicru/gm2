@@ -135,12 +135,12 @@ class ViewsInfo
     /**
      * Возвращает имя файл - описания шаблона темы.
      * 
-     * @param string|null $themeName Название темы. Если значение `null`, 
+     * @param null|string $themeName Название темы. Если значение `null`, 
      *     используется текущая тема (по умолчанию `null`).
      * 
      * @return string|null Если значение `null`, указанная тема не существует.
      */
-    public function getFilename(string $themeName = null): ?string
+    public function getFilename(?string $themeName = null): ?string
     {
         $themeParams = $this->theme->get($themeName);
         if (empty($themeParams)) {
@@ -152,12 +152,12 @@ class ViewsInfo
     /**
      * Проверяет, существует ли файл описания шаблонов темы.
      * 
-     * @param string|null $themeName Название темы. Если значение `null`, 
+     * @param null|string $themeName Название темы. Если значение `null`, 
      *     используется текущая тема (по умолчанию `null`).
      * 
      * @return bool Если значение `false`, файл с описанием отсутствует.
      */
-    public function exists(string $themeName = null): bool
+    public function exists(?string $themeName = null): bool
     {
         $filename = $this->getFilename($themeName);
         if ($filename === null) {
@@ -169,14 +169,14 @@ class ViewsInfo
     /**
      * Возвращает описание файлов шаблонов расположенных в каталоге указанной темы.
      * 
-     * @param string|null $themeName Название темы. Если значение `null`, используется 
+     * @param null|string $themeName Название темы. Если значение `null`, используется 
      *     текущая тема (по умолчанию `null`).
      * @param null|string $side Сторона клиента: `BACKEND`, `FRONTEND` в описании файла шаблона.
      *     Если значение `null`, сторона определяется из текущей темы (по умолчанию `null`).
      * 
      * @return array
      */
-    public function themeFilesDescription(string $themeName = null, string $side = null): array
+    public function themeFilesDescription(?string $themeName = null, ?string $side = null): array
     {
         // поиск всех файлов (шаблонов) кроме backend
         /** @var \Symfony\Component\Finder\Finder $finder  */
@@ -249,11 +249,11 @@ class ViewsInfo
      * Определяет свойство "вид" (type) в описании шаблона по его имени.
      * 
      * @param string $name Имя шаблона.
-     * @param string $path Локальный путь к файлу шаблона (по умолчанию `null`).
+     * @param null|string $path Локальный путь к файлу шаблона (по умолчанию `null`).
      * 
      * @return string
      */
-    protected function defineType(string $name, string $path = null): string
+    protected function defineType(string $name, ?string $path = null): string
     {
         foreach ($this->types as $type => $params) {
             if (empty($params)) continue;
@@ -462,7 +462,7 @@ class ViewsInfo
      * 
      * @return array
      */
-    public function componentFilesDescription(string $themeName = null): array
+    public function componentFilesDescription(?string $themeName = null): array
     {
         $result = [];
         /** @var string $viewPath Абсолютный путь к шаблонам указанной темы */
@@ -508,7 +508,7 @@ class ViewsInfo
      * 
      * @return $this
      */
-    public function generateDescription(string $type = 'components', string $themeName = null, string $side = null)
+    public function generateDescription(string $type = 'components', ?string $themeName = null, ?string $side = null)
     {
         $description = [];
         switch ($type) {
@@ -530,7 +530,7 @@ class ViewsInfo
     /**
      * Загружает описание файлов шаблонов и их директорий указанной темы.
      * 
-     * @param string|null $themeName Название темы. Если знаяение `null`, 
+     * @param null|string $themeName Название темы. Если знаяение `null`, 
      *     используется текущая тема (по умолчанию `null`).
      * 
      * @return bool Возвращает значение `false`, если описание загрузить невозможно.
@@ -538,7 +538,7 @@ class ViewsInfo
      * @throws \Gm\Theme\Exception\ViewsNotFoundException
      * @throws \Gm\Theme\Exception\FileNotReadException
      */
-    public function load(string $themeName = null): bool
+    public function load(?string $themeName = null): bool
     {
         $this->filename = $this->getFilename($themeName);
         if ($this->filename === null) return false;
@@ -563,14 +563,14 @@ class ViewsInfo
     /**
      * Сохраняет описание шаблонов в каталоге указанной темы.
      * 
-     * @param string|null $themeName Название темы. Если значение `null`, используется 
+     * @param null|string $themeName Название темы. Если значение `null`, используется 
      *     текущая тема (по умолчанию `null`).
      * 
      * @return bool Возвращает значение `false`, если описание сохранить невозможно.
      * 
      * @throws \Gm\Theme\Exception\FileNotWriteException
      */
-    public function save(string $themeName = null): bool
+    public function save(?string $themeName = null): bool
     {
         if ($themeName !== null) {
             $filename = $this->getFilename($themeName);
@@ -593,11 +593,11 @@ class ViewsInfo
     /**
      * Возвращает переводчик шаблонов.
      * 
-     * @param string|null $locale Имя локали, например: 'ru_RU', 'en_GB.
+     * @param null|string $locale Имя локали, например: 'ru_RU', 'en_GB.
      * 
      * @return Translator
      */
-    public function getTranslator(string $locale = null): Translator
+    public function getTranslator(?string $locale = null): Translator
     {
         if (!isset($this->translator)) {
             $this->translator = new Translator($locale);
