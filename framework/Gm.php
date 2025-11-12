@@ -1264,4 +1264,24 @@ class Gm
         }
         return $type . $component . $controller . $action;
     }
+
+    /**
+     * Возвращает параметр или текущий язык.
+     * 
+     * @see \Gm\Language\Language::get()
+     * 
+     * @param null|string $name Имя параметра, например: 'tag', 'code', 'name', 
+     *     'shortName', 'country', 'slug', 'locale', 'alternative'. Если значение
+     *     `null`, то возвратит объект {@see \Gm\Language\Language} (по умолчанию `null`).
+     * @param mixed $default Значение по умолчанию, если параметр отсутстсвует у языка.
+
+     * @return mixed
+     */
+    public static function language(?string $param = null, mixed $default = null): mixed
+    {
+        if ($param === null)
+            return static::$app->language;
+        else
+            return static::$app->language->get($param, $default);
+    }
 }
