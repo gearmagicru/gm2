@@ -128,7 +128,7 @@ class ExtensionManager extends BaseManager
     /**
      * {@inheritdoc}
      */
-    public function selectAll(string $key = null, string|array $where = ''): array
+    public function selectAll(?string $key = null, string|array $where = ''): array
     {
         $extension = new Model\Extension();
         return $extension->fetchAll($key, $extension->maskedAttributes(), $where ?: null);
@@ -145,7 +145,7 @@ class ExtensionManager extends BaseManager
     /**
      * {@inheritdoc}
      */
-    public function selectNames(string $attribute = null, int $languageCode = null): ?array
+    public function selectNames(?string $attribute = null, ?int $languageCode = null): ?array
     {
         return (new Model\ExtensionLocale())->fetchNames($attribute, $languageCode);
     }
@@ -210,7 +210,7 @@ class ExtensionManager extends BaseManager
      * 
      * @return array
      */
-    public function collectRoutes(int $moduleId = null): array
+    public function collectRoutes(?int $moduleId = null): array
     {
         $result = [];
         if ($moduleId) {
