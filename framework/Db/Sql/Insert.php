@@ -163,11 +163,11 @@ class Insert extends AbstractSql
     /**
      * Возвращает необработанное состояние.
      *
-     * @param string|null $key Ключ: 'table', 'columns', 'values'.
+     * @param null|string $key Ключ: 'table', 'columns', 'values'.
      * 
      * @return mixed
      */
-    public function getRawState(string $key = null): mixed
+    public function getRawState(?string $key = null): mixed
     {
         $rawState = [
             'table'   => $this->table,
