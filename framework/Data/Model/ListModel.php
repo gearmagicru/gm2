@@ -11,9 +11,8 @@ namespace Gm\Data\Model;
 
 use Gm;
 use Gm\Exception;
-use Gm\Data\Model\DataModel;
-use Gm\Db\Adapter\Driver\AbstractCommand;
 use Gm\Db\Sql;
+use Gm\Db\Adapter\Driver\AbstractCommand;
 use Gm\Helper\Json;
 
 /**
