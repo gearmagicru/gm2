@@ -108,7 +108,7 @@ class Language extends Service
      * 
      * @var array|AvailableLanguage
      */
-    public array|AvailableLanguage $available;
+    public array|AvailableLanguage|null $available;
 
     /**
      * Если положение слага в начале URL-адреса.
@@ -397,7 +397,7 @@ class Language extends Service
      * 
      * @return bool Возвращает значение `true`, если язык по умолчанию является текущем.
      */
-    public function isDefault(string $slug = null): bool
+    public function isDefault(?string $slug = null): bool
     {
         if ($slug === null) {
             return $this->default === $this->slug;
@@ -470,14 +470,14 @@ class Language extends Service
     /**
      * Возвращает параметр или параметры текущего языка.
      * 
-     * @param string|null $name Имя параметра, например: 'tag', 'code', 'name', 
+     * @param null|string $name Имя параметра, например: 'tag', 'code', 'name', 
      *     'shortName', 'country', 'slug', 'locale', 'alternative'. Если значение
      *     `null`, то возвратит все параметры (по умолчанию `null`).
      * @param mixed $default Значение по умолчанию, если параметр отсутстсвует.
      * 
      * @return mixed Параметры или значение параметра языка.
      */
-    public function get(string $name = null, mixed $default = null): mixed
+    public function get(?string $name = null, mixed $default = null): mixed
     {
         if ($name !== null) {
             return $this->parameters[$name] ?? $default;
