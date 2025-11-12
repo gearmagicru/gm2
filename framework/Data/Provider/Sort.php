@@ -251,13 +251,13 @@ class Sort extends BaseObject
      * 
      * @see BaseProvider::getQueryParams()
      * 
-     * @param string|null $sort Сортировка элементов, например: 'name,d;index,a'.
+     * @param null|string $sort Сортировка элементов, например: 'name,d;index,a'.
      *     Если значение указано, то оно обязательно будет в возвращаемом параметре 
      *     (по умолчанию `null`).
      * 
      * @return array Возвращаемые параметры могут иметь вид: `['sort' => 'name,d;index,a']`.
      */
-    public function getQueryParams(string $sort = null): array
+    public function getQueryParams(?string $sort = null): array
     {
         $params = [];
         if ($sort)
