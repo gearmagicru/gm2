@@ -90,12 +90,12 @@ class BaseGenerator extends BaseObject
      * Возвращает случайное значение из указанного шаблона значений.
      * 
      * @param string $name Имя шаблона.
-     * @param string|null $subname Имя ключа (группы) произвольных значений шаблона 
+     * @param null|string $subname Имя ключа (группы) произвольных значений шаблона 
      *     (по умолчанию `null`).
      * 
      * @return mixed Если значение `false`, то невозможно получить генерируемое значение.
      */
-    public function random(string $name, string $subname = null): mixed
+    public function random(string $name, ?string $subname = null): mixed
     {
         if ($subname) {
             if (!isset($this->patterns[$name][$subname])) {
@@ -121,12 +121,12 @@ class BaseGenerator extends BaseObject
      * 
      * @param int $index Индекс массива произвольных значений шаблона.
      * @param string $name Имя шаблона.
-     * @param string|null $subname Имя ключа (группы) произвольных значений шаблона 
+     * @param null|string $subname Имя ключа (группы) произвольных значений шаблона 
      *     (по умолчанию `null`).
      * 
      * @return mixed Если значение `false`, невозможно получить значение.
      */
-    public function next(int &$index, string $name, string $subname = null): mixed
+    public function next(int &$index, string $name, ?string $subname = null): mixed
     {
         if ($subname) {
             if (!isset($this->patterns[$name][$subname])) {
