@@ -220,7 +220,7 @@ class ActionRecord extends BaseObject
      *     Если `null`, результатом будет индексированный массив записей (по умолчачнию `null`).
      * @param string|array<string, string> $order Порядок сортировки, например: 'field, ASC', 
      *     `['field' => 'ASC', 'field1' => 'DESC']` (по умолчанию '').
-     * @param array<int, int> $limit Количество записей выводимых в запросе со смещением, например `[10, 10]`.
+     * @param null|array<int, int> $limit Количество записей выводимых в запросе со смещением, например `[10, 10]`.
      * 
      * @return array
      */
@@ -228,9 +228,9 @@ class ActionRecord extends BaseObject
         string $tableName, 
         array $columns = ['*'],  
         PredicateInterface|Closure|string|array|null $where = null, 
-        string $fetchKey = null, 
+        ?string $fetchKey = null, 
         array|string $order = '',  
-        array $limit = null
+        ?array $limit = null
     ): array {
         /** @var Select $select */
         $select = $this->db->select($tableName);
