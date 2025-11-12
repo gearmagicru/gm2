@@ -447,7 +447,7 @@ class Installer extends BaseObject
      * 
      * @return string
      */
-    public function makeUrl(string $stepName = null): string
+    public function makeUrl(?string $stepName = null): string
     {
         $url = '/' . $this->route;
         if ($stepName) {
@@ -681,7 +681,7 @@ class Installer extends BaseObject
      * 
      * @return $this
      */
-    public function complete(string $stepName = null, bool $complete = true): static
+    public function complete(?string $stepName = null, bool $complete = true): static
     {
         if ($stepName === null) {
             $stepName = $this->getStepName(true);
