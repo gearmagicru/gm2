@@ -502,7 +502,7 @@ class Request extends Service
      * 
      * @param array|string|null $name Имя или массив имен параметров POST.
      * @param mixed $default Значение по умолчанию, возвращаемое если параметр не существует.
-     * @param mixed $type Тип возвращаемого значения (по умолчанию `null`). Если `null`, 
+     * @param null|string $type Тип возвращаемого значения (по умолчанию `null`). Если `null`, 
      *     приведение типа возвращаемого значения не будет. Допустимыми значениями:
      *     - 'boolean' или 'bool';
      *     - 'integer' или 'int';
@@ -513,7 +513,7 @@ class Request extends Service
      * 
      * @return mixed
      */
-    public function getPost(array|string $name = null, mixed $default = null, string $type = null): mixed
+    public function getPost(array|string|null $name = null, mixed $default = null, ?string $type = null): mixed
     {
         if ($name === null) {
             return $_POST;
@@ -553,7 +553,7 @@ class Request extends Service
      * 
      * @param array|string|null $name Имя или массив имен параметров GET.
      * @param mixed $default Значение по умолчанию, возвращаемое если параметр не существует.
-     * @param string $type Тип возвращаемого значения (по умолчанию `null`). Если `null`, 
+     * @param null|string $type Тип возвращаемого значения (по умолчанию `null`). Если `null`, 
      *     приведение типа возвращаемого значения не будет. Допустимыми значениями:
      *     - 'boolean' или 'bool';
      *     - 'integer' или 'int';
@@ -564,7 +564,7 @@ class Request extends Service
      * 
      * @return mixed
      */
-    public function getQuery(array|string $name = null, mixed $default = null, string $type = null): mixed
+    public function getQuery(array|string|null $name = null, mixed $default = null, ?string $type = null): mixed
     {
         if ($name === null) {
             return $_GET;
@@ -615,12 +615,12 @@ class Request extends Service
     /**
      * Проверяет параметр в массиве POST-запросов.
      * 
-     * @param string $name Имя параметра. Если имя не указано, проверяет пустой ли 
+     * @param null|string $name Имя параметра. Если имя не указано, проверяет пустой ли 
      *     массив POST (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function hasPost(string $name = null): bool
+    public function hasPost(?string $name = null): bool
     {
         return $name === null ? !empty($_POST) : isset($_POST[$name]);
     }
@@ -705,10 +705,12 @@ class Request extends Service
     /**
      * Проверяет, является ли текущий запрос AJAX (XMLHttpRequest) запросом.
      * 
+     * @param null|string $headerName
+     * 
      * @return bool Возвращает значение `true`, если запрос является запросом 
      *     AJAX (XMLHttpRequest).
      */
-    public function isAjax(string $headerName = null): bool
+    public function isAjax(?string $headerName = null): bool
     {
         if ($headerName) {
             return $this->_isAjax() && $this->getHeaders()->has($headerName);
@@ -1251,7 +1253,7 @@ class Request extends Service
         try {
             $token = Gm::$app->encrypter->encryptString($token);
         } catch (\Exception $e) {
-            return null;
+            return [];
         }
         $cookie = array_merge(
             $this->csrfCookie, [
@@ -1333,7 +1335,7 @@ class Request extends Service
     /**
      * Преобразует `$ _COOKIE` в коллекцию `CookieCollection`.
      * 
-     * @return array Cookie полученные из запроса.
+     * @return CookieCollection Cookie полученные из запроса.
      * 
      * @throws Exception\InvalidConfigException Если {@see Request::$cookieValidationKey} 
      *     не установлен, когда  {@see Request::$enableCookieValidation} true.
@@ -1396,7 +1398,7 @@ class Request extends Service
      * 
      * @see Request::validateParam()
      * 
-     * @param string $params Параметры в виде пар "ключ-значение".
+     * @param array $params Параметры в виде пар "ключ-значение".
      * @param bool $skip Если значение `true`, то игнорируется исключение вызванное 
      *     отсутствием метода проверка (по умоланию `false`).
      * 
