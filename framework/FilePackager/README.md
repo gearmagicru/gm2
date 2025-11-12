@@ -1,7 +1,7 @@
-# Компонент FilePackager входит в состав GM Framework.
+# Пакет компонента FilePackager входит в состав GM Framework.
 
 Упаковщик файлов в пакет GPK.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-filepackager)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-filepackager/)
