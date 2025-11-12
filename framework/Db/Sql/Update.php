@@ -160,11 +160,11 @@ class Update extends AbstractSql
     /**
      * Возвращает необработанное состояние.
      *
-     * @param string|null $key Ключ: 'emptyWhereProtection', 'table', 'set', 'where'.
+     * @param null|string $key Ключ: 'emptyWhereProtection', 'table', 'set', 'where'.
      * 
      * @return mixed
      */
-    public function getRawState(string $key = null): mixed
+    public function getRawState(?string $key = null): mixed
     {
         $rawState = [
             'emptyWhereProtection' => $this->emptyWhereProtection,
