@@ -1,7 +1,7 @@
-# Компонент License входит в состав GM Framework.
+# Пакет компонента License входит в состав GM Framework.
 
-Компонент управляет лицензией пользователя на редакцию веб-приложения с помощью API сервера GearMagic.
+Пакет компонента управляет лицензией пользователя на редакцию веб-приложения с помощью API сервера GearMagic.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-license)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-license/)
