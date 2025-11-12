@@ -24,9 +24,9 @@ interface SqlInterface
     /**
      * Получить строку SQL для оператора.
      *
-     * @param PlatformInterface|null $adapterPlatform
+     * @param null|PlatformInterface $adapterPlatform
      *
      * @return string
      */
-    public function getSqlString(PlatformInterface $adapterPlatform = null): string;
+    public function getSqlString(?PlatformInterface $adapterPlatform = null): string;
 }
