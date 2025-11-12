@@ -33,7 +33,7 @@ class Meta extends AbstractMeta
         if (isset($names['keywords']))
             $this->setName('keywords', $names['keywords']);
         if (isset($names['description']))
-            $this->setName('description', $names['keywords']);
+            $this->setName('description', $names['description']);
         return $this;
     }
 
@@ -137,11 +137,11 @@ class Meta extends AbstractMeta
     /**
      * Добавление метатега c названием "generator".
      *
-     * @param string|null $content Контент метатега (по умолчанию `null`).
+     * @param null|string $content Контент метатега (по умолчанию `null`).
      * 
      * @return $this
      */
-    public function generatorTag(string $content = null): static
+    public function generatorTag(?string $content = null): static
     {
         $useMeta = true;
         if ($content === null) {
@@ -257,11 +257,11 @@ class Meta extends AbstractMeta
     /**
      * Устанавливает тег CSRF.
      * 
-     * @param string|null $token Токен для проверки CSRF (по умолчанию `null`).
+     * @param null|string $token Токен для проверки CSRF (по умолчанию `null`).
      * 
      * @return void
      */
-    public function csrfTokenTag(string $token = null)
+    public function csrfTokenTag(?string $token = null)
     {
         /** @var \Gm\Http\Request $request */
         $request = Gm::$services->getAs('request');
