@@ -354,7 +354,7 @@ class Session extends Service implements \IteratorAggregate, \ArrayAccess, \Coun
      * 
      * @return bool
      */
-    public function useTransparentSessionId(bool $value = null): bool
+    public function useTransparentSessionId(?bool $value = null): bool
     {
         if ($value === null) {
             return ini_get('session.use_trans_sid') == 1;
