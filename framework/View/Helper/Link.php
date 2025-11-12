@@ -38,6 +38,16 @@ class Link implements HelperInterface
     protected Favicon $favicon;
 
     /**
+     * @var array<string, string>
+     */
+    public array $files = [];
+
+    /**
+     * @var array<string, string>
+     */
+    public array $comments = [];
+
+    /**
      * Базовый (абсолютный) URL к темам
      * имеет вид: "<абсолютный URL приложения/> <локальный путь к темам/>".
      * 
