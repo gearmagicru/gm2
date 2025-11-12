@@ -110,7 +110,7 @@ class AccessRules extends BaseObject
      * Конструктор класса.
      * 
      * @param array $rules Правила доступа.
-     * @param Module $module Модуль.
+     * @param BaseModule $module Модуль.
      * @param string $controllerName Имя контроллера для которого выполняется проверка доступа. 
      * @param string $actionName Имя действия для которого выполняется проверка доступа.
      * 
