@@ -1,7 +1,7 @@
-# Компонент ModuleManager входит в состав GM Framework.
+# Пакет компонента ModuleManager входит в состав GM Framework.
 
-Компонент менеджера модулей позволяет проектировать модульную архитектуру приложений PHP.
+Пакет компонента Менеджера модулей позволяет проектировать модульную архитектуру приложения PHP.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-modulemanager)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-modulemanager/)
