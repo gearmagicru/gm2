@@ -1,7 +1,7 @@
-# Компонент Mail входит в состав GM Framework.
+# Пакет компонента Mail входит в состав GM Framework.
 
-Компонент Mail помогает отправлять электронные письма.
+Пакет компонента Mail позволяет отправлять электронные письма.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-mail)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-mail/)
