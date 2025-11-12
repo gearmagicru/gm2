@@ -307,11 +307,11 @@ class Segments extends BaseMatcher
     /**
      * {@inheritdoc}
      * 
-     * @param string $route Cопоставляемый маршрут, например 'user/account' (по умолчанию `null`).
-     * @param int $pathOffset Cмещение относительно маршрута, часть которого будет 
+     * @param null|string $route Cопоставляемый маршрут, например 'user/account' (по умолчанию `null`).
+     * @param null|int $pathOffset Cмещение относительно маршрута, часть которого будет 
      *     сопоставляться (по умолчанию `null`).
      */
-    public function match(string $route = null, int $pathOffset = null): mixed
+    public function match(?string $route = null, ?int $pathOffset = null): mixed
     {
         if ($route === null) {
             $route = Gm::$app->urlManager->route;
