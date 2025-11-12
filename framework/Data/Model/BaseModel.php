@@ -39,11 +39,11 @@ class BaseModel extends BaseObject
      * Сбрасывает автоинкремент первичного ключа таблицы к указанному значению.
      * 
      * @param int|string $increment Значение автоинкремента первичного ключа.
-     * @param string $tableName Имя таблицы (по умолчанию `null`).
+     * @param null|string $tableName Имя таблицы (по умолчанию `null`).
      * 
      * @return void
      */
-    public function resetIncrement(int|string $increment = 1, string $tableName = null): void
+    public function resetIncrement(int|string $increment = 1, ?string $tableName = null): void
     {
         $this->getDb()
             ->createCommand()
@@ -55,12 +55,12 @@ class BaseModel extends BaseObject
      * Удаляет записи из таблицы.
      * 
      * @param Where|Closure|string|array $where Условие выполнения запроса.
-     * @param string $table Имя таблицы (по умолчанию `null`).
+     * @param null|string $table Имя таблицы (по умолчанию `null`).
      * 
      * @return false|int Если значение `false`, ошибка выполнения запроса. Иначе, 
      *     количество удалённых записей.
      */
-    public function deleteRecord(Where|Closure|string|array $where, string $tableName = null): false|int
+    public function deleteRecord(Where|Closure|string|array $where, ?string $tableName = null): false|int
     {
         /** @var AbstractCommand $command */
         $command = $this->getDb()
@@ -74,16 +74,16 @@ class BaseModel extends BaseObject
      * Обновляет записи таблицы.
      * 
      * @param array $columns Cтолбцы таблицы с их значениями в виде пар "ключ - значение".
-     * @param Where|Closure|string|array $where Условие выполнения запроса (по умолчанию `null`).
-     * @param string $table Имя таблицы (по умолчанию `null`).
+     * @param Where|Closure|string|array|null $where Условие выполнения запроса (по умолчанию `null`).
+     * @param null|string $table Имя таблицы (по умолчанию `null`).
      * 
      * @return false|int Если значение `false`, ошибка выполнения запроса. Иначе количество 
      *     обновленных записей.
      */
     public function updateRecord(
         array $columns, 
-        Where|Closure|string|array $where = null, 
-        string $tableName = null
+        Where|Closure|string|array|null $where = null, 
+        ?string $tableName = null
     ): false|int
     {
         /** @var AbstractCommand $command */
@@ -98,11 +98,11 @@ class BaseModel extends BaseObject
      * Добавляет запись.
      * 
      * @param array $columns Имена столбцов таблицы с их значениями в виде пар "ключ - значение".
-     * @param string $table Имя таблицы (по умолчанию `null`).
+     * @param null|string $table Имя таблицы (по умолчанию `null`).
      * 
      * @return int|string Идентификатор добавленной записи.
      */
-    public function insertRecord(array $columns, string $tableName = null): int|string
+    public function insertRecord(array $columns, ?string $tableName = null): int|string
     {
         /** @var Adapter $db */
         $db = $this->getDb();
