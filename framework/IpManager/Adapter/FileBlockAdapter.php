@@ -44,7 +44,7 @@ class FileBlockAdapter extends AbstractBlockAdapter
     /**
      * {@inheritdoc}
      */
-    public function add(array $ipInfo, string $ipAddress = null): bool
+    public function add(array $ipInfo, ?string $ipAddress = null): bool
     {
         $ipInfo['ip'] = $ipAddress ?: $this->ipAddress;
         $id = ip2long($ipInfo['ip']);
@@ -58,7 +58,7 @@ class FileBlockAdapter extends AbstractBlockAdapter
     /**
      * {@inheritdoc}
      */
-    public function update(array $ipInfo, string $ipAddress = null): bool
+    public function update(array $ipInfo, ?string $ipAddress = null): bool
     {
         $this->resetError();
         /** @var \Gm\Db\Adapter\Driver\AbstractCommand $command */
@@ -93,7 +93,7 @@ class FileBlockAdapter extends AbstractBlockAdapter
     /**
      * {@inheritdoc}
      */
-    public function remove(string $ipAddress = null): bool
+    public function remove(?string $ipAddress = null): bool
     {
         $this->resetError();
         /** @var \Gm\Db\Adapter\Driver\AbstractCommand $command */
@@ -114,7 +114,7 @@ class FileBlockAdapter extends AbstractBlockAdapter
     /**
      * {@inheritdoc}
      */
-    public function get(string $ipAddress = null): mixed
+    public function get(?string $ipAddress = null): mixed
     {
         /** @var \Gm\Db\Adapter\Driver\AbstractCommand $command */
         $select = Gm::$app->db
