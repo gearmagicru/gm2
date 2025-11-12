@@ -27,7 +27,7 @@ class Cookie extends SymfonyCookie
      *
      * @param array $config Параметры конфигурации.
      * 
-     * @return void
+     * @return Cookie
      */
     public static function createWith(array $config): Cookie
     {
