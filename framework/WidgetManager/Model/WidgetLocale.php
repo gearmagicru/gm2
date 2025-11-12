@@ -64,7 +64,7 @@ class WidgetLocale extends ActiveRecord
      * 
      * @return null|ActiveRecord Активная запись при успешном запросе, иначе `null`.
      */
-    public function get(int $widgetId, int $languageId = null): ?ActiveRecord
+    public function get(int $widgetId, ?int $languageId = null): ?ActiveRecord
     {
         return $this->selectOne([
             'widget_id'   => $widgetId,
@@ -120,7 +120,7 @@ class WidgetLocale extends ActiveRecord
      * {@inheritdoc}
      */
     public function fetchAll(
-        string $fetchKey = null, 
+        ?string $fetchKey = null, 
         array $columns = ['*'], 
         Where|Closure|string|array|null $where = null, 
         string|array|null $order = null
@@ -143,15 +143,15 @@ class WidgetLocale extends ActiveRecord
     /**
      * Возвращает имена виджетов.
      * 
-     * @param string $attribute Название атрибута ('name', 'description') возвращаемого 
+     * @param null|string $attribute Название атрибута ('name', 'description') возвращаемого 
      *     для каждого идентификатора. Если значение `null`, возвратит все атрибуты 
      *     (по умолчанию `null`).
-     * @param int $languageCode Идентификатор языка. Если значение `null`, то идентификатор 
+     * @param null|int $languageCode Идентификатор языка. Если значение `null`, то идентификатор 
      *     текущего языка (по умолчанию `null`).
      * 
      * @return array<int, array{name:string, description:string}>
      */
-    public function fetchNames(string $attribute = null, int $languageCode = null): array
+    public function fetchNames(?string $attribute = null, ?int $languageCode = null): array
     {
         $db = $this->getDb();
         $sql = 'SELECT IF(`l`.`name` IS NULL, `m`.`name`, `l`.`name`) `name`,  '
