@@ -110,17 +110,17 @@ class Headers implements \IteratorAggregate
      * Устанавливает набор HTTP-заголовков по умолчанию для загрузки файлов.
      *
      * @param string $attachmentName Имя прикрепляемого файла.
-     * @param string $mimeType MIME-тип ответа. Если значение `null`, заголовок 
+     * @param null|string $mimeType MIME-тип ответа. Если значение `null`, заголовок 
      *     'Content-Type' не будет установлен (по умолчанию `null`).
      * @param bool $inline Устанавливает, должен ли браузер открывать файл в окне 
      *     браузера. Если значение `false`, то  появится диалоговое окно загрузки.
      *     (по умолчанию `false`).
-     * @param int $contentLength Длина загружаемого файла в байтах. Если значение `null`, 
+     * @param null|int $contentLength Длина загружаемого файла в байтах. Если значение `null`, 
      *     то заголовок 'Content-Length' не будет установлен. (по умолчанию `null`).
      * 
      * @return $this
      */
-    public function setDownload(string $attachmentName, string $mimeType = null, bool $inline = false, int $contentLength = null): static
+    public function setDownload(string $attachmentName, ?string $mimeType = null, bool $inline = false, ?int $contentLength = null): static
     {
         $disposition = $this->getDispositionValue($inline ? 'inline' : 'attachment', $attachmentName);
         $this
@@ -144,12 +144,12 @@ class Headers implements \IteratorAggregate
      * Возвращает значение параметра заголовка.
      * 
      * @param string $name Имя параметра.
-     * @param string|null $default Значение по умолчнаию.
+     * @param null|string $default Значение по умолчнаию.
      * @param bool $сouple Если true, возвращает строку вида "параметр: значение", иначе значение параметра.
      * 
      * @return string|null
      */
-    public function get(string $name, string $default = null, bool $сouple = false): ?string
+    public function get(string $name, ?string $default = null, bool $сouple = false): ?string
     {
         $name = strtolower($name);
         if (isset($this->headers[$name])) {
@@ -191,12 +191,12 @@ class Headers implements \IteratorAggregate
      * Возвращает оригинальное значение параметра заголовка.
      * 
      * @param string $name Имя параметра.
-     * @param string|null $default Значение по умолчнаию.
+     * @param null|string $default Значение по умолчнаию.
      * @param bool $сouple Если true, возвращает строку вида "параметр: значение", иначе значение параметра.
      * 
      * @return string|null
      */
-    public function getOriginal(string $name, string $default = null, bool $сouple = false): ?string
+    public function getOriginal(string $name, ?string $default = null, bool $сouple = false): ?string
     {
         if (isset($this->headers[$name])) {
             $value = $this->headers[$name];
