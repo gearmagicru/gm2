@@ -1,7 +1,7 @@
-# Компонент Exception входит в состав GM Framework.
+# Пакет компонентов Exception входит в состав GM Framework.
 
 Gm\Exception предоставляет ряд предопределённых исключений.
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-exception)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-exception/)
