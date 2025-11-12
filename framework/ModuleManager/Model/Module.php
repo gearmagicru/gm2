@@ -126,7 +126,7 @@ class Module extends ActiveRecord
      * {@inheritdoc}
      */
     public function fetchAll(
-        string $fetchKey = null, 
+        ?string $fetchKey = null, 
         array $columns = ['*'], 
         Where|Closure|string|array|null $where = null, 
         string|array|null $order = null
