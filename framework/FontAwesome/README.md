@@ -1,7 +1,7 @@
-# Компонент FontAwesome входит в состав GM Framework.
+# Пакет компонентов FontAwesome входит в состав GM Framework.
 
-Компонент предназначен для работы с css стилем шрифта [FontAwesome](https://fontawesome.com/).
+Пакет компонентов предназначен для работы с css стилем шрифта [FontAwesome](https://fontawesome.com/).
 
 ## Ресурсы
-- [GM Framework](https://apps.gearmagic.ru/framework)
-- [Документация](https://apps.gearmagic.ru/component/framework-fontawesome)
+- [GM Framework](https://gearmagic.ru/framework/)
+- [Документация](https://gearmagic.ru/package/framework-fontawesome/)
