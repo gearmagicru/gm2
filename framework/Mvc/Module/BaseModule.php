@@ -415,6 +415,7 @@ class BaseModule extends Component
      */
     public function storageGet(string $key, mixed $default = null): mixed
     {
+        return null;
     }
 
     /**
@@ -589,11 +590,11 @@ class BaseModule extends Component
     }
 
     /**
-     * @param string|null $name
+     * @param null|string $name
      * 
      * @return BaseModule|null
      */
-    public function extension(string $name = null): ?BaseModule
+    public function extension(?string $name = null): ?BaseModule
     {
         if ($name === null) {
             return $this->extension;
@@ -814,12 +815,12 @@ class BaseModule extends Component
      * 
      * @see BaseModule::getController()
      * 
-     * @param string $name Идентификатор контроллера или короткое имя его класса. 
+     * @param null|string $name Идентификатор контроллера или короткое имя его класса. 
      *     Если `null`, возвращает текущий контроллер {@see BaseModule::$controller}.
      * 
      * @return BaseController|null Если `null`, контроллер не создан.
      */
-    public function controller(string $name = null): ?BaseController
+    public function controller(?string $name = null): ?BaseController
     {
         if ($name === null) {
             return $this->controller;
@@ -1017,14 +1018,14 @@ class BaseModule extends Component
     /**
      * Возвращает значение параметра конфигурации модуля.
      * 
-     * @param string $name Имя параметра. Если значение `null`, то результатом будет 
+     * @param null|string $name Имя параметра. Если значение `null`, то результатом будет 
      *     {@see BaseModule::$config()} (по умолчанию `null`).
      * @param mixed $default Значение по умолчанию если параметр не существует 
      *     (по умолчанию `[]`).
      * 
      * @return mixed
      */
-    public function getConfigParam(string $name = null, mixed $default = []): mixed
+    public function getConfigParam(?string $name = null, mixed $default = []): mixed
     {
         if (!isset($this->config)) {
             $this->config = $this->getConfig();
