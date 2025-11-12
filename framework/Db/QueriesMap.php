@@ -297,13 +297,13 @@ class QueriesMap extends BaseObject
     /**
      * Возврашает раздел или всю карту SQL-запросов.
      * 
-     * @param string|null $name Имя раздела карты. Если значение `null`, возвратит 
+     * @param null|string $name Имя раздела карты. Если значение `null`, возвратит 
      *     всю карты (по умолчанию `null`).
      * 
      * @return array|null Возврашает значение `null`, если указан раздел, а он не 
      *     существует.
      */
-    public function getMap(string $name = null): ?array
+    public function getMap(?string $name = null): ?array
     {
         if ($name === null)
             return $this->map;
@@ -515,14 +515,14 @@ class QueriesMap extends BaseObject
      * @param string $action Имя действия, например: 'truncate', 'delete', 'insert', 
      *     'create', 'drop'.
      * 
-     * @param array|null $queries Имена таблиц с параметрами, передаваемые в метод 
+     * @param null|array $queries Имена таблиц с параметрами, передаваемые в метод 
      *     действия (по умолчанию `null`).
      * 
      * @return bool Возвращает значение `false`, если действия нет на карте SQL-запросов.
      * 
      * @throws CommandException Невозможно выполнить инструкцию SQL.
      */
-    public function doAction(string $action, array $queries = null): bool
+    public function doAction(string $action, ?array $queries = null): bool
     {
         if ($queries === null) {
             $queries = $this->map[$action] ?? null;
