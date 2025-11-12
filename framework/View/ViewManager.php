@@ -107,7 +107,7 @@ class ViewManager extends BaseObject
      * @param \Gm\Mvc\Module\BaseModule|null $module Модуль, которому принадлежит 
      *     представление. (по умолчанию `null`).
      */
-    public function __construct(array $config = [], Module|Extension $module = null)
+    public function __construct(array $config = [], Module|Extension|null $module = null)
     {
         parent::__construct($config);
 
