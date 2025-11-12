@@ -69,14 +69,14 @@ class FilesystemManager extends Service
      * 
      * @see FilesystemManager::get()
      * 
-     * @param string|null $name Имя диска. Если имя не указано, применяется имя диска 
+     * @param null|string $name Имя диска. Если имя не указано, применяется имя диска 
      *     по умолчанию.
      * 
      * @return LeagueFs
      * 
      * @throws Exception\InvalidArgumentException Диск по умолчанию не найден.
      */
-    public function disk(string $name = null): LeagueFs
+    public function disk(?string $name = null): LeagueFs
     {
         $name = $name ?: $this->getDefaultDisk();
         if ($name === null) {
