@@ -165,7 +165,7 @@ class PackageManager extends Service
         $id = $params['id'] ?? $this->genPackageId();
         // имя приложения
         $name = $params['name'] ?? null;
-        if ($name === null) return null;
+        if ($name === null) return '';
 
         $name = strtolower($name);
         $name = str_replace(' ', '.', $name);
@@ -257,12 +257,12 @@ class PackageManager extends Service
     /**
      * Возвращает количество пакетов обновлений (из базы данных) с указанным статусом.
      * 
-     * @param string|null $status Статус пакета: "installed", "uploaded".
+     * @param null|string $status Статус пакета: "installed", "uploaded".
      *    Если null, все пакеты обновлений.
      * 
      * @return int Если значение `null`, информация о пакете не найдена.
      */
-    public function getCountPackages(string $status = null): int
+    public function getCountPackages(?string $status = null): int
     {
         /** @var \Gm\Db\Sql\Select $select */
         $select = Gm::$app->db->select($this->tableName);
