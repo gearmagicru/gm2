@@ -70,7 +70,7 @@ class InstallerRouter
      * 
      * @return bool Возвращает значение `true`, если это маршрут установщика.
      */
-    public function isMatch(string $route = null): bool
+    public function isMatch(?string $route = null): bool
     {
         if ($route === null) {
             $route = $this->match;
