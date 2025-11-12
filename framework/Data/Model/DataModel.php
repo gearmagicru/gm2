@@ -28,7 +28,7 @@ class DataModel extends BaseModel
     /**
      * {@inheritdoc}
      */
-    public function deleteRecord(Where|Closure|string|array $where, string $tableName = null): false|int
+    public function deleteRecord(Where|Closure|string|array $where, ?string $tableName = null): false|int
     {
         return parent::deleteRecord($where, $tableName ?: $this->dataManager->tableName);
     }
@@ -37,14 +37,14 @@ class DataModel extends BaseModel
      * Удаляет записи по значению первичного ключа таблицы.
      * 
      * @param mixed $value Значение.
-     * @param string $primaryKey Первичный ключ.
-     * @param string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
+     * @param null|string $primaryKey Первичный ключ.
+     * @param null|string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * 
      * @return false|int Если значение `false`, ошибка выполнения запроса. Иначе, 
      *     количество удалённых записей.
      */
-    public function deleteByPk(mixed $value, string $primaryKey = null, string $tableName = null): false|int
+    public function deleteByPk(mixed $value, ?string $primaryKey = null, ?string $tableName = null): false|int
     {
         $primaryKey = $primaryKey ?: $this->dataManager->primaryKey;
         return $this->deleteRecord(
@@ -56,13 +56,13 @@ class DataModel extends BaseModel
     /**
      * Удаляет записи с условием.
      * 
-     * @param string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
+     * @param null|string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * 
      * @return false|int Если значение `false`, ошибка выполнения запроса. Иначе, 
      *     количество удалённых записей
      */
-    public function deleteAll(string $tableName = null): false|int
+    public function deleteAll(?string $tableName = null): false|int
     {
         return $this->deleteRecord([], $tableName);
     }
@@ -72,12 +72,12 @@ class DataModel extends BaseModel
      * 
      * @param array $dependencies Зависимые записи.
      * @param array $condition Условие удаление записей в зависимых таблицах.
-     * @param string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
+     * @param null|string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      *
      * @return void
      */
-    public function deleteDependencies(array $dependencies, array $condition = [], string $tableName = null): void
+    public function deleteDependencies(array $dependencies, array $condition = [], ?string $tableName = null): void
     {
         if (empty($dependencies)) return;
 
@@ -157,7 +157,7 @@ class DataModel extends BaseModel
     /**
      * {@inheritdoc}
      */
-    public function resetIncrement(int|string $increment = 1, string $tableName = null): void
+    public function resetIncrement(int|string $increment = 1, ?string $tableName = null): void
     {
         parent::resetIncrement($increment, $tableName ?: $this->dataManager->tableName);
     }
@@ -167,8 +167,8 @@ class DataModel extends BaseModel
      */
     public function updateRecord(
         array $columns, 
-        Where|Closure|string|array $where = null, 
-        string $tableName = null
+        Where|Closure|string|array|null $where = null, 
+        ?string $tableName = null
     ): false|int
     {
         return parent::updateRecord($columns, $where, $tableName ?: $this->dataManager->tableName);
@@ -179,8 +179,8 @@ class DataModel extends BaseModel
      * 
      * @param array $columns Cтолбцы таблицы с их значениями в виде пар "ключ - значение".
      * @param mixed $value Значениям первичного ключа.
-     * @param string $primaryKey Первичный ключ.
-     * @param string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
+     * @param null|string $primaryKey Первичный ключ.
+     * @param null|string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * 
      * @return false|int Если значение `false`, ошибка выполнения запроса. Иначе количество 
@@ -189,8 +189,8 @@ class DataModel extends BaseModel
     public function updateByPk(
         array $columns, 
         mixed $value, 
-        string $primaryKey = null, 
-        string $tableName = null
+        ?string $primaryKey = null, 
+        ?string $tableName = null
     ): false|int
     {
         $primaryKey = $primaryKey ?: $this->dataManager->primaryKey;
@@ -205,13 +205,13 @@ class DataModel extends BaseModel
      * Обновляет все записи.
      * 
      * @param array $columns Cтолбцы таблицы с их значениями в виде пар "ключ - значение".
-     * @param string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
+     * @param null|string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * 
      * @return false|int Если значение `false`, ошибка выполнения запроса. Иначе количество 
      *     обновленных записей.
      */
-    public function updateAll(array $columns, string $tableName = null): false|int
+    public function updateAll(array $columns, ?string $tableName = null): false|int
     {
         return $this->updateRecord($columns, [], $tableName ?: $this->dataManager->tableName);
     }
@@ -219,7 +219,7 @@ class DataModel extends BaseModel
     /**
      * {@inheritdoc}
      */
-    public function insertRecord(array $columns, string $tableName = null): int|string
+    public function insertRecord(array $columns, ?string $tableName = null): int|string
     {
         return parent::insertRecord($columns, $tableName ?: $this->dataManager->tableName);
     }
@@ -230,7 +230,7 @@ class DataModel extends BaseModel
      * @see \Gm\Db\Adapter\Driver\AbstractCommand::fetchAll()
      * 
      * @param Where|Closure|string|array $condition Условие выполнения запроса.
-     * @param string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
+     * @param null|string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * @param array $columns Столбцы таблицы выборки. Если столбцы выборки не указаны, 
      *     то по умолчанию будет значение `['*']` (означающее "все столбцы"). 
@@ -239,7 +239,7 @@ class DataModel extends BaseModel
      */
     public function selectByCondition(
         Where|Closure|string|array $condition, 
-        string $tableName = null, 
+        ?string $tableName = null, 
         array $columns = ['*']
     )
     {
@@ -260,7 +260,7 @@ class DataModel extends BaseModel
      * @see \Gm\Db\Adapter\Driver\AbstractCommand::fetchAll()
      * 
      * @param Where|Closure|string|array $condition Условие выполнения запроса.
-     * @param string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
+     * @param null|string $table Имя таблицы. Если значение `null`, тогда имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * @param array $columns Столбцы таблицы выборки. Если столбцы выборки не указаны, 
      *     то по умолчанию будет значение `['*']` (означающее "все столбцы"). 
@@ -269,7 +269,7 @@ class DataModel extends BaseModel
      */
     public function selectOneByCondition(
         Where|Closure|string|array $condition, 
-        string $tableName = null, 
+        ?string $tableName = null, 
         array $columns = ['*']
     )
     {
@@ -283,13 +283,13 @@ class DataModel extends BaseModel
      * @see DataModel::selectByCondition()
      * 
      * @param mixed $value Значение первичного ключа.
-     * @param string $primaryKey Первичный ключ.
-     * @param string $table Имя таблицы. Если значение `null`, то имя таблицы должно 
+     * @param null|string $primaryKey Первичный ключ.
+     * @param null|string $table Имя таблицы. Если значение `null`, то имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * 
      * @return array<int|string, array|object>
      */
-    public function selectByPk(mixed $value, string $primaryKey = null, string $tableName = null)
+    public function selectByPk(mixed $value, ?string $primaryKey = null, ?string $tableName = null)
     {
         if ($primaryKey === null) {
             $primaryKey = $this->dataManager->primaryKey;
@@ -302,12 +302,12 @@ class DataModel extends BaseModel
      * 
      * @see DataModel::selectByCondition()
      * 
-     * @param string $table Имя таблицы. Если значение `null`, то имя таблицы должно 
+     * @param null|string $table Имя таблицы. Если значение `null`, то имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * 
      * @return array<int|string, array|object>
      */
-    public function selectAll(string $tableName = null): array
+    public function selectAll(?string $tableName = null): array
     {
         return $this->selectByCondition([], $tableName);
     }
@@ -315,12 +315,12 @@ class DataModel extends BaseModel
     /**
      * Возвращает количество записей в таблице.
      * 
-     * @param string $table Имя таблицы. Если значение `null`, то имя таблицы должно 
+     * @param null|string $table Имя таблицы. Если значение `null`, то имя таблицы должно 
      *     быть указано в менеджере данных (по умолчанию `null`).
      * 
      * @return int
      */
-    public function selectCount(string $tableName = null): int
+    public function selectCount(?string $tableName = null): int
     {
         /** @var Adapter $db  */
         $db = $this->getDb();
