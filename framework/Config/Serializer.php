@@ -54,14 +54,14 @@ class Serializer extends BaseConfig
     /**
      * Загрузки файла конфигурации.
      * 
-     * @param string $filename Имя файла конфигурации, если значение `null` используется 
+     * @param null|string $filename Имя файла конфигурации, если значение `null` используется 
      *    текущий файл конфигурации {@see Serializer::$filename} (по умолчанию `null`).
      * 
      * @return $this
      * 
      * @throws Exception\FormatException Невозможно выполнить сериализацию.
      */
-    public function load(string $filename = null)
+    public function load(?string $filename = null)
     {
         if ($filename === null) {
             $filename = $this->filename;
@@ -79,9 +79,11 @@ class Serializer extends BaseConfig
     /**
      * Проверяет существование файла конфигурации.
      * 
+     * @param null|string $filename Имя файла.
+     * 
      * @return bool
      */
-    public function exists(string $filename = null): bool
+    public function exists(?string $filename = null): bool
     {
         if ($filename === null) {
             $filename = $this->filename;
@@ -92,14 +94,14 @@ class Serializer extends BaseConfig
     /**
      * Сохраняет параметры конфигурации в файл.
      * 
-     * @param string $filename Имя файла конфигурации, если значение `null` используется 
+     * @param null|string $filename Имя файла конфигурации, если значение `null` используется 
      *    текущий файл конфигурации {@see Serializer::$filename} (по умолчанию `null`).
      * 
      * @return $this
      * 
      * @throws Exception\FormatException Невозможно выполнить сериализацию.
      */
-    public function save(string $filename = null)
+    public function save(?string $filename = null): static
     {
         if ($filename === null) {
             $filename = $this->filename;
@@ -120,14 +122,14 @@ class Serializer extends BaseConfig
     /**
      * Создаёт файл конфигурации с текущими параметрами.
      * 
-     * @param string $filename Имя файла конфигурации, если значение `null` используется 
+     * @param null|string $filename Имя файла конфигурации, если значение `null` используется 
      *    текущий файл конфигурации {@see Serializer::$filename} (по умолчанию `null`).
      * 
      * @return $this
      * 
      * @throws Exception\FormatException Невозможно выполнить сериализацию.
      */
-    public function create(string $filename = null)
+    public function create(?string $filename = null): static
     {
         if ($filename === null) {
             $filename = $this->filename;
