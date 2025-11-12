@@ -92,11 +92,11 @@ class Escaper
      * the current object. Если версия PHP 5.4, устанавливается дополнительный флаг ENT_SUBSTITUTE
      * для вызова htmlspecialchars().
      *
-     * @param string $encoding
+     * @param null|string $encoding
      * 
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(string $encoding = null)
+    public function __construct(?string $encoding = null)
     {
         if ($encoding !== null) {
             $encoding = (string) $encoding;
