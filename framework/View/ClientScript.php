@@ -684,12 +684,12 @@ class ClientScript extends Service
     /**
      * Возвращает HTML тег "<title>".
      * 
-     * @param string|null $title Заголовок (по умолчанию `null`).
+     * @param null|string $title Заголовок (по умолчанию `null`).
      * @param string $pattern Шаблон заголовка к (по умолчанию '').
      * 
      * @return string
      */
-    public function renderTitle(string $title = null, string $pattern = ''): string
+    public function renderTitle(?string $title = null, string $pattern = ''): string
     {
         $title = $title === null ? $this->title : $title;
         if ($pattern) {
