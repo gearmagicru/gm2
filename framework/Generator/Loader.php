@@ -30,9 +30,9 @@ class Loader
     /**
      * Конструктор класса.
      * 
-     * @param string $filename Имя файла шаблона.
+     * @param null|string $filename Имя файла шаблона.
      */
-    public function __construct(string $filename = null)
+    public function __construct(?string $filename = null)
     {
         $this->filename = $filename;
     }
@@ -40,14 +40,14 @@ class Loader
     /**
      * Загружает произвольные значения шаблона.
      * 
-     * @param string|null $filename Имя файла шаблона в формате (*.php, *.xml). Если 
+     * @param null|string $filename Имя файла шаблона в формате (*.php, *.xml). Если 
      *     имя шаблона не указано, то используется {@see Loader::$filename}.
      * 
      * @return mixed
      * 
      * @throws Exception\PatternNotLoadException Невозможно загрузить произвольные значения шаблона.
      */
-    public function load(string $filename = null): array
+    public function load(?string $filename = null): array
     {
         if ($filename === null) {
             $filename = $this->filename;
