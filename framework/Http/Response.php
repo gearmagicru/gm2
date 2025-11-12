@@ -580,7 +580,7 @@ class Response extends AbstractMessage
      * Отправляет файл в браузер.
      *
      * @param string $filename Имя файла (включает путь)
-     * @param string $attachmentName Имя вложения. Если значение `null`, то имя 
+     * @param null|string $attachmentName Имя вложения. Если значение `null`, то имя 
      *     определяется из имени файла (по умолчанию `null`).
      * @param array $options Настйроки добавляемые в заголовок браузера:
      *     - 'mimeType', MIME-тип ответа. Если значение `null`, заголовок 'Content-Type' 
@@ -592,7 +592,7 @@ class Response extends AbstractMessage
      * 
      * @return $this
      */
-    public function sendFile(string $filename, string $attachmentName = null, array $options = []): static
+    public function sendFile(string $filename, ?string $attachmentName = null, array $options = []): static
     {
         $options = array_merge(
             [
