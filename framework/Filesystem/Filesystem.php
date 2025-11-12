@@ -796,11 +796,11 @@ class Filesystem
      *
      * @param string $directory Директория, которую необходимо скопировать.
      * @param string $destination Место копирования.
-     * @param int|null $options Опции итератора файловой системы {@see \FilesystemIterator}.
+     * @param null|int $options Опции итератора файловой системы {@see \FilesystemIterator}.
      * 
      * @return bool
      */
-    public static function copyDirectory(string $directory, string $destination, int $options = null): bool
+    public static function copyDirectory(string $directory, string $destination, ?int $options = null): bool
     {
         if (!self::isDirectory($directory)) {
             return false;
