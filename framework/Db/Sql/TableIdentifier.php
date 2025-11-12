@@ -37,13 +37,13 @@ class TableIdentifier
      * Конструктор класса.
      * 
      * @param mixed $table Имя таблицы базы данных.
-     * @param string|null $schema Схема базы данных.
+     * @param null|string $schema Схема базы данных.
      * 
      * @return void
      * 
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(mixed $table, string $schema = null)
+    public function __construct(mixed $table, ?string $schema = null)
     {
         if (! (is_string($table) || is_callable(array($table, '__toString')))) {
             throw new Exception\InvalidArgumentException(sprintf(
