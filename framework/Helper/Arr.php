@@ -223,12 +223,12 @@ class Arr
      * Возвращает первый элемент массива, прошедший заданный тест на истинность.
      *
      * @param array $array
-     * @param callable|null $callback (по умолчанию `null`).
+     * @param null|callable $callback (по умолчанию `null`).
      * @param mixed $default (по умолчанию `null`).
      * 
      * @return mixed
      */
-    public static function first(array $array, callable $callback = null, mixed $default = null): mixed
+    public static function first(array $array, ?callable $callback = null, mixed $default = null): mixed
     {
         if (is_null($callback)) {
             if (empty($array)) {
@@ -251,12 +251,12 @@ class Arr
      * Возвращает последний элемент массива, прошедший заданный тест на истинность.
      *
      * @param array $array
-     * @param callable|null  $callback (по умолчанию `null`).
+     * @param null|callable  $callback (по умолчанию `null`).
      * @param mixed $default (по умолчанию `null`).
      * 
      * @return mixed
      */
-    public static function last(array $array, callable $callback = null, mixed $default = null): mixed
+    public static function last(array $array, ?callable $callback = null, mixed $default = null): mixed
     {
         if (is_null($callback)) {
             return empty($array) ? static::value($default) : end($array);
