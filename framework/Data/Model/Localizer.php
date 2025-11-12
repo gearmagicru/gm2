@@ -128,12 +128,12 @@ class Localizer
     /**
      * Возвращает локализованную модель данных по указанному тегу языка.
      * 
-     * @param string|null $languageTag Тег языка ('ru-RU', 'en-GB', ...). Если `null`, 
+     * @param null|string $languageTag Тег языка ('ru-RU', 'en-GB', ...). Если `null`, 
      *     тег текущего языка (по умолчанию `null`).
      * 
      * @return ActiveRecord|RecordModel
      */
-    public function getModel(string $languageTag = null)
+    public function getModel(?string $languageTag = null)
     {
         if ($languageTag === null) {
             $languageTag = Gm::$app->language->tag;
