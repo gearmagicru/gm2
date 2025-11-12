@@ -220,13 +220,13 @@ abstract class AbstractValidator {
      * Устанавливает шаблон сообщения об ошибке указанному ключу.
      *
      * @param string $messageString Шаблон сообщения.
-     * @param string $messageKey Ключ сообщения.
+     * @param null|string $messageKey Ключ сообщения.
      * 
      * @return $this
      * 
      * @throws Exception\InvalidArgumentException
      */
-    public function setMessage(string $messageString, string $messageKey = null): static
+    public function setMessage(string $messageString, ?string $messageKey = null): static
     {
         if ($messageKey === null) {
             $keys = array_keys($this->abstractOptions['messageTemplates']);
