@@ -51,12 +51,12 @@ class AvailableLanguage extends Config
      * Проверяет наличие языка по указанному параметру.
      * 
      * @param mixed $value Значение параметра.
-     * @param string|null $parameter Название параметра. Если значение `null`, то проверит 
+     * @param null|string $parameter Название параметра. Если значение `null`, то проверит 
      *     наличие указанной локализации ($value).
      * 
      * @return bool
      */
-    public function has(mixed $value, string $parameter = null): bool
+    public function has(mixed $value, ?string $parameter = null): bool
     {
         if ($parameter === null) {
             return $this->get($value) !== null;
