@@ -57,7 +57,7 @@ abstract class AbstractConnection
      * 
      * @return void
      */
-    public function __construct(array $connectionInfo = null)
+    public function __construct(?array $connectionInfo = null)
     {
         if ($connectionInfo) {
             $this->setParameters($connectionInfo);
