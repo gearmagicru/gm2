@@ -254,14 +254,14 @@ class License extends Service
     /**
      * Возвращает шаблон файла лицензионного ключа.
      *
-     * @param string|null $key Лицензионный ключ.
+     * @param null|string $key Лицензионный ключ.
      * 
      * @return string
      * 
      * @throws Exception\FileNotFoundException Файл лицензионного ключ не найден.
      * @throws Exception\FileNotReadException Файл лицензионного ключ не читается.
      */
-    public function getFilePattern(string $key = null): string
+    public function getFilePattern(?string $key = null): string
     {
         $filename = $this->getFilename();
         if (!file_exists($filename)) {
