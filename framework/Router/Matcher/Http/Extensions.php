@@ -88,11 +88,11 @@ class Extensions extends Segments
     /**
      * {@inheritdoc}
      * 
-     * @param string $route Маршрут сопоставления (полученный из URL-адреса, по умолчанию `null`).
-     * @param int $pathOffset Cмещение относительно маршрута сопоставления, часть 
+     * @param null|string $route Маршрут сопоставления (полученный из URL-адреса, по умолчанию `null`).
+     * @param null|int $pathOffset Cмещение относительно маршрута сопоставления, часть 
      *     (сегмент) которого будет сопоставляться (по умолчанию `null`).
      */
-    public function match(string $route = null, int $pathOffset = null): mixed
+    public function match(?string $route = null, ?int $pathOffset = null): mixed
     {
         if ($route === null) {
             $route = Gm::$app->urlManager->route;
