@@ -67,7 +67,7 @@ class ExtensionLocale extends ActiveRecord
      * 
      * @return null|ActiveRecord Активная запись при успешном запросе, иначе `null`.
      */
-    public function get(int $extensionId, int $languageId = null): ?ActiveRecord
+    public function get(int $extensionId, ?int $languageId = null): ?ActiveRecord
     {
         return $this->selectOne([
             'extension_id' => $extensionId,
@@ -123,7 +123,7 @@ class ExtensionLocale extends ActiveRecord
      * {@inheritdoc}
      */
     public function fetchAll(
-        string $fetchKey = null, 
+        ?string $fetchKey = null, 
         array $columns = ['*'], 
         Where|Closure|string|array|null $where = null, 
         string|array|null $order = null
@@ -146,15 +146,15 @@ class ExtensionLocale extends ActiveRecord
     /**
      * Возвращает все записи локализации.
      * 
-     * @param string $attribute Название атрибута ('name', 'description') возвращаемого 
+     * @param null|string $attribute Название атрибута ('name', 'description') возвращаемого 
      *     для каждого идентификатора. Если значение `null`, возвратит все атрибуты 
      *     (по умолчанию `null`).
-     * @param int $languageCode Идентификатор языка. Если значение `null`, то идентификатор 
+     * @param null|int $languageCode Идентификатор языка. Если значение `null`, то идентификатор 
      *     текущего языка (по умолчанию `null`).
      * 
      * @return array<int, array{name:string, description:string}>
      */
-    public function fetchNames(string $attribute = null, int $languageCode = null): array
+    public function fetchNames(?string $attribute = null, ?int $languageCode = null): array
     {
         /** @var Select $select */
         $select = $this->select(['*'], ['language_id' => $languageCode ?: Gm::$app->language->code]);
