@@ -36,7 +36,7 @@ class Gm
     /**
      * @var string Номер версии фреймоврка.
      */
-    public const VERSION_NUMBER = '2.0';
+    public const VERSION_NUMBER = '2.0.3';
 
     /**
      * Приложение.
