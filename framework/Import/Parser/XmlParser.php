@@ -188,7 +188,8 @@ class XmlParser extends AbstractParser
         $xml = xml_parser_create('UTF-8');
         xml_parser_set_option( $xml, XML_OPTION_SKIP_WHITE, 1);
         xml_parser_set_option( $xml, XML_OPTION_CASE_FOLDING, 0);
-        xml_set_object($xml, $this);
+        // deprecated PHP 8.4
+        @xml_set_object($xml, $this);
         xml_set_character_data_handler($xml, 'characterData');
         xml_set_element_handler( $xml, 'tagOpen', 'tagClose');
 
