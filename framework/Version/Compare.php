@@ -166,11 +166,11 @@ class Compare extends BaseObject
      * Сравнивает с названием и версией приложения.
      * 
      * @param string $code $name Название приложения.
-     * @param string|null $version Номер версии приложения (по умолчанию `null`).
+     * @param null|string $version Номер версии приложения (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function withApp(string $code, string $version = null): bool
+    public function withApp(string $code, ?string $version = null): bool
     {
         if ($code) {
             if ($this->version) {
@@ -200,11 +200,11 @@ class Compare extends BaseObject
      * Сравнивает с кодом и версией редакции приложения.
      * 
      * @param string $code Код редакции приложения.
-     * @param string $version Номер версии редакции приложения (по умолчанию `null`).
+     * @param null|string $version Номер версии редакции приложения (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function withEdition(string $code, string $version = null): bool
+    public function withEdition(string $code, ?string $version = null): bool
     {
         if ($code) {
             if ($this->edition) {
@@ -277,13 +277,13 @@ class Compare extends BaseObject
      * Сравнивает с идентификатор и версией расширения модуля.
      * 
      * @param string $id Идентификатор расширения модуля.
-     * @param string|null $version Номер версии расширения модуля (по умолчанию `null`).
+     * @param null|string $version Номер версии расширения модуля (по умолчанию `null`).
      * @param null|string $name Возвращаемое имя расширения модуля после сравнения. 
      *     Если имя расширения невозможно получить, результатом будет $id (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function withExtension(string $id, string $version = null, string &$name = null): bool
+    public function withExtension(string $id, ?string $version = null, ?string &$name = null): bool
     {
         static $registry;
 
@@ -319,13 +319,13 @@ class Compare extends BaseObject
      * Сравнивает с идентификатор и версией модуля.
      * 
      * @param string $id Идентификатор модуля.
-     * @param string|null $version Номер версии модуля.
+     * @param null|string $version Номер версии модуля.
      * @param null|string $name Возвращаемое имя модуля после сравнения. Если 
      *     имя модуля невозможно получить, результатом будет $id (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function withModule(string $id, string $version = null, string &$name = null): bool
+    public function withModule(string $id, ?string $version = null, ?string &$name = null): bool
     {
         static $registry;
 
@@ -361,13 +361,13 @@ class Compare extends BaseObject
      * Сравнивает с идентификатор и версией виджета.
      * 
      * @param string $id Идентификатор виджета.
-     * @param string|null $version Номер версии виджета.
+     * @param null|string $version Номер версии виджета.
      * @param null|string $name Возвращаемое имя виджета после сравнения. Если 
      *     имя виджета невозможно получить, результатом будет $id (по умолчанию `null`).
      * 
      * @return bool
      */
-    public function withWidget(string $id, string $version = null, string &$name = null): bool
+    public function withWidget(string $id, ?string $version = null, ?string &$name = null): bool
     {
         static $registry;
 
