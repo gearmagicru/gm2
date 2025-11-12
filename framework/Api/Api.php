@@ -158,11 +158,11 @@ class Api extends BaseObject
     /**
      * Вызывает метод формирующий HTTP-ответ.
      * 
-     * @param string|null $route Маршрут запроса.
+     * @param null|string $route Маршрут запроса.
      * 
      * @return mixed Возвращает значение `false`, если возникла ошибка при формировании HTTP-ответа.
      */
-    public function apiCall(string $route = null): mixed
+    public function apiCall(?string $route = null): mixed
     {
         if (!isset($route)) {
             $route = $this->route;
