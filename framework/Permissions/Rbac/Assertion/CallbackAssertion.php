@@ -25,7 +25,7 @@ class CallbackAssertion implements AssertionInterface
     /**
      * @var callable Обратный вызов.
      */
-    protected callable $callback;
+    protected $callback;
 
     /**
      * @param callable $callback
