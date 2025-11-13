@@ -31,6 +31,16 @@ class Serializer
     protected string $filename = '';
 
     /**
+     * Аннулирует закешированный скрипт (файл сериализации).
+     * 
+     * @see Serializer::load()
+     * @link https://www.php.net/manual/ru/function.opcache-invalidate.php
+     * 
+     * @var bool
+     */
+    public bool $opcacheInvalidate = true;
+
+    /**
      * Конструктор класса.
      * 
      * @param string $filename Имя файла.
@@ -139,6 +149,12 @@ class Serializer
     {
         if (!$this->exists()) {
             return false;
+        }
+
+        if ($this->opcacheInvalidate) {
+            if (function_exists('opcache_invalidate')) {
+                opcache_invalidate($this->filename, true);
+            }
         }
 
         $str = require($this->filename);
